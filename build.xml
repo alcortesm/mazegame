@@ -1,0 +1,80 @@
+<?xml version="1.0"?>
+<project name="MazeGame" basedir="." default="main">
+
+    <property name="src.dir"         value="src" />
+    <property name="build.dir"       value="build" />
+    <property name="class.dir"       value="${build.dir}/class" />
+    <property name="jar.dir"         value="${build.dir}/jar" />
+
+    <property name="test.src.dir"    value="test" />
+    <property name="test.build.dir"  value="${build.dir}/test" />
+    <property name="test.report.dir" value="testreport" />
+
+    <property name="main-class"      value="mazegame.Main" />
+
+    <path id="junit.class.path">
+        <pathelement location="/usr/share/java/junit4.jar" />
+        <pathelement location="${class.dir}" />
+    </path>
+
+    <target name="clean">
+        <delete dir="${build.dir}" />
+        <delete dir="${test.report.dir}" />
+    </target>
+
+    <target name="compile">
+        <mkdir dir="${class.dir}" />
+        <javac includeantruntime="false" srcdir="${src.dir}" destdir="${class.dir}">
+            <compilerarg value="-Xlint:unchecked"/>
+        </javac>
+    </target>
+
+    <target name="compile-debug">
+        <mkdir dir="${class.dir}" />
+        <javac debug="true" debuglevel="lines,vars,source" includeantruntime="false" srcdir="${src.dir}" destdir="${class.dir}">
+            <compilerarg value="-Xlint:unchecked"/>
+        </javac>
+    </target>
+
+    <target name="compile-test" depends="compile-debug">
+        <mkdir dir="${test.build.dir}" />
+        <javac debug="true" debuglevel="lines,vars,source" includeantruntime="false" srcdir="${test.src.dir}" destdir="${test.build.dir}">
+            <compilerarg value="-Xlint:unchecked"/>
+            <classpath refid="junit.class.path" />
+        </javac>
+    </target>
+
+    <target name="junit" depends="clean, compile-test">
+        <mkdir dir="${test.report.dir}" />
+        <junit printsummary="on" fork="true" haltonfailure="yes">
+            <classpath refid="junit.class.path" />
+            <classpath>
+                <pathelement location="${test.build.dir}" />
+            </classpath>
+            <formatter type="plain" />
+            <batchtest todir="${test.report.dir}">
+                <fileset dir="${test.src.dir}">
+                    <include name="**/*Test*.java" />
+                </fileset>
+            </batchtest>
+        </junit>
+    </target>
+
+    <target name="jar" depends="compile">
+        <mkdir dir="${jar.dir}" />
+        <jar destfile="${jar.dir}/${ant.project.name}.jar" basedir="${class.dir}">
+            <manifest>
+                <attribute name="Main-Class" value="${main-class}" />
+            </manifest>
+        </jar>
+    </target>
+
+    <target name="run" depends="jar">
+        <java jar="${jar.dir}/${ant.project.name}.jar" fork="true" />
+    </target>
+
+    <target name="clean-build" depends="clean,jar" />
+
+    <target name="main" depends="clean,run" />
+
+</project>
