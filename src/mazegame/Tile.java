@@ -1,0 +1,3 @@
+package mazegame;
+
+class Tile {}
