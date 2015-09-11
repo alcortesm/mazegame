@@ -1,3 +1,6 @@
+// A map is the physical part of the maze, the walls and the spaces
+// between them.
+
 package mazegame;
 
 class Map {

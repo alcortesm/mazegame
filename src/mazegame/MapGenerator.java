@@ -1,3 +1,5 @@
+// Collection of static methods to build different types of maps.
+
 package mazegame;
 
 class MapGenerator {
