@@ -8,7 +8,9 @@
 package mazegame;
 
 class Wall extends Tile {
+    static final String TEXT_ICON = "#";
+
     public String toString() {
-        return "#";
+        return TEXT_ICON;
     }
 }

@@ -7,13 +7,13 @@ import java.text.ParseException;
 public class MapTest {
 
     @Test
-    public void MinRowsMustBe3OrGreater() {
-        assertTrue(Map.getMinRows() >= 3);
+    public void MinRowsMustBePositive() {
+        assertTrue(Map.getMinRows() > 0);
     }
 
     @Test
-    public void MinColumnsMustBe3OrGreater() {
-        assertTrue(Map.getMinColumns() >= 3);
+    public void MinColumnsMustBePositive() {
+        assertTrue(Map.getMinColumns() > 0);
     }
 
     @Test(expected=NullPointerException.class)
@@ -23,7 +23,12 @@ public class MapTest {
 
     private Tile[][] buildTileArray() {
         return buildTileArray(
-                Map.getMinRows(), Map.getMinColumns());
+                reasonableDimForTest(), reasonableDimForTest());
+    }
+
+    private int reasonableDimForTest() {
+        int maxDim = Math.max(Map.getMinRows(), Map.getMinColumns());
+        return Math.max(3, maxDim);
     }
 
     private Tile[][] buildTileArray(int rows, int columns) {

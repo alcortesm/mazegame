@@ -4,33 +4,47 @@ package mazegame;
 
 class MapGenerator {
 
+    private static final int SMALL = 5;
+
     static enum TYPE {
-        SMALLEST_EMPTY
+        SMALLEST_EMPTY,
+        SMALL_EMPTY
     }
 
     // prevent creation of objects from this class
     private MapGenerator() {}
 
-    private static Map createSmallestEmpty() {
-        Tile[][] a = new Tile[Map.getMinRows()][Map.getMinColumns()];
+    private static Map generateSmallestEmpty() {
+        Tile[][] a =
+            new Tile[Map.getMinRows()][Map.getMinColumns()];
+
         for (int r=0; r<a.length; r++) {
             for (int c=0; c<a[r].length; c++) {
-                // put walls in the external borders
-                if (r == 0 || r == a.length-1 ||
-                        c == 0 || c == a[r].length-1) {
-                    a[r][c] = new Wall();
-                } else { // and empty space in the center area
-                    a[r][c] = new Space();
-                }
+                a[r][c] = new Space();
+            }
+        }
+
+        return new Map(a);
+    }
+
+    private static Map generateSmallEmpty() {
+        int rows = Math.max(SMALL, Map.getMinRows());
+        int columns = Math.max(SMALL, Map.getMinColumns());
+        Tile[][] a = new Tile[rows][columns];
+        for (int r=0; r<a.length; r++) {
+            for (int c=0; c<a[r].length; c++) {
+                a[r][c] = new Space();
             }
         }
         return new Map(a);
     }
 
-    static Map create(TYPE type) {
+    static Map generate(TYPE type) {
         switch (type) {
             case SMALLEST_EMPTY:
-                return createSmallestEmpty();
+                return generateSmallestEmpty();
+            case SMALL_EMPTY:
+                return generateSmallEmpty();
             default:
                 // should never get here
                 throw new EnumConstantNotPresentException(
