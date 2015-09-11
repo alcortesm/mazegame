@@ -7,16 +7,6 @@ class Map {
     private static int MIN_ROWS = 3;
     private static int MIN_COLUMNS = 3;
 
-    static Map MapFactory() {
-        Tile[][] a = new Tile[Map.getMinRows()][Map.getMinColumns()];
-        for (int r=0; r<a.length; r++) {
-            for (int c=0; c<a[r].length; c++) {
-                a[r][c] = new Tile();
-            }
-        }
-        return new Map(a);
-    }
-
     Map(Tile[][] data) {
         throwIfThereAreNulls(data);
         if (! isRectArray(data)) {
@@ -44,6 +34,17 @@ class Map {
     static int getMinRows() { return MIN_ROWS; }
     static int getMinColumns() { return MIN_COLUMNS; }
     Tile getTile(int row, int column) { return data[row][column]; }
+
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        for (int r=0; r<getNumRows(); r++) {
+            for (int c=0; c<getNumColumns(); c++) {
+                sb.append(getTile(r, c));
+            }
+            sb.append(System.lineSeparator());
+        }
+        return sb.toString();
+    }
 
     // Checks if a 2D array is rectangular.
     //
