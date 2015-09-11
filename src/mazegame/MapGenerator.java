@@ -20,7 +20,7 @@ class MapGenerator {
                         c == 0 || c == a[r].length-1) {
                     a[r][c] = new Wall();
                 } else { // and empty space in the center area
-                    a[r][c] = new Empty();
+                    a[r][c] = new Space();
                 }
             }
         }

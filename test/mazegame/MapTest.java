@@ -30,7 +30,7 @@ public class MapTest {
         Tile[][] a = new Tile[rows][columns];
         for (int r=0; r<a.length; r++) {
             for (int c=0; c<a[r].length; c++) {
-                a[r][c] = new Tile();
+                a[r][c] = new Wall();
             }
         }
         return a;
@@ -108,7 +108,7 @@ public class MapTest {
         Tile[][] a = buildTileArray();
         a[0] = new Tile[Map.getMinColumns()+1];
         for (int c=0; c<a[0].length; c++) {
-            a[0][c] = new Tile();
+            a[0][c] = new Wall();
         }
         new Map(a);
     }
@@ -118,7 +118,7 @@ public class MapTest {
         Tile[][] a = buildTileArray();
         a[1] = new Tile[Map.getMinColumns()+1];
         for (int c=0; c<a[1].length; c++) {
-            a[1][c] = new Tile();
+            a[1][c] = new Wall();
         }
         new Map(a);
     }
@@ -128,7 +128,7 @@ public class MapTest {
         Tile[][] a = buildTileArray();
         a[2] = new Tile[Map.getMinColumns()+1];
         for (int c=0; c<a[2].length; c++) {
-            a[2][c] = new Tile();
+            a[2][c] = new Wall();
         }
         new Map(a);
     }
@@ -173,7 +173,7 @@ public class MapTest {
         Tile[][] a = new Tile[Map.getMinRows()][Map.getMinColumns()];
         for (int r = 0; r<a.length; r++) {
             for (int c = 0; c<a[r].length; c++) {
-                a[r][c] = new Tile();
+                a[r][c] = new Wall();
             }
         }
         Map m = new Map(a);

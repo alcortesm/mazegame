@@ -2,4 +2,4 @@
 
 package mazegame;
 
-class Tile {}
+abstract class Tile {}
