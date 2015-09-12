@@ -35,7 +35,7 @@ public class MapTest {
         Tile[][] a = new Tile[rows][columns];
         for (int r=0; r<a.length; r++) {
             for (int c=0; c<a[r].length; c++) {
-                a[r][c] = new Wall();
+                a[r][c] = new Space();
             }
         }
         return a;
@@ -113,7 +113,7 @@ public class MapTest {
         Tile[][] a = buildTileArray();
         a[0] = new Tile[Map.getMinColumns()+1];
         for (int c=0; c<a[0].length; c++) {
-            a[0][c] = new Wall();
+            a[0][c] = new Space();
         }
         new Map(a);
     }
@@ -123,7 +123,7 @@ public class MapTest {
         Tile[][] a = buildTileArray();
         a[1] = new Tile[Map.getMinColumns()+1];
         for (int c=0; c<a[1].length; c++) {
-            a[1][c] = new Wall();
+            a[1][c] = new Space();
         }
         new Map(a);
     }
@@ -133,7 +133,7 @@ public class MapTest {
         Tile[][] a = buildTileArray();
         a[2] = new Tile[Map.getMinColumns()+1];
         for (int c=0; c<a[2].length; c++) {
-            a[2][c] = new Wall();
+            a[2][c] = new Space();
         }
         new Map(a);
     }
@@ -178,7 +178,7 @@ public class MapTest {
         Tile[][] a = new Tile[Map.getMinRows()][Map.getMinColumns()];
         for (int r = 0; r<a.length; r++) {
             for (int c = 0; c<a[r].length; c++) {
-                a[r][c] = new Wall();
+                a[r][c] = new Space();
             }
         }
         Map m = new Map(a);
@@ -188,5 +188,16 @@ public class MapTest {
                         a[r][c] == m.getTile(r, c));
             }
         }
+    }
+
+    @Test(expected=IllegalArgumentException.class)
+    public void shouldThrowIfNoWalkables() {
+         Tile[][] a = new Tile[2*Map.getMinRows()][2*Map.getMinColumns()];
+        for (int r = 0; r<a.length; r++) {
+            for (int c = 0; c<a[r].length; c++) {
+                a[r][c] = new Wall();
+            }
+        }
+        Map m = new Map(a);
     }
 }
