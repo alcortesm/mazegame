@@ -40,8 +40,7 @@ package mazegame;
 
 class Map {
     private Tile[][] data;
-    private int rows;
-    private int columns;
+
     private static int MIN_ROWS = 1;
     private static int MIN_COLUMNS = 1;
 
@@ -53,14 +52,14 @@ class Map {
         }
         this.data = data;
 
-        rows = data.length;
+        int rows = data.length;
         if (rows < MIN_ROWS) {
             throw new IllegalArgumentException(
                     "number of rows (" + rows +
                     ") is less than " + MIN_ROWS);
         }
 
-        columns = data[0].length;
+        int columns = data[0].length;
         if (columns < MIN_COLUMNS) {
             throw new IllegalArgumentException(
                     "number of columns (" + columns +
@@ -68,8 +67,8 @@ class Map {
         }
     }
 
-    int getNumRows() { return this.rows; }
-    int getNumColumns() { return this.columns; }
+    int getNumRows() { return this.data.length; }
+    int getNumColumns() { return this.data[0].length; }
 
     static int getMinRows() { return MIN_ROWS; }
     static int getMinColumns() { return MIN_COLUMNS; }
