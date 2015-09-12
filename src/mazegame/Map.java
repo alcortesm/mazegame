@@ -69,7 +69,7 @@ class Map {
         // check that there is at least one walkable tile
         boolean ok = false;
         for (int r=0; r<rows; r++) {
-            for (int c=0; c<column; c++) {
+            for (int c=0; c<columns; c++) {
                 if (data[r][c].isWalkable()) {
                     ok = true;
                     break;

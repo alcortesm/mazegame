@@ -3,5 +3,5 @@
 package mazegame;
 
 abstract class Tile {
-    boolean isWalkable();
+    abstract boolean isWalkable();
 }

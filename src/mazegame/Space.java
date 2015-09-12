@@ -19,7 +19,7 @@ class Space extends Tile {
     }
 
     boolean isWalkable() {
-        trurn true;
+        return true;
     }
 }
 
