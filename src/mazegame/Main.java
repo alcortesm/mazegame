@@ -2,13 +2,15 @@ package mazegame;
 
 class Main {
     public static void main(String args[]) {
-        Map m = MapGenerator.generate(
+        Map map = MapGenerator.generate(
                 MapGenerator.TYPE.SMALLEST_EMPTY);
-        System.out.println(m);
+        Maze maze = new Maze(map);
+        System.out.println(maze);
 
-        m = MapGenerator.generate(
+        map = MapGenerator.generate(
                 MapGenerator.TYPE.SMALL_EMPTY);
-        System.out.println(m);
+        maze = new Maze(map);
+        System.out.println(maze);
 
         System.exit(0);
     }

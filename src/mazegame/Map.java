@@ -38,6 +38,8 @@
 
 package mazegame;
 
+import java.util.ArrayList;
+
 class Map {
     private Tile[][] data;
 
@@ -91,6 +93,18 @@ class Map {
     // there is no need to check for parameter errors, as the
     // array access will already check that for us.
     Tile getTile(int row, int column) { return data[row][column]; }
+
+    ArrayList<Place> getWalkablePlaces() {
+        ArrayList<Place> a = new ArrayList<Place>();
+        for (int r=0; r<getNumRows(); r++) {
+            for (int c=0; c<getNumColumns(); c++) {
+                if (data[r][c].isWalkable()) {
+                    a.add(new Place(r, c, this));
+                }
+            }
+        }
+        return a;
+    }
 
     public String toString() {
         StringBuilder sb = new StringBuilder();
