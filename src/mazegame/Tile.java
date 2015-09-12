@@ -2,4 +2,6 @@
 
 package mazegame;
 
-abstract class Tile {}
+abstract class Tile {
+    boolean isWalkable();
+}

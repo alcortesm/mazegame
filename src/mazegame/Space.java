@@ -17,5 +17,9 @@ class Space extends Tile {
     public String toString() {
         return TEXT_ICON;
     }
+
+    boolean isWalkable() {
+        trurn true;
+    }
 }
 

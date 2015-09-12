@@ -19,7 +19,7 @@
 //  I will solve 3 by leaving out the exterior walls as implicit.
 //
 //  I will solve 4 with and identification method in Tile to avoid
-//  reflection.
+//  reflection (isWalkable() method).
 //
 //  The minimum possible maze will be:
 //
@@ -64,6 +64,21 @@ class Map {
             throw new IllegalArgumentException(
                     "number of columns (" + columns +
                     ") is less than " + MIN_COLUMNS);
+        }
+
+        // check that there is at least one walkable tile
+        boolean ok = false;
+        for (int r=0; r<rows; r++) {
+            for (int c=0; c<column; c++) {
+                if (data[r][c].isWalkable()) {
+                    ok = true;
+                    break;
+                }
+            }
+        }
+        if (! ok) {
+            throw new IllegalArgumentException(
+                    "There are no walkable tiles in the map");
         }
     }
 

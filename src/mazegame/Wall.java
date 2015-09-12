@@ -13,4 +13,8 @@ class Wall extends Tile {
     public String toString() {
         return TEXT_ICON;
     }
+
+    boolean isWalkable() {
+        return false;
+    }
 }
