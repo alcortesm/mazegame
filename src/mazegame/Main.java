@@ -24,20 +24,40 @@ class Main {
             line = scan.nextLine();
             switch (line) {
                 case "north": case "n":
-                    System.out.println();
-                    System.out.println("Moving NORTH...");
+                    if (maze.movePlayer(Mob.DIRECTION.NORTH)) {
+                        System.out.println();
+                        System.out.println("Moving NORTH...");
+                    } else {
+                        System.out.println();
+                        System.out.println("Cannot move there!");
+                    }
                     break;
                 case "south": case "s":
-                    System.out.println();
-                    System.out.println("Moving SOUTH...");
+                    if (maze.movePlayer(Mob.DIRECTION.SOUTH)) {
+                        System.out.println();
+                        System.out.println("Moving NORTH...");
+                    } else {
+                        System.out.println();
+                        System.out.println("Cannot move there!");
+                    }
                     break;
                 case "east": case "e":
-                    System.out.println();
-                    System.out.println("Moving EAST...");
+                    if (maze.movePlayer(Mob.DIRECTION.EAST)) {
+                        System.out.println();
+                        System.out.println("Moving NORTH...");
+                    } else {
+                        System.out.println();
+                        System.out.println("Cannot move there!");
+                    }
                     break;
                 case "west": case "w":
-                    System.out.println();
-                    System.out.println("Moving WEST...");
+                    if (maze.movePlayer(Mob.DIRECTION.WEST)) {
+                        System.out.println();
+                        System.out.println("Moving NORTH...");
+                    } else {
+                        System.out.println();
+                        System.out.println("Cannot move there!");
+                    }
                     break;
                 case "quit": case "q": case "exit": case "ex":
                     System.out.println();

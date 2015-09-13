@@ -7,9 +7,11 @@ class Maze {
     private Map map;
     private Place start;
     private Place end;
+    private Mob player;
 
     private static final char START_ICON = 's';
     private static final char END_ICON = 'e';
+    private static final char PLAYER_ICON = '@';
 
     Maze(Map map) {
         if (map == null) {
@@ -19,6 +21,7 @@ class Maze {
         ArrayList<Place> places = map.getWalkablePlaces();
         start = randomWalkablePlace(places);
         end = randomWalkablePlace(places);
+        player = new Mob(start);
     }
 
     private Place randomWalkablePlace(ArrayList<Place> places) {
@@ -28,14 +31,13 @@ class Maze {
 
     public String toString() {
         StringBuilder sb = new StringBuilder(map.toString());
-        int width = map.getNumColumns() + 2 +
-            System.lineSeparator().length();
-        int startIndex = ((start.getRow()+1) * width) +
-            start.getColumn() + 1;
-        int endIndex = ((end.getRow()+1) * width) +
-            end.getColumn() + 1;
-        sb.setCharAt(startIndex, START_ICON);
-        sb.setCharAt(endIndex, END_ICON);
+        sb.setCharAt(start.getMapStringIndex(), START_ICON);
+        sb.setCharAt(end.getMapStringIndex(), END_ICON);
+        sb.setCharAt(player.getMapStringIndex(), PLAYER_ICON);
         return sb.toString();
+    }
+
+    boolean movePlayer(Mob.DIRECTION dir) {
+        return player.move(dir);
     }
 }
