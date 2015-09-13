@@ -40,4 +40,8 @@ class Maze {
     boolean movePlayer(Mob.DIRECTION dir) {
         return player.move(dir);
     }
+
+    boolean isPlayerAtEnd() {
+        return player.equals(end);
+    }
 }

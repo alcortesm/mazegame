@@ -68,6 +68,12 @@ class Main {
                     System.out.println();
                     System.out.println("Unknown command");
             }
+            if (maze.isPlayerAtEnd()) {
+                System.out.println();
+                System.out.println(
+                        "CONGRATULATIONS!, YOU BEAT THE GAME!");
+                finish = true;
+            }
         } while (! finish);
 
         System.exit(0);

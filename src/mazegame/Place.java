@@ -37,7 +37,8 @@ class Place {
 
     public boolean equals(Place p) {
         return (this.getRow() == p.getRow()) &&
-            (this.getColumn() == p.getColumn());
+            (this.getColumn() == p.getColumn()) &&
+            (this.map == p.map);
     }
 
     public String toString() {
