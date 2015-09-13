@@ -4,11 +4,12 @@ package mazegame;
 
 class MapGenerator {
 
-    private static final int SMALL = 5;
+    private static final int SMALL = 6;
 
     static enum TYPE {
         SMALLEST_EMPTY,
-        SMALL_EMPTY
+        SMALL_EMPTY,
+        TEST
     }
 
     // prevent creation of objects from this class
@@ -39,12 +40,28 @@ class MapGenerator {
         return new Map(a);
     }
 
+    private static Map generateTest() {
+        Tile[][] a = {
+            { new Space(), new Wall(), new Space(), new Wall(),
+            new Space(), new Space(), new Space(), new Wall()},
+            { new Space(), new Wall(), new Space(), new Space(),
+            new Space(), new Wall(), new Space(), new Space()},
+            { new Space(), new Wall(), new Space(), new Wall(),
+            new Wall(), new Wall(), new Space(), new Wall()},
+            { new Space(), new Space(), new Space(), new Wall(),
+            new Space(), new Space(), new Space(), new Space()},
+        };
+        return new Map(a);
+    }
+
     static Map generate(TYPE type) {
         switch (type) {
             case SMALLEST_EMPTY:
                 return generateSmallestEmpty();
             case SMALL_EMPTY:
                 return generateSmallEmpty();
+            case TEST:
+                return generateTest();
             default:
                 // should never get here
                 throw new EnumConstantNotPresentException(

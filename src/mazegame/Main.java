@@ -6,7 +6,7 @@ class Main {
 
     public static void main(String args[]) {
         Map map = MapGenerator.generate(
-                MapGenerator.TYPE.SMALL_EMPTY);
+                MapGenerator.TYPE.TEST);
         Maze maze = new Maze(map);
 
         System.out.println("Welcome to the MazeGame.");
