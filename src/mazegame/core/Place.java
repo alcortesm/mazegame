@@ -3,7 +3,7 @@
 //
 // Places can not be on Walls or other non-walkable tiles.
 
-package mazegame;
+package mazegame.core;
 
 class Place {
 

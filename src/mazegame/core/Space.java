@@ -9,7 +9,7 @@
 // will probably be all equal, maybe it will be a good idea to use
 // the same object for all of them.
 
-package mazegame;
+package mazegame.core;
 
 class Space implements Tile {
 

@@ -6,7 +6,7 @@
 //
 // They are always visible (they have an Icon).
 
-package mazegame;
+package mazegame.core;
 
 abstract class Thing implements HasIcon {
 

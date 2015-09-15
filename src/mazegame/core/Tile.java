@@ -2,7 +2,7 @@
 //
 // Example classes that implements Tile: Walls and Spaces.
 
-package mazegame;
+package mazegame.core;
 
 interface Tile extends HasIcon {
     boolean isWalkable();

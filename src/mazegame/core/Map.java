@@ -36,15 +36,15 @@
 //  #   #####    South, East x 2, North, East x 2,
 //  #########    South x 2, East x 2.
 
-package mazegame;
+package mazegame.core;
 
 import java.util.ArrayList;
 
-class Map {
+public class Map {
 
     private Tile[][] data;
 
-    Map(Tile[][] data) {
+    public Map(Tile[][] data) {
         throwIfThereAreNulls(data);
         if (! isRectArray(data)) {
             throw new IllegalArgumentException(
@@ -82,12 +82,12 @@ class Map {
         }
     }
 
-    int getNumRows() { return this.data.length; }
-    int getNumColumns() { return this.data[0].length; }
+    public int getNumRows() { return this.data.length; }
+    public int getNumColumns() { return this.data[0].length; }
 
     // there is no need to check for parameter errors, as the
     // array access will already check that for us.
-    Tile getTile(int row, int column) { return data[row][column]; }
+    public Tile getTile(int row, int column) { return data[row][column]; }
 
     ArrayList<Place> getWalkablePlaces() {
         ArrayList<Place> a = new ArrayList<Place>();

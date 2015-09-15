@@ -26,7 +26,7 @@
 // characters, otherwise the TUI version of the game will be very
 // confusing.
 
-package mazegame;
+package mazegame.core;
 
 class Icon {
 

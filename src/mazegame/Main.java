@@ -1,6 +1,10 @@
 package mazegame;
 
 import java.util.Scanner;
+import mazegame.core.Map;
+import mazegame.core.Maze;
+import mazegame.core.MapGenerator;
+import mazegame.core.Mob;
 
 class Main {
 

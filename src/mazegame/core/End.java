@@ -1,4 +1,4 @@
-package mazegame;
+package mazegame.core;
 
 class End extends Thing {
 

@@ -3,17 +3,17 @@
 // Mobs can only move over walkable tiles and they can not
 // get out of the map.
 
-package mazegame;
+package mazegame.core;
 
-abstract class Mob extends Thing {
+abstract public class Mob extends Thing {
 
-    enum DIRECTION {
+    public enum DIRECTION {
         NORTH, SOUTH, EAST, WEST
     };
 
     // create a mob at the starting position
     // defined by place.
-    Mob(Place place, Icon icon) {
+    public Mob(Place place, Icon icon) {
         super(place, icon);
     }
 
@@ -26,7 +26,7 @@ abstract class Mob extends Thing {
     //
     // If the destination tile is not walkable or if it is outside
     // the map, the mob does not move and returns false.
-    boolean move(DIRECTION dir) {
+    public boolean move(DIRECTION dir) {
         int dstRow = place.getRow();
         int dstColumn = place.getColumn();
         switch (dir) {

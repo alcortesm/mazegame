@@ -1,16 +1,16 @@
-package mazegame;
+package mazegame.core;
 
 import java.util.Random;
 import java.util.ArrayList;
 
-class Maze {
+public class Maze {
 
     private Map map;
     private Start start;
     private End end;
     private Player player;
 
-    Maze(Map map) {
+    public Maze(Map map) {
         if (map == null) {
             throw new NullPointerException("map");
         }
@@ -34,11 +34,11 @@ class Maze {
         return s;
     }
 
-    boolean movePlayer(Mob.DIRECTION dir) {
+    public boolean movePlayer(Mob.DIRECTION dir) {
         return player.move(dir);
     }
 
-    boolean isPlayerAtEnd() {
+    public boolean isPlayerAtEnd() {
         return player.sharePlaceWith(end);
     }
 }

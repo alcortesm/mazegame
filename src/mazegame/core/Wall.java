@@ -5,7 +5,7 @@
 // TODO: There can be many walls in a maze and they will be all
 // equal, consider to reuse the same object for all of them.
 
-package mazegame;
+package mazegame.core;
 
 class Wall implements Tile {
 
