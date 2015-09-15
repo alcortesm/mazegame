@@ -17,8 +17,8 @@ public class MapTest {
         return buildTileArray(5, 5);
     }
 
-    private Tile[][] buildTileArray(int rows, int columns) {
-        Tile[][] a = new Tile[rows][columns];
+    private Tile[][] buildTileArray(int rows, int cols) {
+        Tile[][] a = new Tile[rows][cols];
         for (int r=0; r<a.length; r++) {
             for (int c=0; c<a[r].length; c++) {
                 a[r][c] = new Space();
@@ -81,7 +81,7 @@ public class MapTest {
     }
 
     @Test(expected=IllegalArgumentException.class)
-    public void CtorShouldThrowOnZeroColumns() {
+    public void CtorShouldThrowOnZeroCols() {
         Tile[][] a = new Tile[1][0];
         new Map(a);
     }
@@ -120,34 +120,34 @@ public class MapTest {
     public void ShouldReturnCorrectNums() {
         {
             int rows = 1;
-            int columns = 1;
-            Map m = new Map(buildTileArray(rows, columns));
+            int cols = 1;
+            Map m = new Map(buildTileArray(rows, cols));
             assertTrue(m.getNumRows() == rows);
-            assertTrue(m.getNumColumns() == columns);
+            assertTrue(m.getNumCols() == cols);
         }
 
         {
             int rows = 2;
-            int columns = 1;
-            Map m = new Map(buildTileArray(rows, columns));
+            int cols = 1;
+            Map m = new Map(buildTileArray(rows, cols));
             assertTrue(m.getNumRows() == rows);
-            assertTrue(m.getNumColumns() == columns);
+            assertTrue(m.getNumCols() == cols);
         }
 
         {
             int rows = 1;
-            int columns = 2;
-            Map m = new Map(buildTileArray(rows, columns));
+            int cols = 2;
+            Map m = new Map(buildTileArray(rows, cols));
             assertTrue(m.getNumRows() == rows);
-            assertTrue(m.getNumColumns() == columns);
+            assertTrue(m.getNumCols() == cols);
         }
 
         {
             int rows = 23;
-            int columns = 54;
-            Map m = new Map(buildTileArray(rows, columns));
+            int cols = 54;
+            Map m = new Map(buildTileArray(rows, cols));
             assertTrue(m.getNumRows() == rows);
-            assertTrue(m.getNumColumns() == columns);
+            assertTrue(m.getNumCols() == cols);
         }
     }
 

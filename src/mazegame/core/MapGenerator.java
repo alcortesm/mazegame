@@ -11,8 +11,8 @@ public class MapGenerator {
         return Empty(1, 1);
     }
 
-    public static Map Empty(int rows, int columns) {
-        Tile[][] a = new Tile[rows][columns];
+    public static Map Empty(int rows, int cols) {
+        Tile[][] a = new Tile[rows][cols];
         for (int r=0; r<a.length; r++) {
             for (int c=0; c<a[r].length; c++) {
                 a[r][c] = new Space();

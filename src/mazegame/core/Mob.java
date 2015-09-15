@@ -30,7 +30,7 @@ abstract public class Mob extends Thing {
     // the map, the mob does not move and returns false.
     public boolean move(DIRECTION dir) {
         int dstRow = place.getRow();
-        int dstColumn = place.getColumn();
+        int dstCol = place.getCol();
         switch (dir) {
             case NORTH:
                 dstRow--;
@@ -39,10 +39,10 @@ abstract public class Mob extends Thing {
                 dstRow++;
                 break;
             case WEST:
-                dstColumn--;
+                dstCol--;
                 break;
             case EAST:
-                dstColumn++;
+                dstCol++;
                 break;
             default:
                 throw new EnumConstantNotPresentException(
@@ -51,17 +51,17 @@ abstract public class Mob extends Thing {
         // check if destination is out of the map.
         if (dstRow < 0 ||
                 dstRow >= place.getMap().getNumRows() ||
-                dstColumn < 0 ||
-                dstColumn >= place.getMap().getNumColumns()) {
+                dstCol < 0 ||
+                dstCol >= place.getMap().getNumCols()) {
             return false;
         }
         // check if destination is walkable.
-        if (! place.getMap().getTile(dstRow, dstColumn).isWalkable()) {
+        if (! place.getMap().getTile(dstRow, dstCol).isWalkable()) {
             return false;
         }
 
         Place dstPlace = new Place(
-                dstRow, dstColumn, place.getMap());
+                dstRow, dstCol, place.getMap());
         setPlace(dstPlace);
         return true;
     }

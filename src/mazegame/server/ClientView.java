@@ -12,12 +12,12 @@ public class ClientView {
         return photo.length;
     }
 
-    public int getNumColumns() {
+    public int getNumCols() {
         return photo[0].length;
     }
 
-    public Icon getIconAt(int row, int column) {
-        return photo[row][column];
+    public Icon getIconAt(int row, int col) {
+        return photo[row][col];
     }
 
     public boolean isFinished() {

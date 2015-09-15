@@ -59,17 +59,17 @@ public class Map {
                     ") is less than 1");
         }
 
-        int columns = data[0].length;
-        if (columns < 1) {
+        int cols = data[0].length;
+        if (cols < 1) {
             throw new IllegalArgumentException(
-                    "number of columns (" + columns +
+                    "number of columns (" + cols +
                     ") is less than 1");
         }
 
         // check that there is at least one walkable tile
         boolean ok = false;
         for (int r=0; r<rows; r++) {
-            for (int c=0; c<columns; c++) {
+            for (int c=0; c<cols; c++) {
                 if (data[r][c].isWalkable()) {
                     ok = true;
                     break;
@@ -83,16 +83,16 @@ public class Map {
     }
 
     public int getNumRows() { return this.data.length; }
-    public int getNumColumns() { return this.data[0].length; }
+    public int getNumCols() { return this.data[0].length; }
 
     // there is no need to check for parameter errors, as the
     // array access will already check that for us.
-    public Tile getTile(int row, int column) { return data[row][column]; }
+    public Tile getTile(int row, int col) { return data[row][col]; }
 
     ArrayList<Place> getWalkablePlaces() {
         ArrayList<Place> a = new ArrayList<Place>();
         for (int r=0; r<getNumRows(); r++) {
-            for (int c=0; c<getNumColumns(); c++) {
+            for (int c=0; c<getNumCols(); c++) {
                 if (data[r][c].isWalkable()) {
                     a.add(new Place(r, c, this));
                 }
@@ -109,7 +109,7 @@ public class Map {
         char wallIcon = (new Wall()).getIconChar();
 
         // North wall
-        for (int c=0; c<getNumColumns()+2; c++) {
+        for (int c=0; c<getNumCols()+2; c++) {
             sb.append(wallIcon);
         }
         sb.append(System.lineSeparator());
@@ -117,7 +117,7 @@ public class Map {
         // Maze interior (walls and spaces as per 'data')
         for (int r=0; r<getNumRows(); r++) {
             sb.append(wallIcon); // East wall
-            for (int c=0; c<getNumColumns(); c++) {
+            for (int c=0; c<getNumCols(); c++) {
                 sb.append(getTile(r, c).getIconChar()); // data
             }
             sb.append(wallIcon); // West wall
@@ -125,7 +125,7 @@ public class Map {
         }
 
         // South wall
-        for (int c=0; c<getNumColumns()+2; c++) {
+        for (int c=0; c<getNumCols()+2; c++) {
             sb.append(wallIcon);
         }
 
@@ -141,12 +141,12 @@ public class Map {
         if (numRows == 0) {
             return false;
         }
-        int numColumns = a[0].length;
-        if (numColumns == 0) {
+        int numCols = a[0].length;
+        if (numCols == 0) {
             return false;
         }
         for (int r = 1; r < numRows; r++) {
-            if (a[r].length != numColumns) {
+            if (a[r].length != numCols) {
                 return false;
             }
         }

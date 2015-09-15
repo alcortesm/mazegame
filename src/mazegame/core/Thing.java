@@ -45,7 +45,7 @@ abstract class Thing implements HasIcon {
         // A row holds as many chars as the number of columns
         // plus 2 (the two east and west wall characters)
         // plus the eol charactters
-        int rowLength = place.getMap().getNumColumns() + 2 +
+        int rowLength = place.getMap().getNumCols() + 2 +
             System.lineSeparator().length();
         int index = 0;
         // add the proper number of rows (+1 as the first row will
@@ -53,7 +53,7 @@ abstract class Thing implements HasIcon {
         index += (place.getRow() + 1) * rowLength;
         // add the proper number of columns (+1 as the first column
         // will always be the east wall character.
-        index += place.getColumn() + 1;
+        index += place.getCol() + 1;
         return index;
     }
 
