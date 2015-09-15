@@ -26,9 +26,9 @@
 // characters, otherwise the TUI version of the game will be very
 // confusing.
 
-package mazegame.core;
+package mazegame.server;
 
-class Icon {
+public class Icon {
 
     private char c;
 
@@ -37,7 +37,7 @@ class Icon {
         return (c >= 32) && (c <= 126);
     }
 
-    Icon(char c) {
+    public Icon(char c) {
         if (! isAsciiPrintable(c)) {
             throw new IllegalArgumentException(
                     "Non ASCII printable icon");

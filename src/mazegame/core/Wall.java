@@ -7,6 +7,8 @@
 
 package mazegame.core;
 
+import mazegame.server.Icon;
+
 class Wall implements Tile {
 
     private static final Icon ICON = new Icon('#');

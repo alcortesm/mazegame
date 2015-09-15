@@ -8,6 +8,8 @@
 
 package mazegame.core;
 
+import mazegame.server.Icon;
+
 abstract class Thing implements HasIcon {
 
     protected Place place;

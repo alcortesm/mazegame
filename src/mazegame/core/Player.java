@@ -1,5 +1,7 @@
 package mazegame.core;
 
+import mazegame.server.Icon;
+
 class Player extends Mob {
 
     private static Icon ICON = new Icon('@');

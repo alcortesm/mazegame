@@ -1,5 +1,7 @@
 package mazegame.core;
 
+import mazegame.server.Icon;
+
 class End extends Thing {
 
     private static Icon ICON = new Icon('e');

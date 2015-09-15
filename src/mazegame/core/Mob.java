@@ -5,6 +5,8 @@
 
 package mazegame.core;
 
+import mazegame.server.Icon;
+
 abstract public class Mob extends Thing {
 
     public enum DIRECTION {
