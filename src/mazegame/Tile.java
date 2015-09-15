@@ -1,7 +1,9 @@
-// parent class for walls and spaces.
+// A map is composed of several tiles arranged in 2D array.
+//
+// Example classes that implements Tile: Walls and Spaces.
 
 package mazegame;
 
-abstract class Tile {
-    abstract boolean isWalkable();
+interface Tile extends HasIcon {
+    boolean isWalkable();
 }

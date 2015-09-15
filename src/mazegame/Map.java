@@ -41,10 +41,8 @@ package mazegame;
 import java.util.ArrayList;
 
 class Map {
-    private Tile[][] data;
 
-    private static int MIN_ROWS = 1;
-    private static int MIN_COLUMNS = 1;
+    private Tile[][] data;
 
     Map(Tile[][] data) {
         throwIfThereAreNulls(data);
@@ -55,17 +53,17 @@ class Map {
         this.data = data;
 
         int rows = data.length;
-        if (rows < MIN_ROWS) {
+        if (rows < 1) {
             throw new IllegalArgumentException(
                     "number of rows (" + rows +
-                    ") is less than " + MIN_ROWS);
+                    ") is less than 1");
         }
 
         int columns = data[0].length;
-        if (columns < MIN_COLUMNS) {
+        if (columns < 1) {
             throw new IllegalArgumentException(
                     "number of columns (" + columns +
-                    ") is less than " + MIN_COLUMNS);
+                    ") is less than 1");
         }
 
         // check that there is at least one walkable tile
@@ -87,9 +85,6 @@ class Map {
     int getNumRows() { return this.data.length; }
     int getNumColumns() { return this.data[0].length; }
 
-    static int getMinRows() { return MIN_ROWS; }
-    static int getMinColumns() { return MIN_COLUMNS; }
-
     // there is no need to check for parameter errors, as the
     // array access will already check that for us.
     Tile getTile(int row, int column) { return data[row][column]; }
@@ -109,28 +104,29 @@ class Map {
     public String toString() {
         StringBuilder sb = new StringBuilder();
 
+        // as external walls are implicit, we need a
+        // wall object to get its visual representation.
+        char wallIcon = (new Wall()).getIconChar();
+
         // North wall
         for (int c=0; c<getNumColumns()+2; c++) {
-            sb.append(Wall.TEXT_ICON);
+            sb.append(wallIcon);
         }
         sb.append(System.lineSeparator());
 
         // Maze interior (walls and spaces as per 'data')
         for (int r=0; r<getNumRows(); r++) {
-
-            sb.append(Wall.TEXT_ICON); // East wall
-
+            sb.append(wallIcon); // East wall
             for (int c=0; c<getNumColumns(); c++) {
-                sb.append(getTile(r, c)); // data
+                sb.append(getTile(r, c).getIconChar()); // data
             }
-
-            sb.append(Wall.TEXT_ICON); // West wall
+            sb.append(wallIcon); // West wall
             sb.append(System.lineSeparator());
         }
 
         // South wall
         for (int c=0; c<getNumColumns()+2; c++) {
-            sb.append(Wall.TEXT_ICON);
+            sb.append(wallIcon);
         }
 
         return sb.toString();

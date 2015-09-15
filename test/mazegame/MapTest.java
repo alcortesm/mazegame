@@ -6,15 +6,7 @@ import java.text.ParseException;
 
 public class MapTest {
 
-    @Test
-    public void MinRowsMustBePositive() {
-        assertTrue(Map.getMinRows() > 0);
-    }
-
-    @Test
-    public void MinColumnsMustBePositive() {
-        assertTrue(Map.getMinColumns() > 0);
-    }
+    private static final int REASONABLE_DIM = 3;
 
     @Test(expected=NullPointerException.class)
     public void CtorShouldThrowOnNull() {
@@ -22,13 +14,7 @@ public class MapTest {
     }
 
     private Tile[][] buildTileArray() {
-        return buildTileArray(
-                reasonableDimForTest(), reasonableDimForTest());
-    }
-
-    private int reasonableDimForTest() {
-        int maxDim = Math.max(Map.getMinRows(), Map.getMinColumns());
-        return Math.max(3, maxDim);
+        return buildTileArray(5, 5);
     }
 
     private Tile[][] buildTileArray(int rows, int columns) {
@@ -90,28 +76,20 @@ public class MapTest {
 
     @Test(expected=IllegalArgumentException.class)
     public void CtorShouldThrowOnZeroRows() {
-        Tile[][] a = new Tile[0][Map.getMinColumns()];
+        Tile[][] a = new Tile[0][1];
         new Map(a);
     }
 
     @Test(expected=IllegalArgumentException.class)
-    public void CtorShouldThrowOnTooFewRows() {
-        Tile[][] a = buildTileArray(
-                Map.getMinRows()-1, Map.getMinColumns());
-        new Map(a);
-    }
-
-    @Test(expected=IllegalArgumentException.class)
-    public void CtorShouldThrowOnTooFewColumns() {
-        Tile[][] a = buildTileArray(
-                Map.getMinRows(), Map.getMinColumns()-1);
+    public void CtorShouldThrowOnZeroColumns() {
+        Tile[][] a = new Tile[1][0];
         new Map(a);
     }
 
     @Test(expected=IllegalArgumentException.class)
     public void CtorShouldThrowOnNonRectangular0() {
         Tile[][] a = buildTileArray();
-        a[0] = new Tile[Map.getMinColumns()+1];
+        a[0] = new Tile[2];
         for (int c=0; c<a[0].length; c++) {
             a[0][c] = new Space();
         }
@@ -121,7 +99,7 @@ public class MapTest {
     @Test(expected=IllegalArgumentException.class)
     public void CtorShouldThrowOnNonRectangular1() {
         Tile[][] a = buildTileArray();
-        a[1] = new Tile[Map.getMinColumns()+1];
+        a[1] = new Tile[2];
         for (int c=0; c<a[1].length; c++) {
             a[1][c] = new Space();
         }
@@ -131,7 +109,7 @@ public class MapTest {
     @Test(expected=IllegalArgumentException.class)
     public void CtorShouldThrowOnNonRectangular2() {
         Tile[][] a = buildTileArray();
-        a[2] = new Tile[Map.getMinColumns()+1];
+        a[2] = new Tile[2];
         for (int c=0; c<a[2].length; c++) {
             a[2][c] = new Space();
         }
@@ -141,32 +119,32 @@ public class MapTest {
     @Test
     public void ShouldReturnCorrectNums() {
         {
-            int rows = Map.getMinRows();
-            int columns = Map.getMinColumns();
+            int rows = 1;
+            int columns = 1;
             Map m = new Map(buildTileArray(rows, columns));
             assertTrue(m.getNumRows() == rows);
             assertTrue(m.getNumColumns() == columns);
         }
 
         {
-            int rows = Map.getMinRows()+1;
-            int columns = Map.getMinColumns();
+            int rows = 2;
+            int columns = 1;
             Map m = new Map(buildTileArray(rows, columns));
             assertTrue(m.getNumRows() == rows);
             assertTrue(m.getNumColumns() == columns);
         }
 
         {
-            int rows = Map.getMinRows();
-            int columns = Map.getMinColumns()+1;
+            int rows = 1;
+            int columns = 2;
             Map m = new Map(buildTileArray(rows, columns));
             assertTrue(m.getNumRows() == rows);
             assertTrue(m.getNumColumns() == columns);
         }
 
         {
-            int rows = 2*Map.getMinRows();
-            int columns = 3*Map.getMinColumns();
+            int rows = 23;
+            int columns = 54;
             Map m = new Map(buildTileArray(rows, columns));
             assertTrue(m.getNumRows() == rows);
             assertTrue(m.getNumColumns() == columns);
@@ -175,7 +153,7 @@ public class MapTest {
 
     @Test
     public void shouldGetTiles() {
-        Tile[][] a = new Tile[Map.getMinRows()][Map.getMinColumns()];
+        Tile[][] a = new Tile[1][1];
         for (int r = 0; r<a.length; r++) {
             for (int c = 0; c<a[r].length; c++) {
                 a[r][c] = new Space();
@@ -192,7 +170,7 @@ public class MapTest {
 
     @Test(expected=IllegalArgumentException.class)
     public void shouldThrowIfNoWalkables() {
-         Tile[][] a = new Tile[2*Map.getMinRows()][2*Map.getMinColumns()];
+         Tile[][] a = new Tile[12][15];
         for (int r = 0; r<a.length; r++) {
             for (int c = 0; c<a[r].length; c++) {
                 a[r][c] = new Wall();

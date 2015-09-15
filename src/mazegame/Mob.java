@@ -1,11 +1,11 @@
-// A mob is a "mobile" place.
+// A mob is a "mobile" thing.
 //
 // Mobs can only move over walkable tiles and they can not
 // get out of the map.
 
 package mazegame;
 
-class Mob extends Place {
+abstract class Mob extends Thing {
 
     enum DIRECTION {
         NORTH, SOUTH, EAST, WEST
@@ -13,8 +13,12 @@ class Mob extends Place {
 
     // create a mob at the starting position
     // defined by place.
-    Mob(Place place) {
-        super(place.getRow(), place.getColumn(), place.map);
+    Mob(Place place, Icon icon) {
+        super(place, icon);
+    }
+
+    private void setPlace(Place place) {
+        this.place = place;
     }
 
     // Move the mob 1 tile towards the specified direction and
@@ -23,8 +27,8 @@ class Mob extends Place {
     // If the destination tile is not walkable or if it is outside
     // the map, the mob does not move and returns false.
     boolean move(DIRECTION dir) {
-        int dstRow = row;
-        int dstColumn = column;
+        int dstRow = place.getRow();
+        int dstColumn = place.getColumn();
         switch (dir) {
             case NORTH:
                 dstRow--;
@@ -43,17 +47,20 @@ class Mob extends Place {
                         dir.getClass(), dir.toString());
         }
         // check if destination is out of the map.
-        if (dstRow < 0 || dstRow >= map.getNumRows() ||
-                dstColumn < 0 || dstColumn >= map.getNumColumns()) {
+        if (dstRow < 0 ||
+                dstRow >= place.getMap().getNumRows() ||
+                dstColumn < 0 ||
+                dstColumn >= place.getMap().getNumColumns()) {
             return false;
         }
         // check if destination is walkable.
-        if (! map.getTile(dstRow, dstColumn).isWalkable()) {
+        if (! place.getMap().getTile(dstRow, dstColumn).isWalkable()) {
             return false;
         }
 
-        row = dstRow;
-        column = dstColumn;
+        Place dstPlace = new Place(
+                dstRow, dstColumn, place.getMap());
+        setPlace(dstPlace);
         return true;
     }
 }

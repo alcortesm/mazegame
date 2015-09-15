@@ -3,7 +3,7 @@
 // Mobs will be able to walk over space, but not across walls.
 //
 // A space is not necesarily empty, it can have objects or mobs in
-// it.
+// it (see the Place class).
 
 // TODO: as there are going to be many spaces in the maze, and they
 // will probably be all equal, maybe it will be a good idea to use
@@ -11,15 +11,15 @@
 
 package mazegame;
 
-class Space extends Tile {
-    static final String TEXT_ICON = " ";
+class Space implements Tile {
 
-    public String toString() {
-        return TEXT_ICON;
-    }
+    private static final Icon ICON = new Icon(' ');
 
-    boolean isWalkable() {
+    public boolean isWalkable() {
         return true;
     }
-}
 
+    public char getIconChar() {
+        return ICON.getChar();
+    }
+}

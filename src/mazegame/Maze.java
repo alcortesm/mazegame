@@ -4,14 +4,11 @@ import java.util.Random;
 import java.util.ArrayList;
 
 class Maze {
-    private Map map;
-    private Place start;
-    private Place end;
-    private Mob player;
 
-    private static final char START_ICON = 's';
-    private static final char END_ICON = 'e';
-    private static final char PLAYER_ICON = '@';
+    private Map map;
+    private Start start;
+    private End end;
+    private Player player;
 
     Maze(Map map) {
         if (map == null) {
@@ -19,9 +16,9 @@ class Maze {
         }
         this.map = map;
         ArrayList<Place> places = map.getWalkablePlaces();
-        start = randomWalkablePlace(places);
-        end = randomWalkablePlace(places);
-        player = new Mob(start);
+        start = new Start(randomWalkablePlace(places));
+        end = new End(randomWalkablePlace(places));
+        player = new Player(start.getPlace());
     }
 
     private Place randomWalkablePlace(ArrayList<Place> places) {
@@ -30,11 +27,11 @@ class Maze {
     }
 
     public String toString() {
-        StringBuilder sb = new StringBuilder(map.toString());
-        sb.setCharAt(start.getMapStringIndex(), START_ICON);
-        sb.setCharAt(end.getMapStringIndex(), END_ICON);
-        sb.setCharAt(player.getMapStringIndex(), PLAYER_ICON);
-        return sb.toString();
+        String s = map.toString();
+        s = start.insertMeIntoMapString(s);
+        s = end.insertMeIntoMapString(s);
+        s = player.insertMeIntoMapString(s);
+        return s;
     }
 
     boolean movePlayer(Mob.DIRECTION dir) {
@@ -42,6 +39,6 @@ class Maze {
     }
 
     boolean isPlayerAtEnd() {
-        return player.equals(end);
+        return player.sharePlaceWith(end);
     }
 }

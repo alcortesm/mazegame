@@ -1,12 +1,20 @@
-// A place is the coordinates (row and column) of a tile in
+// A place is the coordinates (row and column) of an space tile in
 // a map.
+//
+// Places can not be on Walls or other non-walkable tiles.
 
 package mazegame;
 
 class Place {
+
     protected int row;
     protected int column;
     protected Map map;
+
+    // clone ctor
+    Place(Place place) {
+        this(place.row, place.column, place.map);
+    }
 
     Place(int row, int column, Map map) {
         if (row < 0) {
@@ -26,14 +34,18 @@ class Place {
         if (map == null) {
             throw new NullPointerException("map");
         }
+        if (! map.getTile(row, column).isWalkable()) {
+            throw new IllegalArgumentException(
+                    "non walkable tile at the specified row x colum");
+        }
         this.row = row;
         this.column = column;
         this.map = map;
     }
 
     int getRow() { return row; }
-
     int getColumn() { return column; }
+    Map getMap() { return map; }
 
     public boolean equals(Place p) {
         return (this.getRow() == p.getRow()) &&
@@ -43,23 +55,5 @@ class Place {
 
     public String toString() {
         return "(" + row + ", " + column + ")";
-    }
-
-    // This method returns the string index of a place
-    // in the string representation of its map
-    int getMapStringIndex() {
-        // A row holds as many chars as the number of columns
-        // plus 2 (the two east and west wall characters)
-        // plus the eol charactters
-        int rowLength = map.getNumColumns() + 2 +
-            System.lineSeparator().length();
-        int index = 0;
-        // add the proper number of rows (+1 as the first row will
-        // always be the north wall).
-        index += (getRow() + 1) * rowLength;
-        // add the proper number of columns (+1 as the first column
-        // will always be the east wall character.
-        index += getColumn() + 1;
-        return index;
     }
 }

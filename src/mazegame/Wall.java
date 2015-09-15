@@ -1,20 +1,21 @@
 // A wall in a map is a physical barrier that mobs cannot cross.
 //
-// A simple maze will be composed of wall and the space between them.
+// A simple map will be composed of walls and the space between them.
 //
 // TODO: There can be many walls in a maze and they will be all
 // equal, consider to reuse the same object for all of them.
 
 package mazegame;
 
-class Wall extends Tile {
-    static final String TEXT_ICON = "#";
+class Wall implements Tile {
 
-    public String toString() {
-        return TEXT_ICON;
+    private static final Icon ICON = new Icon('#');
+
+    public boolean isWalkable() {
+        return false;
     }
 
-    boolean isWalkable() {
-        return false;
+    public char getIconChar() {
+        return ICON.getChar();
     }
 }

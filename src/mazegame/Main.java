@@ -5,8 +5,7 @@ import java.util.Scanner;
 class Main {
 
     public static void main(String args[]) {
-        Map map = MapGenerator.generate(
-                MapGenerator.TYPE.TEST);
+        Map map = MapGenerator.Test();
         Maze maze = new Maze(map);
 
         System.out.println("Welcome to the MazeGame.");
