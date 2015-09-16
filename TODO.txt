@@ -1,0 +1,15 @@
+- Remove a lot of methods that are no longer needed.
+
+- Right now the onion has too many layers, think about adding
+  shortcut methods to highlevel classes or not.
+
+- Icons should be part of the client, not of the Server, so each
+  client will choose it own icons.
+
+- Thing is a really bad name, think of another.
+
+- Think about the server-maze interface, Do we really need it, or can
+  we reuse maze as the server (via access modifiers)
+
+- Think again about the Places : Must tiles has a place?, can there
+  be non walkable places?

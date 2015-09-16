@@ -24,4 +24,8 @@ class Space implements Tile {
     public char getIconChar() {
         return ICON.getChar();
     }
+
+    public Icon getIcon() {
+        return ICON;
+    }
 }

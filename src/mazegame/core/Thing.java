@@ -10,7 +10,7 @@ package mazegame.core;
 
 import mazegame.server.Icon;
 
-abstract class Thing implements HasIcon {
+public abstract class Thing implements HasIcon {
 
     protected Place place;
     protected Icon icon;
@@ -26,8 +26,12 @@ abstract class Thing implements HasIcon {
         this.icon = icon;
     }
 
-    Place getPlace() {
+    public Place getPlace() {
         return place;
+    }
+
+    public Icon getIcon() {
+        return icon;
     }
 
     // Returns the src string, which is assumed to be a
@@ -57,11 +61,15 @@ abstract class Thing implements HasIcon {
         return index;
     }
 
-    boolean isAt(Place place) {
+    public boolean isAt(Place place) {
         return this.getPlace().equals(place);
     }
 
-    boolean sharePlaceWith(Thing other) {
+    public boolean sharePlaceWith(Thing other) {
         return isAt(other.getPlace());
+    }
+
+    public String toString() {
+        return "Thing[" + place + ", " + icon + "]";
     }
 }

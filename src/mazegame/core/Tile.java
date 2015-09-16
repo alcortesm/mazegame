@@ -4,6 +4,6 @@
 
 package mazegame.core;
 
-interface Tile extends HasIcon {
+public interface Tile extends HasIcon {
     boolean isWalkable();
 }

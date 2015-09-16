@@ -13,4 +13,8 @@ class Start extends Thing {
     public char getIconChar() {
         return icon.getChar();
     }
+
+    public String toString() {
+        return "Start = " + super.toString();
+    }
 }

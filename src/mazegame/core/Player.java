@@ -13,4 +13,8 @@ class Player extends Mob {
     public char getIconChar() {
         return icon.getChar();
     }
+
+    public String toString() {
+        return "Player = " + super.toString();
+    }
 }

@@ -32,6 +32,8 @@ public class Icon {
 
     private char c;
 
+    public static final Icon EXTERNAL_WALL = new Icon('#');
+
     // ASCII printable characters are from 32 to 126 (both included)
     private static boolean isAsciiPrintable(char c) {
         return (c >= 32) && (c <= 126);
@@ -47,5 +49,9 @@ public class Icon {
 
     public char getChar() {
         return c;
+    }
+
+    public String toString() {
+        return "Icon['" + c + "']";
     }
 }

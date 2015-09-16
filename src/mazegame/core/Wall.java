@@ -9,7 +9,7 @@ package mazegame.core;
 
 import mazegame.server.Icon;
 
-class Wall implements Tile {
+public class Wall implements Tile {
 
     private static final Icon ICON = new Icon('#');
 
@@ -19,5 +19,9 @@ class Wall implements Tile {
 
     public char getIconChar() {
         return ICON.getChar();
+    }
+
+    public Icon getIcon() {
+        return ICON;
     }
 }

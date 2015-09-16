@@ -2,6 +2,7 @@ package mazegame.core;
 
 import java.util.Random;
 import java.util.ArrayList;
+import mazegame.server.Direction;
 
 public class Maze {
 
@@ -34,11 +35,16 @@ public class Maze {
         return s;
     }
 
-    public boolean movePlayer(Mob.DIRECTION dir) {
+    public boolean movePlayer(Direction dir) {
         return player.move(dir);
     }
 
     public boolean isPlayerAtEnd() {
         return player.sharePlaceWith(end);
     }
+
+    public Player getPlayer() { return player; }
+    public Start getStart() { return start; }
+    public End getEnd() { return end; }
+    public Map getMap() { return map; }
 }

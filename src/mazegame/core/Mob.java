@@ -6,12 +6,9 @@
 package mazegame.core;
 
 import mazegame.server.Icon;
+import mazegame.server.Direction;
 
 abstract public class Mob extends Thing {
-
-    public enum DIRECTION {
-        NORTH, SOUTH, EAST, WEST
-    };
 
     // create a mob at the starting position
     // defined by place.
@@ -28,25 +25,19 @@ abstract public class Mob extends Thing {
     //
     // If the destination tile is not walkable or if it is outside
     // the map, the mob does not move and returns false.
-    public boolean move(DIRECTION dir) {
+    public boolean move(Direction dir) {
         int dstRow = place.getRow();
         int dstCol = place.getCol();
-        switch (dir) {
-            case NORTH:
+        if (dir == Direction.NORTH) {
                 dstRow--;
-                break;
-            case SOUTH:
+        } else if (dir == Direction.SOUTH) {
                 dstRow++;
-                break;
-            case WEST:
+        } else if (dir == Direction.WEST) {
                 dstCol--;
-                break;
-            case EAST:
+        } else if (dir == Direction.EAST) {
                 dstCol++;
-                break;
-            default:
-                throw new EnumConstantNotPresentException(
-                        dir.getClass(), dir.toString());
+        } else {
+            throw new IllegalArgumentException("dir");
         }
         // check if destination is out of the map.
         if (dstRow < 0 ||
@@ -64,5 +55,9 @@ abstract public class Mob extends Thing {
                 dstRow, dstCol, place.getMap());
         setPlace(dstPlace);
         return true;
+    }
+
+    public String toString() {
+        return "Mob = " + super.toString();
     }
 }

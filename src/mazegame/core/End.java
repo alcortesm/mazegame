@@ -13,4 +13,8 @@ class End extends Thing {
     public char getIconChar() {
         return icon.getChar();
     }
+
+    public String toString() {
+        return "End = " + super.toString();
+    }
 }

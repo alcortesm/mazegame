@@ -4,10 +4,61 @@ import java.util.Scanner;
 
 import mazegame.server.*;
 
-
 public class Tui implements Client {
 
     private Server server;
+
+    private static final String GREETING =
+        System.lineSeparator() +
+        "                  ###########################               " + System.lineSeparator() +
+        "                  # Welcome to the MazeGame #               " + System.lineSeparator() +
+        "                  ###########################               " + System.lineSeparator() +
+        "                                                            " + System.lineSeparator() +
+        "            A tiny roguelike game for teaching Java.        " + System.lineSeparator() +
+        "                                                            " + System.lineSeparator() +
+        "       (C) 2015 by Alberto Cortés (alcortesm@gmail.com)     " + System.lineSeparator() +
+        "                                                            " + System.lineSeparator() +
+        "                                                            " + System.lineSeparator() +
+        "Press the ENTER key to begin...";
+
+    private static final String CONGRATULATIONS =
+        System.lineSeparator() +
+        "                        CONGRATULATIONS!                    " + System.lineSeparator() +
+        "                                                            " + System.lineSeparator() +
+        "                           YOU WIN!                         " + System.lineSeparator() +
+        System.lineSeparator();
+
+    private static final String ASK_FOR_COMMAND =
+        System.lineSeparator() +
+        "Write a command and press ENTER (h for help): ";
+
+    private static final String HELP =
+        System.lineSeparator() +
+        "Goal:" + System.lineSeparator() +
+        "\tYour goal is to take the player from" + System.lineSeparator() +
+        "\tthe starting point to the exit of the maze." + System.lineSeparator() +
+        System.lineSeparator() +
+        "Legend:" + System.lineSeparator() +
+        "\t#   a wall" + System.lineSeparator() +
+        "\t@   the player" + System.lineSeparator() +
+        "\ts   starting position" + System.lineSeparator() +
+        "\te   the exit of the maze" + System.lineSeparator() +
+        System.lineSeparator() +
+        "Commands:" + System.lineSeparator() +
+        "\th, help:   this help" + System.lineSeparator() +
+        "\tn, north:  go north" + System.lineSeparator() +
+        "\ts, south:  go south" + System.lineSeparator() +
+        "\te, east:   go east" + System.lineSeparator() +
+        "\tw, west:   go west" + System.lineSeparator() +
+        "\tq, quit:   quit the game" + System.lineSeparator() +
+        "\tx, exit:   alias for \"quit\"" + System.lineSeparator() +
+        System.lineSeparator();
+
+    private static final String EXITING = System.lineSeparator() + "Exiting..." + System.lineSeparator()
+        + System.lineSeparator();
+
+    private static final String UNKNOWN_COMMAND = System.lineSeparator() + "Unknown command: \"";
+    private static final String UNKNOWN_COMMAND_SUFIX = "\"" + System.lineSeparator();
 
     public Tui() {
         server = new Server();
@@ -16,61 +67,81 @@ public class Tui implements Client {
     public void run() {
         Scanner scan = new Scanner(System.in);
 
-        System.out.println("Welcome to the MazeGame.");
-        System.out.println("Press the ENTER key to begin...");
-        String line = scan.nextLine();
+        System.out.print(GREETING);
+        scan.nextLine();
 
-        boolean exit = false;
+        String line;
+        boolean mustExit = false;
         ClientView view = server.getClientView();
+        printClientView(view);
         do {
-            System.out.println();
-            System.out.println();
-            System.out.print("Enter a command and press ENTER: ");
+            if (view.isFinished()) {
+                System.out.print(CONGRATULATIONS);
+                mustExit = true;
+                continue;
+            }
+            System.out.print(ASK_FOR_COMMAND);
             line = scan.nextLine();
+            if (line.length() == 0) {
+                continue;
+            }
             switch (line) {
                 case "north": case "n":
                     view = server.movePlayer(Direction.NORTH);
-                    System.out.println();
-                    System.out.println(view.lastCommandResultDescription());
+                    printClientView(view);
+                    break;
+                case "south": case "s":
+                    view = server.movePlayer(Direction.SOUTH);
+                    printClientView(view);
+                    break;
+                case "east": case "e":
+                    view = server.movePlayer(Direction.EAST);
+                    printClientView(view);
+                    break;
+                case "west": case "w":
+                    view = server.movePlayer(Direction.WEST);
+                    printClientView(view);
                     break;
                 case "quit": case "q": case "exit": case "x":
-                    System.out.println();
-                    System.out.println("Exiting...");
-                    exit = true;
+                    System.out.print(EXITING);
+                    mustExit = true;
                     break;
                 case "help": case "h":
-                    System.out.println();
-                    System.out.println("Goal:");
-                    System.out.println("\tYour goal is to take the player from");
-                    System.out.println("\tthe starting point to the exit of the maze.");
-                    System.out.println();
-                    System.out.println("Legend:");
-                    System.out.println("\t#   a wall");
-                    System.out.println("\t@   the player");
-                    System.out.println("\ts   starting position");
-                    System.out.println("\te   the exit of the maze");
-
-                    System.out.println();
-                    System.out.println("Commands:");
-                    System.out.println("\th, help:   this help");
-                    System.out.println("\tn, north:  go north");
-                    System.out.println("\ts, south:  go south");
-                    System.out.println("\te, east:   go east");
-                    System.out.println("\tw, west:   go west");
-                    System.out.println("\tq, quit:   quit the game");
-                    System.out.println("\tx, exit:   alias for \"quit\"");
+                    System.out.print(HELP);
                     break;
                 default:
-                    System.out.println();
-                    System.out.println("Unknown command");
+                    System.out.print(UNKNOWN_COMMAND + line + UNKNOWN_COMMAND_SUFIX);
             }
-            if (view.isFinished()) {
-                System.out.println();
-                System.out.println(
-                        "CONGRATULATIONS!, YOU BEAT THE GAME!");
-                exit = true;
-            }
-        } while (! exit);
+        } while (! mustExit);
+    }
 
+    private static void printClientView(ClientView view) {
+        // print last command result
+        System.out.println();
+        System.out.println(view.lastCommandResultDescription());
+
+        // print maze
+        System.out.println();
+        // we will need this for printing exterior walls
+        char wall = Icon.EXTERNAL_WALL.getChar();
+        // print north wall
+        for (int c = 0; c<view.getNumCols()+2; c++) {
+            System.out.print(wall);
+        }
+        System.out.println();
+        // print tiles and objects in the maze
+        for (int r = 0; r<view.getNumRows(); r++) {
+            System.out.print(wall); // west wall
+            for (int c = 0; c<view.getNumCols(); c++) {
+                System.out.print(view.getIconAt(r, c).getChar());
+            }
+            System.out.print(wall); // east wall
+            System.out.println();
+        }
+        // print south wall
+        for (int c = 0; c<view.getNumCols()+2; c++) {
+            System.out.print(wall);
+        }
+        System.out.println();
     }
 }

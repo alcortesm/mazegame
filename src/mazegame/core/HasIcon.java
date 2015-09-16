@@ -3,7 +3,10 @@
 
 package mazegame.core;
 
-interface HasIcon {
+import mazegame.server.Icon;
+
+public interface HasIcon {
+    Icon getIcon();
     // Returns the char representation of the icon of the
     // object, for the TUI. This will be usueful to show
     // the maze map in the TUI.

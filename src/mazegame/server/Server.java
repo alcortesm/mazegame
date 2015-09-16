@@ -13,6 +13,7 @@ public class Server {
             throw new IllegalStateException(
                     "The maze has not yet been created");
         }
+        maze.movePlayer(dir);
         return new ClientView(maze);
     }
 
