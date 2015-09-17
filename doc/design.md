@@ -5,7 +5,7 @@
 MazeGame is a tiny roguelike game for teaching Java.
 
 Its desing is strongly influenced by the current curriculum of the course I
-have been teaching in the past 3 years, this means you will find:
+have been teaching in the past 3 years at UC3M. This means you will find:
 
 - Questionable desing decissions.
 - Inefficiencies.
@@ -24,13 +24,13 @@ extended.
 The goal of the game is to control the movements of a *hero* inside a closed 2D
 maze.
 
-The hero will begin the game at the *starting* position and the game will end
+The hero will begin the game at a starting position and the game will end
 when the hero gets to the *ending* position or dies.
 
 The maze is a 2D rectangular array of *wall*s and *empty space*. Walls in the
 maze prevents the player from taking a direct, straighforward route to the
-ending position. Empty space can hold other objects, like the starting
-position, the ending position, the hero, monsters, traps...
+ending position. Empty space can hold other objects, like the ending position,
+the hero, monsters, traps...
 
 ## Overall desing
 
@@ -68,12 +68,12 @@ server nor it has the concept of "connections" between client and server.
 The server initialization requires some data from the client:
 
 - The desired strategy for generating the maze (i.e. choosing one among a set
-  of predefined mazes or asking for a randomly maze) and its parameters (i.e.
-  the name of the pregenerated maze or the dimensions for a randomly generated
-  maze).
+  of predefined mazes or asking for a randomly generated maze) and its
+  parameters (i.e.  the name of the pregenerated maze or the dimensions for a
+  randomly generated maze).
 
 This information is stored in objects implementing the `ServerSpec` interface.
-There are implementations of these interface for every kind of server supported.
+There are implementations of this interface for every kind of server supported.
 
 Once the server has been created, the client can send two types of messages to
 the server:
@@ -97,13 +97,13 @@ information stored in a `ClientView` object is:
 - `boolean isHeroAlive()`: if the player is alive. At game over the
   player wins if the hero is alive, otherwise the player loses.
 
-- `String lastMovementResult()`: a textual message to the user to let her know
+- `String lastMsgResult()`: a textual message to the user to let her know
   if the last movement was succesfully performed (the hero can not move into
   walls, for example).
 
-- `Icon[][] getFloorPlan()`: the set of objects in the maze and their
+- `Icon[][] getTopView()`: the set of objects in the maze and their
   positions. To keep things simple, its current implementation is a Java 2D
-  rectangular array of Icons (an enum). This means there can only be one icon
+  rectangular array of Icons (another enum). This means there can only be one icon
   for each position in the maze, this is, the hero will obscure the floor under
   him or the starting and ending position. This makes sense for a textual
   interface, but will look ugly for a graphical one where transparencies could
