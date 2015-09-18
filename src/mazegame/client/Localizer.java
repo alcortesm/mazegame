@@ -139,13 +139,19 @@ class Localizer {
             throw new NullPointerException("lang");
         }
         checkStringDB();
-        switch (lang) {
-            case ENGLISH:
+        // find the correct language in the enum Language
+        Language[] langs = Language.values();
+        boolean found = false;
+        for (int i=0; i<langs.length; i++) {
+            if (lang.equals(langs[i])) {
                 this.lang = lang;
+                found = true;
                 break;
-            default:
-                throw new IllegalArgumentException(
-                        "Unsupported language " + lang);
+            }
+        }
+        if (! found) {
+            throw new IllegalArgumentException(
+                    "Unsupported language " + lang);
         }
     }
 
