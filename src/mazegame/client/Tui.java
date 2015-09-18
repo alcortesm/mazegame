@@ -12,6 +12,9 @@ public class Tui implements Client {
     private Localizer localizer;
     private Server server;
 
+    // we are breaking dependency injection here by
+    // not passing a Localizer, but I think it is worth
+    // it to keep the client package API short and clean.
     public Tui(Language lang) {
         if (lang == null) {
             throw new NullPointerException("lang");
