@@ -8,7 +8,7 @@ class Main {
 
     public static void main(String args[]) {
         if (args.length != 0) {
-            usage(args);
+            usage();
             System.exit(1);
         }
         Client client = new Tui();
@@ -16,7 +16,7 @@ class Main {
         System.exit(0);
     }
 
-    private static void usage(String args[]) {
+    private static void usage() {
         System.err.println("usage:");
         System.err.println(
                 "\tThis program does not admit any command line argument");
