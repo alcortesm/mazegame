@@ -11,7 +11,7 @@ class Main {
             usage();
             System.exit(1);
         }
-        Client client = new Tui();
+        Client client = new Tui(Language.ENGLISH);
         client.run();
         System.exit(0);
     }
