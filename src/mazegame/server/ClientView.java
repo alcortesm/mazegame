@@ -1,8 +1,24 @@
 package mazegame.server;
 
+import mazegame.util.Array;
+
 public class ClientView {
 
-    public ClientView() {}
+    private Icon[][] icons;
+
+    public ClientView(Icon[][] icons) {
+        if (icons == null) {
+            throw new NullPointerException("icons");
+        }
+        if (Array.hasNull(icons)) {
+            throw new NullPointerException("map icons has nulls");
+        }
+        if (! Array.isRect(icons)) {
+            throw new IllegalArgumentException(
+                    "map is not rectangular");
+        }
+        this.icons = icons;
+    }
 
     public boolean isGameOver() {
         return false;
@@ -17,17 +33,7 @@ public class ClientView {
     }
 
     public Icon[][] getTopView() {
-        Icon[][] topView = new Icon[3][3];
-        topView[0][0] = Icon.WALL;
-        topView[0][1] = Icon.WALL;
-        topView[0][2] = Icon.WALL;
-        topView[1][0] = Icon.WALL;
-        topView[1][1] = Icon.WALL;
-        topView[1][2] = Icon.WALL;
-        topView[2][0] = Icon.WALL;
-        topView[2][1] = Icon.WALL;
-        topView[2][2] = Icon.WALL;
-        return topView;
+        return icons;
     }
 
 

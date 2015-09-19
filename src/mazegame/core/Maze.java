@@ -4,16 +4,24 @@ import java.util.Random;
 import java.util.ArrayList;
 
 import mazegame.server.Direction;
+import mazegame.server.ClientView;
 
 public class Maze {
 
-    public Maze() {}
+    private Map map;
 
-    public boolean movePlayer(Direction dir) {
+    public Maze(Map map) {
+        if (map == null) {
+            throw new NullPointerException("map");
+        }
+        this.map = map;
+    }
+
+    public boolean moveHero(Direction dir) {
         return true;
     }
 
-    public boolean isHeroAtEnd() {
-        return false;
+    public ClientView getClientView() {
+        return new ClientView(map.getIcons());
     }
 }
