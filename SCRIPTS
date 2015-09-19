@@ -8,4 +8,4 @@ Compile with debug information:
 
 Run:
 
-    ant jar ; java -jar build/jar/MazeGame.jar
+    ant jar ; if [ $? == 0 ] ; then java -jar build/jar/MazeGame.jar ; fi
