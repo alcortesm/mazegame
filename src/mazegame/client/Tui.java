@@ -46,19 +46,19 @@ public class Tui implements Client {
             }
             switch (line) {
                 case "north": case "n":
-                    view = server.movePlayer(Direction.NORTH);
+                    view = server.moveHero(Direction.NORTH);
                     printClientView(view);
                     break;
                 case "south": case "s":
-                    view = server.movePlayer(Direction.SOUTH);
+                    view = server.moveHero(Direction.SOUTH);
                     printClientView(view);
                     break;
                 case "east": case "e":
-                    view = server.movePlayer(Direction.EAST);
+                    view = server.moveHero(Direction.EAST);
                     printClientView(view);
                     break;
                 case "west": case "w":
-                    view = server.movePlayer(Direction.WEST);
+                    view = server.moveHero(Direction.WEST);
                     printClientView(view);
                     break;
                 case "quit": case "q": case "exit": case "x":
