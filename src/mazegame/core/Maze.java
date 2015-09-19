@@ -28,10 +28,12 @@ public class Maze {
     }
 
     public ClientView getClientView() {
+        // get floor map
         Icon[][] icons = map.getIcons();
+        // add end position
         Place endPlace = end.getPlace();
-        System.out.println(endPlace);
         icons[endPlace.getRow()][endPlace.getCol()] = end.getIcon();
+
         return new ClientView(icons);
     }
 }
