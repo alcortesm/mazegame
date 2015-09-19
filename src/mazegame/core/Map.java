@@ -5,31 +5,31 @@ import mazegame.util.Array;
 
 public class Map {
 
-    private Icon[][] icons;
+    private Tile[][] tiles;
 
-    public Map(Icon[][] icons) {
-        if (icons == null) {
-            throw new NullPointerException("icons");
+    public Map(Tile[][] tiles) {
+        if (tiles == null) {
+            throw new NullPointerException("tiles");
         }
-        if (Array.hasNull(icons)) {
-            throw new NullPointerException("map icons has nulls");
+        if (Array.hasNull(tiles)) {
+            throw new NullPointerException("map tiles has nulls");
         }
-        if (! Array.isRect(icons)) {
+        if (! Array.isRect(tiles)) {
             throw new IllegalArgumentException(
                     "map is not rectangular");
         }
-        this.icons = icons;
+        this.tiles = tiles;
     }
 
     int getNumRows() {
-        return icons.length;
+        return tiles.length;
     }
 
     int getNumCols() {
-        return icons[0].length;
+        return tiles[0].length;
     }
 
-    Icon getIcon(int r, int c) {
+    Tile getTile(int r, int c) {
         if (r < 0) {
             throw new IllegalArgumentException("r < 0");
         }
@@ -44,10 +44,16 @@ public class Map {
             throw new IllegalArgumentException(
                     "c > number of columns in the map");
         }
-        return icons[r][c];
+        return tiles[r][c];
     }
 
     Icon[][] getIcons() {
+        Icon[][] icons = new Icon[getNumRows()][getNumCols()];
+        for (int r=0; r<getNumRows(); r++) {
+            for (int c=0; c<getNumCols(); c++) {
+                icons[r][c] = tiles[r][c].getIcon();
+            }
+        }
         return icons;
     }
 }
