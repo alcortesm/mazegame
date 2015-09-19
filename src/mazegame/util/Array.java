@@ -51,9 +51,6 @@ public class Array {
         if (p < 0) {
             throw new IllegalArgumentException("p < 0");
         }
-        if (p >= a.length) {
-            throw new IllegalArgumentException("p >= a.length");
-        }
         if (t == null) {
             throw new NullPointerException("s");
         }

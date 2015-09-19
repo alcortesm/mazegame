@@ -466,18 +466,21 @@ public class ArrayTest {
         Array.firstIndexOf("a", new String[]{"a", "b"}, -15);
     }
 
-    @Test(expected=IllegalArgumentException.class)
-    public void firstIndexOfMustThrowOnPositionTooBig1() {
-        Array.firstIndexOf("a", new String[]{"a", "b"}, 2);
+    @Test
+    public void firstIndexOfMustNegOnPositionTooBig1() {
+        assertTrue(Array.firstIndexOf(
+                    "a", new String[]{"a", "b"}, 2) == -1);
     }
 
-    @Test(expected=IllegalArgumentException.class)
-    public void firstIndexOfMustThrowOnPositionTooBig2() {
-        Array.firstIndexOf("a", new String[]{"a", "b"}, 15);
+    @Test
+    public void firstIndexOfMustNegOnPositionTooBig2() {
+        assertTrue(Array.firstIndexOf(
+                "a", new String[]{"a", "b"}, 15) == -1);
     }
 
-    @Test(expected=IllegalArgumentException.class)
-    public void firstIndexOfMustThrowOnPositionTooBig3() {
-        Array.firstIndexOf("a", new String[]{}, 0);
+    @Test
+    public void firstIndexOfMustNegOnPositionTooBig3() {
+        assertTrue(Array.firstIndexOf(
+                    "a", new String[]{}, 0) == -1);
     }
 }
