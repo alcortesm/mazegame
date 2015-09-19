@@ -1,0 +1,11 @@
+Read documantation:
+
+    cat design.md | pandoc -f markdown_github -s | w3m -T text/html
+
+Compile with debug information:
+
+    ant clean ; ant compile-debug ; ant junit ; if [ $? != 0 ] ; then cat testreport/TEST-*; fi
+
+Run:
+
+    ant jar ; java -jar build/jar/MazeGame.jar
