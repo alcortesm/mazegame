@@ -6,7 +6,10 @@ public class ServerSpecTest implements ServerSpec {
 
     public Map generateMap() {
         Icon[][] icons = new Icon[][]{
-            {Icon.WALL}
+            {Icon.EMPTY, Icon.WALL, Icon.EMPTY, Icon.WALL, Icon.EMPTY, Icon.EMPTY, Icon.EMPTY, Icon.WALL},
+            {Icon.EMPTY, Icon.WALL, Icon.EMPTY, Icon.EMPTY, Icon.EMPTY, Icon.WALL, Icon.EMPTY, Icon.EMPTY},
+            {Icon.EMPTY, Icon.WALL, Icon.EMPTY, Icon.WALL, Icon.WALL, Icon.WALL, Icon.EMPTY, Icon.WALL},
+            {Icon.EMPTY, Icon.EMPTY, Icon.EMPTY, Icon.WALL, Icon.EMPTY, Icon.EMPTY, Icon.EMPTY, Icon.EMPTY},
         };
         return new Map(icons);
     }
