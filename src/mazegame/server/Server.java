@@ -3,6 +3,7 @@ package mazegame.server;
 import mazegame.core.Maze;
 import mazegame.core.Map;
 import mazegame.server.ServerSpec;
+import mazegame.core.End;
 
 public class Server {
 
@@ -10,7 +11,8 @@ public class Server {
 
     public Server(ServerSpec spec) {
         Map map = spec.generateMap();
-        this.maze = new Maze(map);
+        End end = spec.generateEnd();
+        this.maze = new Maze(map, end);
     }
 
     public ClientView moveHero(Direction dir) {

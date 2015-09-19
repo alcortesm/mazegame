@@ -4,10 +4,15 @@ import mazegame.core.Map;
 import mazegame.core.Tile;
 import mazegame.core.Space;
 import mazegame.core.Wall;
+import mazegame.core.End;
+import mazegame.core.Place;
 
 public class ServerSpecTest implements ServerSpec {
 
-    public Map generateMap() {
+    private Map map;
+    private End end;
+
+    public ServerSpecTest() {
         Tile w = new Wall();
         Tile s = new Space();
         Tile[][] tiles = {
@@ -16,6 +21,15 @@ public class ServerSpecTest implements ServerSpec {
             {s, w, s, w, w, w, s, w},
             {s, s, s, w, s, s, s, s},
         };
-        return new Map(tiles);
+        this.map = new Map(tiles);
+        this.end = new End(new Place(3, 4, map));
+    }
+
+    public Map generateMap() {
+        return map;
+    }
+
+    public End generateEnd() {
+        return end;
     }
 }
