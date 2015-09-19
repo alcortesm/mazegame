@@ -4,7 +4,7 @@ Read documantation:
 
 Compile with debug information:
 
-    ant clean ; ant compile-debug ; ant junit ; if [ $? != 0 ] ; then cat testreport/TEST-*; fi
+    ant clean ; ant junit ; if [ $? != 0 ] ; then cat testreport/TEST-*; fi
 
 Run:
 
