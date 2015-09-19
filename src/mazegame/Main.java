@@ -7,18 +7,22 @@ import mazegame.client.Language;
 class Main {
 
     public static void main(String args[]) {
-        if (args.length != 0) {
+        CLOptions opts = null;
+        try {
+            opts = new CLOptions(args);
+        } catch (IllegalArgumentException e) {
+            System.err.println(e.getMessage());
             usage();
             System.exit(1);
         }
-        Client client = new Tui(Language.ENGLISH);
+        Client client = new Tui(opts.getLanguage());
         client.run();
         System.exit(0);
     }
 
     private static void usage() {
-        System.err.println("usage:");
+        System.err.println("options:");
         System.err.println(
-                "\tThis program does not admit any command line argument");
+                "\t-l (ENGLISH|SPANISH) language to talk to the user");
     }
 }
