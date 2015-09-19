@@ -4,7 +4,11 @@ import mazegame.core.Maze;
 
 public class Server {
 
-    public Server() {}
+    private Maze maze;
+
+    public Server() {
+        this.maze = new Maze();
+    }
 
     public ClientView moveHero(Direction dir) {
         return new ClientView();
