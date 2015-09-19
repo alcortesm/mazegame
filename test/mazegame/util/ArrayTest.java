@@ -356,4 +356,128 @@ public class ArrayTest {
             assertFalse(Array.isRect(a));
         }
     }
+
+    @Test
+    public void firstIndexOfMustWork() {
+        String[] a;
+        int p;
+        String t;
+        int expected;
+        int output;
+        {
+            a = new String[]{"a"};
+            p = 0;
+            t = "a";
+            expected = 0;
+            output = Array.firstIndexOf(t, a, p);
+            assertTrue("expected = " + expected +
+                    ", output = " + output,
+                    expected == output);
+        }
+        {
+            a = new String[]{"a"};
+            p = 0;
+            t = "z";
+            expected = -1;
+            output = Array.firstIndexOf(t, a, p);
+            assertTrue("expected = " + expected +
+                    ", output = " + output,
+                    expected == output);
+        }
+        {
+            a = new String[]{"a", "b"};
+            p = 0;
+            t = "a";
+            expected = 0;
+            output = Array.firstIndexOf(t, a, p);
+            assertTrue("expected = " + expected +
+                    ", output = " + output,
+                    expected == output);
+        }
+        {
+            a = new String[]{"a", "b"};
+            p = 0;
+            t = "b";
+            expected = 1;
+            output = Array.firstIndexOf(t, a, p);
+            assertTrue("expected = " + expected +
+                    ", output = " + output,
+                    expected == output);
+        }
+        {
+            a = new String[]{"a", "b"};
+            p = 0;
+            t = "z";
+            expected = -1;
+            output = Array.firstIndexOf(t, a, p);
+            assertTrue("expected = " + expected +
+                    ", output = " + output,
+                    expected == output);
+        }
+        {
+            a = new String[]{"a", "b"};
+            p = 1;
+            t = "a";
+            expected = -1;
+            output = Array.firstIndexOf(t, a, p);
+            assertTrue("expected = " + expected +
+                    ", output = " + output,
+                    expected == output);
+        }
+        {
+            a = new String[]{"a", "b"};
+            p = 1;
+            t = "b";
+            expected = 1;
+            output = Array.firstIndexOf(t, a, p);
+            assertTrue("expected = " + expected +
+                    ", output = " + output,
+                    expected == output);
+        }
+        {
+            a = new String[]{"a", "b"};
+            p = 1;
+            t = "z";
+            expected = -1;
+            output = Array.firstIndexOf(t, a, p);
+            assertTrue("expected = " + expected +
+                    ", output = " + output,
+                    expected == output);
+        }
+    }
+
+    @Test(expected=NullPointerException.class)
+    public void firstIndexOfMustThrowOnNullTarget() {
+        Array.firstIndexOf(null, new String[]{"a", "b"}, 0);
+    }
+
+    @Test(expected=NullPointerException.class)
+    public void firstIndexOfMustThrowOnNullArray() {
+        Array.firstIndexOf("a", null, 0);
+    }
+
+    @Test(expected=IllegalArgumentException.class)
+    public void firstIndexOfMustThrowOnNegativeIndex1() {
+        Array.firstIndexOf("a", new String[]{"a", "b"}, -1);
+    }
+
+    @Test(expected=IllegalArgumentException.class)
+    public void firstIndexOfMustThrowOnNegativeIndex2() {
+        Array.firstIndexOf("a", new String[]{"a", "b"}, -15);
+    }
+
+    @Test(expected=IllegalArgumentException.class)
+    public void firstIndexOfMustThrowOnPositionTooBig1() {
+        Array.firstIndexOf("a", new String[]{"a", "b"}, 2);
+    }
+
+    @Test(expected=IllegalArgumentException.class)
+    public void firstIndexOfMustThrowOnPositionTooBig2() {
+        Array.firstIndexOf("a", new String[]{"a", "b"}, 15);
+    }
+
+    @Test(expected=IllegalArgumentException.class)
+    public void firstIndexOfMustThrowOnPositionTooBig3() {
+        Array.firstIndexOf("a", new String[]{}, 0);
+    }
 }

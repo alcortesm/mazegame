@@ -41,4 +41,27 @@ public class Array {
         return true;
     }
 
+    // returns the index of the first occurence of target t in
+    // the array a, starting from position p towards the end.
+    // returns -1 if t is not found.
+    public static <T> int firstIndexOf(T t, T[] a, int p) {
+        if (a == null) {
+            throw new NullPointerException("a");
+        }
+        if (p < 0) {
+            throw new IllegalArgumentException("p < 0");
+        }
+        if (p >= a.length) {
+            throw new IllegalArgumentException("p >= a.length");
+        }
+        if (t == null) {
+            throw new NullPointerException("s");
+        }
+        for (int i=p; i<a.length; i++) {
+            if (a[i].equals(t)) {
+                return i;
+            }
+        }
+        return -1;
+    }
 }
