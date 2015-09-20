@@ -6,11 +6,13 @@ import mazegame.core.Space;
 import mazegame.core.Wall;
 import mazegame.core.End;
 import mazegame.core.Place;
+import mazegame.core.Hero;
 
 public class ServerSpecTest implements ServerSpec {
 
     private Map map;
     private End end;
+    private Hero hero;
 
     public ServerSpecTest() {
         Tile w = new Wall();
@@ -23,13 +25,12 @@ public class ServerSpecTest implements ServerSpec {
         };
         this.map = new Map(tiles);
         this.end = new End(new Place(3, 4, map));
+        this.hero = new Hero(new Place(0, 0, map));
     }
 
-    public Map generateMap() {
-        return map;
-    }
+    public Map generateMap() { return map; }
 
-    public End generateEnd() {
-        return end;
-    }
+    public End generateEnd() { return end; }
+
+    public Hero generateHero() { return hero; }
 }

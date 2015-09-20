@@ -3,6 +3,8 @@
 
 package mazegame.core;
 
+import mazegame.server.Direction;
+
 public class Place {
 
     protected int row;
@@ -53,5 +55,37 @@ public class Place {
 
     public String toString() {
         return "Place[" + row + ", " + col + "]";
+    }
+
+    // Returns null if the destination place is out of
+    // the map.
+    Place placeAt(Direction dir) {
+        if (dir == null) {
+            throw new NullPointerException("dir");
+        }
+        int dstRow = getRow();
+        int dstCol = getCol();
+        switch (dir) {
+            case NORTH:
+                dstRow--;
+                break;
+            case SOUTH:
+                dstRow++;
+                break;
+            case EAST:
+                dstCol++;
+                break;
+            case WEST:
+                dstCol--;
+                break;
+            default:
+                throw new UnsupportedOperationException(
+                        dir.toString());
+        }
+        if (dstRow < 0 || dstRow >= map.getNumRows() ||
+                dstCol < 0 || dstCol >= map.getNumCols()) {
+            return null;
+        }
+        return new Place(dstRow, dstCol, map);
     }
 }

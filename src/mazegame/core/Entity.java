@@ -4,7 +4,7 @@ import mazegame.server.Icon;
 
 public abstract class Entity implements HasIcon, HasPlace {
 
-    private Place place;
+    protected Place place;
 
     public Entity(Place place) {
         if (place == null) {
@@ -21,4 +21,3 @@ public abstract class Entity implements HasIcon, HasPlace {
         return place;
     }
 }
-
