@@ -5,8 +5,14 @@ import mazegame.util.Array;
 public class ClientView {
 
     private Icon[][] icons;
+    private boolean  isGameOver;
+    private boolean  isHeroAlive;
+    private String   lastMsgResult;
 
-    public ClientView(Icon[][] icons) {
+    public ClientView(Icon[][] icons,
+            boolean isGameOver,
+            boolean isHeroAlive,
+            String lastMsgResult) {
         if (icons == null) {
             throw new NullPointerException("icons");
         }
@@ -17,19 +23,25 @@ public class ClientView {
             throw new IllegalArgumentException(
                     "map is not rectangular");
         }
+        if (lastMsgResult == null) {
+            throw new NullPointerException("lastMsgResult");
+        }
         this.icons = icons;
+        this.isGameOver = isGameOver;
+        this.isHeroAlive = isHeroAlive;
+        this.lastMsgResult = lastMsgResult;
     }
 
     public boolean isGameOver() {
-        return false;
+        return isGameOver;
     }
 
     public boolean isHeroAlive() {
-        return true;
+        return isHeroAlive;
     }
 
     public String lastMsgResult() {
-        return "TODO";
+        return lastMsgResult;
     }
 
     public Icon[][] getTopView() {

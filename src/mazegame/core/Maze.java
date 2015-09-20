@@ -12,6 +12,7 @@ public class Maze {
     private Map map;
     private End end;
     private Hero hero;
+    private boolean lastMoveOk;
 
     public Maze(Map map, End end, Hero hero) {
         if (map == null) {
@@ -26,10 +27,12 @@ public class Maze {
         this.map = map;
         this.end = end;
         this.hero = hero;
+        lastMoveOk = true;
     }
 
     public boolean moveHero(Direction dir) {
-        return hero.move(dir);
+        lastMoveOk = hero.move(dir);
+        return lastMoveOk;
     }
 
     private Icon[][] addEntityToIcons(Entity e, Icon[][] icons) {
@@ -44,6 +47,13 @@ public class Maze {
         // add end and hero
         icons = addEntityToIcons(end, icons);
         icons = addEntityToIcons(hero, icons);
-        return new ClientView(icons);
+        // isGameOver
+        boolean isGameOver = hero.getPlace().equals(end.getPlace());
+        // isHeroAlive
+        boolean isHeroAlive = true;
+        // lastMsgResult
+        String lastMsgResult = lastMoveOk ? "OK" : "Cannot go there!";
+        return new ClientView(icons, isGameOver,
+                isHeroAlive, lastMsgResult);
     }
 }
