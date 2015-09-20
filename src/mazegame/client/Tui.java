@@ -6,7 +6,7 @@ import mazegame.server.Server;
 import mazegame.server.ClientView;
 import mazegame.server.Icon;
 import mazegame.server.Direction;
-import mazegame.server.ServerSpecTest;
+import mazegame.server.ServerSpecEmpty;
 
 public class Tui implements Client {
 
@@ -21,7 +21,7 @@ public class Tui implements Client {
             throw new NullPointerException("lang");
         }
         localizer = new Localizer(lang);
-        server = new Server(new ServerSpecTest());
+        server = new Server(new ServerSpecEmpty(7, 3));
     }
 
     public void run() {
