@@ -74,21 +74,7 @@ class CLOptions {
         if (repeated != -1) {
             throw new IllegalArgumentException("Repeated option -l");
         }
-        return removePair(args, i);
-    }
-
-    // remove the nth and the nth+1 element from args
-    private String[] removePair(String[] args, int n) {
-        int len = args.length;
-        int newLen = len - 2;
-        String[] r = new String[newLen];
-        for (int i=0; i<n; i++) {
-            r[i] = args[i];
-        }
-        for (int i=n+2; i<len; i++) {
-            r[i-2] = args[i];
-        }
-        return r;
+        return Array.remove(args, i, 2);
     }
 
     public Language getLanguage() {

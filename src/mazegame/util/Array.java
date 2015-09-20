@@ -61,4 +61,35 @@ public class Array {
         }
         return -1;
     }
+
+    // Remove from a[n] to a[n+c] (both included).
+    public static String[] remove(String[] a, int n, int c) {
+        if (a == null) {
+            throw new NullPointerException("a");
+        }
+        if (c < 0) {
+            throw new IllegalArgumentException("c < 0");
+        }
+        if (n < 0) {
+            throw new IllegalArgumentException("n < 0");
+        }
+        if (n >= a.length) {
+            throw new IllegalArgumentException("n >= a.length");
+        }
+        if (n+c > a.length) {
+            throw new IllegalArgumentException("n+c >= a.length");
+        }
+        if (c == 0) {
+            return a;
+        }
+        int newLen = a.length - c;
+        String[] r = new String[newLen];
+        for (int i=0; i<n; i++) {
+            r[i] = a[i];
+        }
+        for (int i=n+c; i<a.length; i++) {
+            r[i-2] = a[i];
+        }
+        return r;
+    }
 }
