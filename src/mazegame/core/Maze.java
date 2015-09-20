@@ -29,7 +29,7 @@ public class Maze {
         this.end = end;
         this.hero = hero;
         lastMoveOk = true;
-        this.trail = new TrailArray();
+        this.trail = new TrailArray(10);
     }
 
     public boolean moveHero(Direction dir) {
@@ -50,14 +50,15 @@ public class Maze {
     public ClientView getClientView() {
         // get floor map
         Icon[][] icons = map.getIcons();
-        // add end and hero
+        // add end
         icons = addEntityToIcons(end, icons);
-        icons = addEntityToIcons(hero, icons);
         // add trail
         Footprint[] tracks = trail.getAll();
         for (int i=0; i<tracks.length; i++) {
             icons = addEntityToIcons(tracks[i], icons);
         }
+        // add hero
+        icons = addEntityToIcons(hero, icons);
         // isGameOver
         boolean isGameOver = hero.getPlace().equals(end.getPlace());
         // isHeroAlive
