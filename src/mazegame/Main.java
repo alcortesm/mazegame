@@ -15,7 +15,8 @@ class Main {
             usage();
             System.exit(1);
         }
-        Client client = new Tui(opts.getLanguage());
+        Client client = new Tui(opts.getLanguage(),
+                opts.getServerSpec());
         client.run();
         System.exit(0);
     }

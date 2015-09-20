@@ -6,7 +6,7 @@ import mazegame.server.Server;
 import mazegame.server.ClientView;
 import mazegame.server.Icon;
 import mazegame.server.Direction;
-import mazegame.server.ServerSpecEmpty;
+import mazegame.server.ServerSpec;
 
 public class Tui implements Client {
 
@@ -16,12 +16,12 @@ public class Tui implements Client {
     // we are breaking dependency injection here by
     // not passing a Localizer, but I think it is worth
     // it to keep the client package API short and clean.
-    public Tui(Language lang) {
+    public Tui(Language lang, ServerSpec serverSpec) {
         if (lang == null) {
             throw new NullPointerException("lang");
         }
         localizer = new Localizer(lang);
-        server = new Server(new ServerSpecEmpty(7, 3));
+        server = new Server(serverSpec);
     }
 
     public void run() {

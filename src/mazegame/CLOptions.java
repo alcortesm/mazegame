@@ -2,10 +2,13 @@ package mazegame;
 
 import mazegame.client.Language;
 import mazegame.util.Array;
+import mazegame.server.ServerSpec;
+import mazegame.server.ServerSpecTest;
 
 class CLOptions {
 
     private Language language;
+    private ServerSpec serverSpec;
 
     // enum for parsing the main args
     private enum Opts {
@@ -25,6 +28,7 @@ class CLOptions {
     // the set of default options
     private CLOptions() {
         language = Language.ENGLISH;
+        serverSpec = new ServerSpecTest();
     }
 
     protected CLOptions(String args[]) {
@@ -79,5 +83,9 @@ class CLOptions {
 
     public Language getLanguage() {
         return language;
+    }
+
+    public ServerSpec getServerSpec() {
+        return serverSpec;
     }
 }
