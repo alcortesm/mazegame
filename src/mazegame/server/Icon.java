@@ -4,5 +4,6 @@ public enum Icon {
     EMPTY,
     WALL,
     END,
-    HERO
+    HERO,
+    FOOTPRINT
 }

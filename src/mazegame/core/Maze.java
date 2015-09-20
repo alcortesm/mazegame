@@ -13,6 +13,7 @@ public class Maze {
     private End end;
     private Hero hero;
     private boolean lastMoveOk;
+    private Trail trail;
 
     public Maze(Map map, End end, Hero hero) {
         if (map == null) {
@@ -28,10 +29,15 @@ public class Maze {
         this.end = end;
         this.hero = hero;
         lastMoveOk = true;
+        this.trail = new TrailArray();
     }
 
     public boolean moveHero(Direction dir) {
+        Place old = hero.getPlace();
         lastMoveOk = hero.move(dir);
+        if (lastMoveOk) {
+            trail.add(old);
+        }
         return lastMoveOk;
     }
 
@@ -47,6 +53,11 @@ public class Maze {
         // add end and hero
         icons = addEntityToIcons(end, icons);
         icons = addEntityToIcons(hero, icons);
+        // add trail
+        Footprint[] tracks = trail.getAll();
+        for (int i=0; i<tracks.length; i++) {
+            icons = addEntityToIcons(tracks[i], icons);
+        }
         // isGameOver
         boolean isGameOver = hero.getPlace().equals(end.getPlace());
         // isHeroAlive

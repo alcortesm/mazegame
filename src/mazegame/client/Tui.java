@@ -87,6 +87,8 @@ public class Tui implements Client {
                 return 'e';
             case HERO:
                 return '@';
+            case FOOTPRINT:
+                return '.';
             default:
                 throw new IllegalArgumentException(icon.toString());
         }
