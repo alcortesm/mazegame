@@ -4,6 +4,7 @@ import mazegame.client.Language;
 import mazegame.util.Array;
 import mazegame.server.ServerSpec;
 import mazegame.server.ServerSpecTest;
+import mazegame.server.ServerSpecEmpty;
 
 class CLOptions {
 
@@ -12,7 +13,8 @@ class CLOptions {
 
     // enum for parsing the main args
     private enum Opts {
-        LANG("-l");
+        LANG("-l"), // ENGLISH or SPANISH
+        SPEC("-s"); // TEST or EMPTY
 
         private final String text;
 
@@ -41,6 +43,7 @@ class CLOptions {
         // enough for the students and it is a good chance
         // to build an extraction filter.
         args = extractAndSetLanguage(args);
+        args = extractAndSetServerSpec(args);
         if (args.length != 0) {
             throw new IllegalArgumentException(
                     "Unrecognized argument: " + args[0]);
@@ -56,7 +59,7 @@ class CLOptions {
         // if no more arguments, complain about a missing argument
         if (i+1 == args.length) {
             throw new IllegalArgumentException(
-                    "Missing -l argument");
+                    "Missing " + Opts.LANG.toString() + " argument");
         }
         // check if the language is supported
         Language[] langs = Language.values();
@@ -73,16 +76,47 @@ class CLOptions {
                     "Unrecognized language: " + args[i+1]);
         }
         // check for repeated command
-        int repeated = Array.firstIndexOf(Opts.LANG.toString(),
+       int repeated = Array.firstIndexOf(Opts.LANG.toString(),
                 args, i+2);
         if (repeated != -1) {
-            throw new IllegalArgumentException("Repeated option -l");
+            throw new IllegalArgumentException("Repeated option " + Opts.LANG.toString());
         }
         return Array.remove(args, i, 2);
     }
 
     public Language getLanguage() {
         return language;
+    }
+
+    private String[] extractAndSetServerSpec(String[] args) {
+        int i = Array.firstIndexOf(Opts.SPEC.toString(), args, 0);
+        if (i == -1) {
+            return args;
+        }
+        // if no more arguments, complain about a missing argument
+        if (i+1 == args.length) {
+            throw new IllegalArgumentException(
+                    "Missing " + Opts.SPEC.toString() + " argument");
+        }
+        // check if the spec is among the supported ones
+        switch (args[i+1]) {
+            case "TEST":
+                serverSpec = new ServerSpecTest();
+                break;
+            case "EMPTY":
+                serverSpec = new ServerSpecEmpty(5, 10);
+                break;
+            default:
+            throw new IllegalArgumentException(
+                    "Unrecognized spec: " + args[i+1]);
+        }
+        // check for repeated command
+        int repeated = Array.firstIndexOf(Opts.SPEC.toString(),
+                args, i+2);
+        if (repeated != -1) {
+            throw new IllegalArgumentException("Repeated option " + Opts.SPEC.toString());
+        }
+        return Array.remove(args, i, 2);
     }
 
     public ServerSpec getServerSpec() {
