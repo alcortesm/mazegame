@@ -25,5 +25,7 @@ class Main {
         System.err.println("options:");
         System.err.println(
                 "\t-l (ENGLISH|SPANISH) language to talk to the user");
+        System.err.println(
+                "\t-s (TEST|EMPTY) Map generation style");
     }
 }
