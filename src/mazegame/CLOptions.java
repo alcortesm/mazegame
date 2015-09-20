@@ -10,11 +10,15 @@ class CLOptions {
 
     private Language language;
     private ServerSpec serverSpec;
+    private int rows;
+    private int cols;
 
     // enum for parsing the main args
     private enum Opts {
-        LANG("-l"), // ENGLISH or SPANISH
-        SPEC("-s"); // TEST or EMPTY
+        LANG("-l"), // followed by ENGLISH or SPANISH
+        SPEC("-s"), // followed by TEST or EMPTY
+        ROWS("-r"), // followed by a number
+        COLS("-c"); // followed by a number
 
         private final String text;
 
@@ -31,6 +35,8 @@ class CLOptions {
     private CLOptions() {
         language = Language.ENGLISH;
         serverSpec = new ServerSpecTest();
+        rows = 10;
+        cols = 20;
     }
 
     protected CLOptions(String args[]) {
@@ -84,10 +90,6 @@ class CLOptions {
         return Array.remove(args, i, 2);
     }
 
-    public Language getLanguage() {
-        return language;
-    }
-
     private String[] extractAndSetServerSpec(String[] args) {
         int i = Array.firstIndexOf(Opts.SPEC.toString(), args, 0);
         if (i == -1) {
@@ -104,7 +106,7 @@ class CLOptions {
                 serverSpec = new ServerSpecTest();
                 break;
             case "EMPTY":
-                serverSpec = new ServerSpecEmpty(5, 10);
+                serverSpec = new ServerSpecEmpty(rows, cols);
                 break;
             default:
             throw new IllegalArgumentException(
@@ -119,7 +121,6 @@ class CLOptions {
         return Array.remove(args, i, 2);
     }
 
-    public ServerSpec getServerSpec() {
-        return serverSpec;
-    }
+    public Language getLanguage() { return language; }
+    public ServerSpec getServerSpec() { return serverSpec; }
 }
