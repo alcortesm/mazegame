@@ -15,7 +15,7 @@ public class Maze {
     private boolean lastMoveOk;
     private Trail trail;
 
-    public Maze(Map map, End end, Hero hero) {
+    public Maze(Map map, End end, Hero hero, int trailCapacity) {
         if (map == null) {
             throw new NullPointerException("map");
         }
@@ -25,11 +25,18 @@ public class Maze {
         if (hero == null) {
             throw new NullPointerException("hero");
         }
+        if (trailCapacity < 0) {
+            throw new IllegalArgumentException("trailCapacity < 0");
+        }
         this.map = map;
         this.end = end;
         this.hero = hero;
         lastMoveOk = true;
-        this.trail = new TrailArray(10);
+        if (trailCapacity == 0) {
+            this.trail = new TrailFake();
+        } else {
+            this.trail = new TrailArray(trailCapacity);
+        }
     }
 
     public boolean moveHero(Direction dir) {

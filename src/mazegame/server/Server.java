@@ -14,7 +14,8 @@ public class Server {
         Map map = spec.generateMap();
         End end = spec.generateEnd();
         Hero hero = spec.generateHero();
-        this.maze = new Maze(map, end, hero);
+        int trailCapacity = spec.generateTrailCapacity();
+        this.maze = new Maze(map, end, hero, trailCapacity);
     }
 
     public ClientView moveHero(Direction dir) {

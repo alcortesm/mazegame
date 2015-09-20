@@ -13,8 +13,12 @@ public class ServerSpecTest implements ServerSpec {
     private Map map;
     private End end;
     private Hero hero;
+    private int trailCapacity;
 
-    public ServerSpecTest() {
+    public ServerSpecTest(int trailCapacity) {
+        if (trailCapacity < 0) {
+            throw new IllegalArgumentException("trailCapacity < 0");
+        }
         Tile w = new Wall();
         Tile s = new Space();
         Tile[][] tiles = {
@@ -26,11 +30,11 @@ public class ServerSpecTest implements ServerSpec {
         this.map = new Map(tiles);
         this.end = new End(new Place(3, 4, map));
         this.hero = new Hero(new Place(0, 0, map));
+        this.trailCapacity = trailCapacity;
     }
 
     public Map generateMap() { return map; }
-
     public End generateEnd() { return end; }
-
     public Hero generateHero() { return hero; }
+    public int generateTrailCapacity() { return trailCapacity; }
 }

@@ -8,4 +8,5 @@ public interface ServerSpec {
     Map generateMap();
     End generateEnd();
     Hero generateHero();
+    int generateTrailCapacity();
 }

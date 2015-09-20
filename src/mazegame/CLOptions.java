@@ -12,13 +12,15 @@ class CLOptions {
     private ServerSpec serverSpec;
     private int rows;
     private int cols;
+    private int trailCapacity;
 
     // enum for parsing the main args
     private enum Opts {
         LANG("-l"), // followed by ENGLISH or SPANISH
         SPEC("-s"), // followed by TEST or EMPTY
         ROWS("-r"), // followed by a number
-        COLS("-c"); // followed by a number
+        COLS("-c"), // followed by a number
+        TRAIL("-t"); // followed by a number
 
         private final String text;
 
@@ -34,7 +36,7 @@ class CLOptions {
     // the set of default options
     private CLOptions() {
         language = Language.ENGLISH;
-        serverSpec = new ServerSpecTest();
+        trailCapacity = 0;
         rows = 10;
         cols = 20;
     }
@@ -51,9 +53,10 @@ class CLOptions {
         args = extractAndSetLanguage(args);
         args = extractAndSetNumRows(args);
         args = extractAndSetNumCols(args);
+        args = extractAndSetTrailCapacity(args);
         args = extractAndSetServerSpec(args);
-        // serverSpec detection comes last to use the appropiate rows
-        // and columns.
+        // serverSpec detection comes last to use the
+        // appropiate rows, columns and trail capacity.
         if (args.length != 0) {
             throw new IllegalArgumentException(
                     "Unrecognized argument: " + args[0]);
@@ -107,10 +110,11 @@ class CLOptions {
         // check if the spec is among the supported ones
         switch (args[i+1]) {
             case "TEST":
-                serverSpec = new ServerSpecTest();
+                serverSpec = new ServerSpecTest(trailCapacity);
                 break;
             case "EMPTY":
-                serverSpec = new ServerSpecEmpty(rows, cols);
+                serverSpec =
+                    new ServerSpecEmpty(rows, cols, trailCapacity);
                 break;
             default:
             throw new IllegalArgumentException(
@@ -174,7 +178,7 @@ class CLOptions {
         }
         if (cols < 0) {
             throw new IllegalArgumentException(
-                    "Negative number of rows: " + args[i+1]);
+                    "Negative number of columns: " + args[i+1]);
         }
         // check for repeated command
         int repeated = Array.firstIndexOf(Opts.COLS.toString(),
@@ -185,6 +189,42 @@ class CLOptions {
         return Array.remove(args, i, 2);
     }
 
+    private String[] extractAndSetTrailCapacity(String[] args) {
+        int i = Array.firstIndexOf(Opts.TRAIL.toString(), args, 0);
+        if (i == -1) {
+            return args;
+        }
+        // if no more arguments, complain about a missing argument
+        if (i+1 == args.length) {
+            throw new IllegalArgumentException(
+                    "Missing " + Opts.TRAIL.toString() + " argument");
+        }
+        // check if the number of rows is supported
+        try {
+            trailCapacity = Integer.parseInt(args[i+1]);
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException(
+                    "Unrecognized number format: " + args[i+1]);
+        }
+        if (trailCapacity < 0) {
+            throw new IllegalArgumentException(
+                    "Negative number of trailCapacity: " + args[i+1]);
+        }
+        // check for repeated command
+        int repeated = Array.firstIndexOf(Opts.TRAIL.toString(),
+                args, i+2);
+        if (repeated != -1) {
+            throw new IllegalArgumentException("Repeated option " + Opts.TRAIL.toString());
+        }
+        return Array.remove(args, i, 2);
+    }
+
     public Language getLanguage() { return language; }
-    public ServerSpec getServerSpec() { return serverSpec; }
+    public ServerSpec getServerSpec() {
+        if (serverSpec == null) {
+            return new ServerSpecTest(trailCapacity);
+        }
+        return serverSpec;
+    }
+    public int getTrailCapacity() { return trailCapacity; }
 }
