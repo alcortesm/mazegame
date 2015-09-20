@@ -49,7 +49,11 @@ class CLOptions {
         // enough for the students and it is a good chance
         // to build an extraction filter.
         args = extractAndSetLanguage(args);
+        args = extractAndSetNumRows(args);
+        args = extractAndSetNumCols(args);
         args = extractAndSetServerSpec(args);
+        // serverSpec detection comes last to use the appropiate rows
+        // and columns.
         if (args.length != 0) {
             throw new IllegalArgumentException(
                     "Unrecognized argument: " + args[0]);
@@ -117,6 +121,66 @@ class CLOptions {
                 args, i+2);
         if (repeated != -1) {
             throw new IllegalArgumentException("Repeated option " + Opts.SPEC.toString());
+        }
+        return Array.remove(args, i, 2);
+    }
+
+    private String[] extractAndSetNumRows(String[] args) {
+        int i = Array.firstIndexOf(Opts.ROWS.toString(), args, 0);
+        if (i == -1) {
+            return args;
+        }
+        // if no more arguments, complain about a missing argument
+        if (i+1 == args.length) {
+            throw new IllegalArgumentException(
+                    "Missing " + Opts.ROWS.toString() + " argument");
+        }
+        // check if the number of rows is supported
+        try {
+            rows = Integer.parseInt(args[i+1]);
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException(
+                    "Unrecognized number format: " + args[i+1]);
+        }
+        if (rows < 0) {
+            throw new IllegalArgumentException(
+                    "Negative number of rows: " + args[i+1]);
+        }
+        // check for repeated command
+        int repeated = Array.firstIndexOf(Opts.ROWS.toString(),
+                args, i+2);
+        if (repeated != -1) {
+            throw new IllegalArgumentException("Repeated option " + Opts.ROWS.toString());
+        }
+        return Array.remove(args, i, 2);
+    }
+
+    private String[] extractAndSetNumCols(String[] args) {
+        int i = Array.firstIndexOf(Opts.COLS.toString(), args, 0);
+        if (i == -1) {
+            return args;
+        }
+        // if no more arguments, complain about a missing argument
+        if (i+1 == args.length) {
+            throw new IllegalArgumentException(
+                    "Missing " + Opts.COLS.toString() + " argument");
+        }
+        // check if the number of rows is supported
+        try {
+            cols = Integer.parseInt(args[i+1]);
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException(
+                    "Unrecognized number format: " + args[i+1]);
+        }
+        if (cols < 0) {
+            throw new IllegalArgumentException(
+                    "Negative number of rows: " + args[i+1]);
+        }
+        // check for repeated command
+        int repeated = Array.firstIndexOf(Opts.COLS.toString(),
+                args, i+2);
+        if (repeated != -1) {
+            throw new IllegalArgumentException("Repeated option " + Opts.COLS.toString());
         }
         return Array.remove(args, i, 2);
     }

@@ -24,8 +24,16 @@ class Main {
     private static void usage() {
         System.err.println("options:");
         System.err.println(
-                "\t-l (ENGLISH|SPANISH) language to talk to the user");
+                "\t-l (ENGLISH|SPANISH)" + System.lineSeparator() +
+                "\t\tsets the language for the user interface");
         System.err.println(
-                "\t-s (TEST|EMPTY) Map generation style");
+                "\t-s (TEST|EMPTY)" + System.lineSeparator() +
+                "\t\t Map generation style");
+        System.err.println(
+                "\t-r number" + System.lineSeparator() +
+                "\t\t number of rows in the map (ignored if using the TEST map)");
+        System.err.println(
+                "\t-c number" + System.lineSeparator() +
+                "\t\t number of columns in the map (ignored if using the TEST map)");
     }
 }
