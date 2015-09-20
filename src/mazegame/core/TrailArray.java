@@ -23,6 +23,9 @@ class TrailArray implements Trail {
     }
 
     public void add(Place p) {
+        if (p == null) {
+            throw new NullPointerException("p");
+        }
         if (size != capacity) {
             newest = (++newest) % capacity;
             tracks[newest] = new Footprint(p);
