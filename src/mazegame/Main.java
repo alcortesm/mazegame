@@ -1,7 +1,7 @@
 package mazegame;
 
 import mazegame.client.Client;
-import mazegame.client.Tui;
+import mazegame.client.gui.Gui;
 import mazegame.client.Language;
 
 class Main {
@@ -15,8 +15,9 @@ class Main {
             usage();
             System.exit(1);
         }
-        Client client = new Tui(opts.getLanguage(),
-                opts.getServerSpec());
+//        Client client = new Tui(opts.getLanguage(),
+//                opts.getServerSpec());
+        Client client = new Gui(opts.getServerSpec());
         client.run();
         System.exit(0);
     }
