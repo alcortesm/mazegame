@@ -13,6 +13,7 @@ class CLOptions {
     private int rows;
     private int cols;
     private int trailCapacity;
+    private ClientChoice clientChoice;
 
     // enum for parsing the main args
     private enum Opts {
@@ -20,7 +21,8 @@ class CLOptions {
         SPEC("-s"), // followed by TEST or EMPTY
         ROWS("-r"), // followed by a number
         COLS("-c"), // followed by a number
-        TRAIL("-t"); // followed by a number
+        TRAIL("-t"), // followed by a number
+        UI("-ui"); // followed by (ClientChoice) TUI or GUI
 
         private final String text;
 
@@ -39,6 +41,7 @@ class CLOptions {
         trailCapacity = 0;
         rows = 10;
         cols = 20;
+        clientChoice = ClientChoice.TUI;
     }
 
     protected CLOptions(String args[]) {
@@ -50,6 +53,7 @@ class CLOptions {
         // again and again is not efficient, but it is simple
         // enough for the students and it is a good chance
         // to build an extraction filter.
+        args = extractAndSetClientChoice(args);
         args = extractAndSetLanguage(args);
         args = extractAndSetNumRows(args);
         args = extractAndSetNumCols(args);
@@ -61,6 +65,40 @@ class CLOptions {
             throw new IllegalArgumentException(
                     "Unrecognized argument: " + args[0]);
         }
+    }
+
+    private String[] extractAndSetClientChoice(String[] args) {
+        int i = Array.firstIndexOf(Opts.UI.toString(), args, 0);
+        if (i == -1) {
+            return args;
+        }
+        // if no more arguments, complain about a missing argument
+        if (i+1 == args.length) {
+            throw new IllegalArgumentException(
+                    "Missing " + Opts.UI.toString() + " argument");
+        }
+        // check if the language is supported
+        ClientChoice[] clientChoices = ClientChoice.values();
+        boolean supported = false;
+        for (int j=0; j<clientChoices.length; j++) {
+            if (clientChoices[j].toString().equals(args[i+1])) {
+                supported = true;
+                this.clientChoice = clientChoices[j];
+                break;
+            }
+        }
+        if (! supported) {
+            throw new IllegalArgumentException(
+                    "Unrecognized client choice: " + args[i+1]);
+        }
+        // check for repeated command
+       int repeated = Array.firstIndexOf(Opts.UI.toString(),
+                args, i+2);
+        if (repeated != -1) {
+            throw new IllegalArgumentException(
+                    "Repeated option " + Opts.UI.toString());
+        }
+        return Array.remove(args, i, 2);
     }
 
     private String[] extractAndSetLanguage(String[] args) {
@@ -227,4 +265,5 @@ class CLOptions {
         return serverSpec;
     }
     public int getTrailCapacity() { return trailCapacity; }
+    public ClientChoice getClientChoice() { return clientChoice; }
 }
