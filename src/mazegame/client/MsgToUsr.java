@@ -1,6 +1,6 @@
 package mazegame.client;
 
-enum MsgToUsr {
+public enum MsgToUsr {
         GREETING,
         CONGRATULATIONS,
         ASK_FOR_COMMAND,

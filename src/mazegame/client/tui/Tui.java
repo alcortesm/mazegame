@@ -1,7 +1,11 @@
-package mazegame.client;
+package mazegame.client.tui;
 
 import java.util.Scanner;
 
+import mazegame.client.Client;
+import mazegame.client.Localizer;
+import mazegame.client.Language;
+import mazegame.client.MsgToUsr;
 import mazegame.server.Server;
 import mazegame.server.ClientView;
 import mazegame.server.Icon;

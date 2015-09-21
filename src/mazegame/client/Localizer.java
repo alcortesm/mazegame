@@ -2,7 +2,7 @@ package mazegame.client;
 
 import mazegame.util.Array;
 
-class Localizer {
+public class Localizer {
 
     // This is the translation database.
     private static final String GREETING_ENGLISH =
@@ -134,7 +134,7 @@ class Localizer {
 
     private Language lang;
 
-    Localizer(Language lang) {
+    public Localizer(Language lang) {
         if (lang == null) {
             throw new NullPointerException("lang");
         }
@@ -168,7 +168,7 @@ class Localizer {
        }
     }
 
-    String get(MsgToUsr msg) {
+    public String get(MsgToUsr msg) {
         return strings[lang.ordinal()][msg.ordinal()];
     }
 }
