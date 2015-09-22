@@ -7,5 +7,7 @@ public enum MsgToUsr {
         HELP,
         EXITING,
         UNKNOWN_COMMAND,
-        UNKNOWN_COMMAND_SUFIX
+        UNKNOWN_COMMAND_SUFIX,
+        MOVE_OK,
+        MOVE_KO
 }

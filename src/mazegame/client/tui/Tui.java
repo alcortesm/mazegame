@@ -37,7 +37,7 @@ public class Tui implements Client {
         String line;
         boolean mustExit = false;
         ClientView view = server.getClientView();
-        printClientView(view, true);
+        printClientView(view);
         do {
             if (view.isGameOver()) {
                 System.out.print(localizer.get(MsgToUsr.CONGRATULATIONS));
@@ -49,22 +49,27 @@ public class Tui implements Client {
             if (line.length() == 0) {
                 continue;
             }
+            boolean ok;
             switch (line) {
                 case "north": case "n":
-                    view = server.moveHero(Direction.NORTH);
-                    printClientView(view, false);
+                    ok = server.moveHero(Direction.NORTH);
+                    printMoveResult(ok);
+                    printClientView(server.getClientView());
                     break;
                 case "south": case "s":
-                    view = server.moveHero(Direction.SOUTH);
-                    printClientView(view, false);
+                    ok = server.moveHero(Direction.SOUTH);
+                    printMoveResult(ok);
+                    printClientView(server.getClientView());
                     break;
                 case "east": case "e":
-                    view = server.moveHero(Direction.EAST);
-                    printClientView(view, false);
+                    ok = server.moveHero(Direction.EAST);
+                    printMoveResult(ok);
+                    printClientView(server.getClientView());
                     break;
                 case "west": case "w":
-                    view = server.moveHero(Direction.WEST);
-                    printClientView(view, false);
+                    ok = server.moveHero(Direction.WEST);
+                    printMoveResult(ok);
+                    printClientView(server.getClientView());
                     break;
                 case "quit": case "q": case "exit": case "x":
                     System.out.print(localizer.get(MsgToUsr.EXITING));
@@ -98,15 +103,18 @@ public class Tui implements Client {
         }
     }
 
-    private static void printClientView(ClientView view,
-            boolean skipLastMsgResult) {
-        // print last command result
+    private void printMoveResult(boolean ok) {
         System.out.println();
-        if (! skipLastMsgResult) {
-            System.out.println(view.lastMsgResult());
+        if (ok) {
+            System.out.println(
+                    localizer.get(MsgToUsr.MOVE_OK));
+        } else {
+            System.out.println(
+                    localizer.get(MsgToUsr.MOVE_KO));
         }
+    }
 
-        // print maze
+    private static void printClientView(ClientView view) {
         System.out.println();
         // we will need this for printing exterior walls
         char wall = iconToChar(Icon.WALL);

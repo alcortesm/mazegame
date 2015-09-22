@@ -111,6 +111,14 @@ public class Localizer {
 
     private static final String UNKNOWN_COMMAND_SUFIX_SPANISH = "\"" + System.lineSeparator();
 
+    private static final String MOVE_OK_ENGLISH = "OK";
+
+    private static final String MOVE_OK_SPANISH = "OK";
+
+    private static final String MOVE_KO_ENGLISH = "Cannot move there!";
+
+    private static final String MOVE_KO_SPANISH = "¡No puedo moverme ahí!";
+
     private static final String[][] strings = {
         {
             GREETING_ENGLISH,
@@ -119,7 +127,9 @@ public class Localizer {
             HELP_ENGLISH,
             EXITING_ENGLISH,
             UNKNOWN_COMMAND_ENGLISH,
-            UNKNOWN_COMMAND_SUFIX_ENGLISH
+            UNKNOWN_COMMAND_SUFIX_ENGLISH,
+            MOVE_OK_ENGLISH,
+            MOVE_KO_ENGLISH
         },
         {
             GREETING_SPANISH,
@@ -128,7 +138,9 @@ public class Localizer {
             HELP_SPANISH,
             EXITING_SPANISH,
             UNKNOWN_COMMAND_SPANISH,
-            UNKNOWN_COMMAND_SUFIX_SPANISH
+            UNKNOWN_COMMAND_SUFIX_SPANISH,
+            MOVE_OK_SPANISH,
+            MOVE_KO_SPANISH
         }
     };
 

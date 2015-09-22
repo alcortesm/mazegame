@@ -18,9 +18,8 @@ public class Server {
         this.maze = new Maze(map, end, hero, trailCapacity);
     }
 
-    public ClientView moveHero(Direction dir) {
-        maze.moveHero(dir);
-        return getClientView();
+    public boolean moveHero(Direction dir) {
+        return maze.moveHero(dir);
     }
 
     public ClientView getClientView() {

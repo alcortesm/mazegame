@@ -1,5 +1,3 @@
 - Remove a lot of methods that are no longer needed.
 
-- Think about how to localize the lastMsgResult.
-
 - The CLOptions code is horrible, rewrite the whole class.
