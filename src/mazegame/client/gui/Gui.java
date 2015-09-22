@@ -16,13 +16,13 @@ import mazegame.server.ServerSpec;
 import mazegame.server.Server;
 import mazegame.server.ClientView;
 import mazegame.server.Icon;
+import mazegame.server.Direction;
 
 public class Gui extends JFrame implements Client, ActionListener {
 
     private Server server;
     private JPanel controls;
     private JPanel map;
-    private GridLayout mapLayout;
     private JButton goNorth;
     private JButton goSouth;
     private JButton goEast;
@@ -45,7 +45,7 @@ public class Gui extends JFrame implements Client, ActionListener {
 
     private void createAndShowGui() {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        drawMap(server.getClientView());
+        updateMap(server.getClientView());
         pack();
         setVisible(true);
     }
@@ -74,18 +74,20 @@ public class Gui extends JFrame implements Client, ActionListener {
         add(controls, BorderLayout.SOUTH);
     }
 
+    // adds an initial empty map
+    // it will get update later using
+    // updateMap().
     private void addMap() {
-        mapLayout = new GridLayout();
-        map = new JPanel(mapLayout);
+        map = new JPanel();
         add(map, BorderLayout.CENTER);
     }
 
-    private void drawMap(ClientView view) {
+    private void updateMap(ClientView view) {
         Icon[][] icons = view.getTopView();
         int numRows = icons.length;
         int numCols = icons[0].length;
-        mapLayout.setRows(numRows);
-        mapLayout.setColumns(numCols);
+        map.removeAll();
+        map.setLayout(new GridLayout(numRows, numCols));
         for (int r=0; r<numRows; r++) {
             for (int c=0; c<numCols; c++) {
                 map.add(new JLabel(
@@ -93,6 +95,7 @@ public class Gui extends JFrame implements Client, ActionListener {
             }
         }
         validate();
+        repaint();
     }
 
     private static String iconToString(Icon icon) {
@@ -120,16 +123,17 @@ public class Gui extends JFrame implements Client, ActionListener {
         }
         JButton b = (JButton) o;
         if (b == goNorth) {
-            System.out.println("NORTH");
+            server.moveHero(Direction.NORTH);
         } else if (b == goSouth) {
-            System.out.println("SOUTH");
+            server.moveHero(Direction.SOUTH);
         } else if (b == goEast) {
-            System.out.println("EAST");
+            server.moveHero(Direction.EAST);
         } else if (b == goWest) {
-            System.out.println("WEST");
+            server.moveHero(Direction.WEST);
         } else {
             throw new UnsupportedOperationException(
                     "Unsupported button: " + b.getText());
         }
+        updateMap(server.getClientView());
     }
 }
