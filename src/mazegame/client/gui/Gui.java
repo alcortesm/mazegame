@@ -11,6 +11,7 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.WindowEvent;
+import javax.swing.SwingConstants;
 
 import mazegame.client.Client;
 import mazegame.server.ServerSpec;
@@ -92,29 +93,37 @@ public class Gui extends JFrame implements Client, ActionListener {
         map.setLayout(new GridLayout(numRows, numCols));
         for (int r=0; r<numRows; r++) {
             for (int c=0; c<numCols; c++) {
-                map.add(new JLabel(
-                            iconToString(icons[r][c])));
+                map.add(newLabel(icons[r][c]));
             }
         }
-        validate();
-        repaint();
+        map.validate();
+        map.repaint();
     }
 
-    private static String iconToString(Icon icon) {
+    private static JLabel newLabel(Icon icon) {
+        JLabel label = new JLabel();
         switch (icon) {
             case EMPTY:
-                return " ";
+                label.setText(" ");
+                break;
             case WALL:
-                return "#";
+                label.setText("#");
+                break;
             case END:
-                return "e";
+                label.setText("e");
+                break;
             case HERO:
-                return "@";
+                label.setText("@");
+                break;
             case FOOTPRINT:
-                return ".";
+                label.setText(".");
+                break;
             default:
                 throw new IllegalArgumentException(icon.toString());
         }
+        label.setHorizontalAlignment(SwingConstants.CENTER);
+        label.setVerticalAlignment(SwingConstants.CENTER);
+        return label;
     }
 
     public void actionPerformed(ActionEvent e) {
