@@ -32,7 +32,6 @@ class Main {
                         clientChoice.toString());
         }
         client.run();
-        System.exit(0);
     }
 
     private static void usage() {
