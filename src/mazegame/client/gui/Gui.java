@@ -94,11 +94,24 @@ public class Gui extends JFrame implements Client, ActionListener {
         int numRows = icons.length;
         int numCols = icons[0].length;
         map.removeAll();
-        map.setLayout(new GridLayout(numRows, numCols));
+        map.setLayout(new GridLayout(numRows+2, numCols+2));
+        // north wall
+        for (int c=0; c<numCols+2; c++) {
+            map.add(newLabel(Icon.WALL));
+        }
         for (int r=0; r<numRows; r++) {
+            // east wall
+            map.add(newLabel(Icon.WALL));
+            // map contents
             for (int c=0; c<numCols; c++) {
                 map.add(newLabel(icons[r][c]));
             }
+            // west wall
+            map.add(newLabel(Icon.WALL));
+        }
+        // south wall
+        for (int c=0; c<numCols+2; c++) {
+            map.add(newLabel(Icon.WALL));
         }
         map.validate();
         map.repaint();
