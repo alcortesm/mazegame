@@ -125,10 +125,10 @@ public class Gui extends JFrame implements Client, ActionListener {
         label.setOpaque(true);
         switch (icon) {
             case EMPTY:
-                label.setBackground(Color.BLACK);
+                label.setBackground(Color.GRAY);
                 break;
             case WALL:
-                label.setBackground(Color.BLUE);
+                label.setBackground(Color.BLACK);
                 break;
             case END:
                 label.setBackground(Color.GREEN);
@@ -137,7 +137,7 @@ public class Gui extends JFrame implements Client, ActionListener {
                 label.setBackground(Color.WHITE);
                 break;
             case FOOTPRINT:
-                label.setBackground(Color.GRAY);
+                label.setBackground(Color.LIGHT_GRAY);
                 break;
             default:
                 throw new IllegalArgumentException(icon.toString());
