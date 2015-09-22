@@ -5,6 +5,7 @@ import mazegame.util.Array;
 import mazegame.server.ServerSpec;
 import mazegame.server.ServerSpecTest;
 import mazegame.server.ServerSpecEmpty;
+import mazegame.server.ServerSpecRandom;
 
 class CLOptions {
 
@@ -153,6 +154,10 @@ class CLOptions {
             case "EMPTY":
                 serverSpec =
                     new ServerSpecEmpty(rows, cols, trailCapacity);
+                break;
+            case "RANDOM":
+                serverSpec =
+                    new ServerSpecRandom(rows, cols, trailCapacity);
                 break;
             default:
             throw new IllegalArgumentException(
