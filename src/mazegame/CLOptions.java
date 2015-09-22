@@ -8,6 +8,13 @@ import mazegame.server.ServerSpecEmpty;
 
 class CLOptions {
 
+    static final Language DEFAULT_LANGUAGE = Language.ENGLISH;
+    static final int DEFAULT_ROWS = 5;
+    static final int DEFAULT_COLS = 5;
+    static final int DEFAULT_TRAIL_CAPACITY = 3;
+    static final ServerSpec DEFAULT_SERVER_SPEC = new ServerSpecTest(DEFAULT_TRAIL_CAPACITY);
+    static final ClientChoice DEFAULT_CLIENT_CHOICE = ClientChoice.GUI;
+
     private Language language;
     private ServerSpec serverSpec;
     private int rows;
@@ -37,11 +44,11 @@ class CLOptions {
 
     // the set of default options
     private CLOptions() {
-        language = Language.ENGLISH;
-        trailCapacity = 3;
-        rows = 10;
-        cols = 20;
-        clientChoice = ClientChoice.GUI;
+        language = DEFAULT_LANGUAGE;
+        rows = DEFAULT_ROWS;
+        cols = DEFAULT_COLS;
+        trailCapacity = DEFAULT_TRAIL_CAPACITY;
+        clientChoice = DEFAULT_CLIENT_CHOICE;
     }
 
     protected CLOptions(String args[]) {
@@ -260,7 +267,7 @@ class CLOptions {
     public Language getLanguage() { return language; }
     public ServerSpec getServerSpec() {
         if (serverSpec == null) {
-            return new ServerSpecTest(trailCapacity);
+            return DEFAULT_SERVER_SPEC;
         }
         return serverSpec;
     }

@@ -42,4 +42,7 @@ public class ServerSpecEmpty implements ServerSpec {
     public Hero generateHero() { return hero; }
     public int generateTrailCapacity() { return trailCapacity; }
 
+    public String toString() {
+        return "EMPTY";
+    }
 }
