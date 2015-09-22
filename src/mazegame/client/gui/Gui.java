@@ -12,6 +12,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.WindowEvent;
 import javax.swing.SwingConstants;
+import java.awt.Dimension;
+import java.awt.Color;
 
 import mazegame.client.Client;
 import mazegame.server.ServerSpec;
@@ -29,6 +31,8 @@ public class Gui extends JFrame implements Client, ActionListener {
     private JButton goSouth;
     private JButton goEast;
     private JButton goWest;
+
+    private static final Dimension TILE_DIM = new Dimension(10, 10);
 
     public Gui(ServerSpec serverSpec) {
         super("MazeGame");
@@ -102,21 +106,25 @@ public class Gui extends JFrame implements Client, ActionListener {
 
     private static JLabel newLabel(Icon icon) {
         JLabel label = new JLabel();
+        label.setMinimumSize(TILE_DIM);
+        label.setPreferredSize(TILE_DIM);
+        label.setMaximumSize(TILE_DIM);
+        label.setOpaque(true);
         switch (icon) {
             case EMPTY:
-                label.setText(" ");
+                label.setBackground(Color.BLACK);
                 break;
             case WALL:
-                label.setText("#");
+                label.setBackground(Color.BLUE);
                 break;
             case END:
-                label.setText("e");
+                label.setBackground(Color.GREEN);
                 break;
             case HERO:
-                label.setText("@");
+                label.setBackground(Color.WHITE);
                 break;
             case FOOTPRINT:
-                label.setText(".");
+                label.setBackground(Color.GRAY);
                 break;
             default:
                 throw new IllegalArgumentException(icon.toString());
