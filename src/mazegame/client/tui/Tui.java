@@ -54,22 +54,26 @@ public class Tui implements Client {
                 case "north": case "n":
                     ok = server.moveHero(Direction.NORTH);
                     printMoveResult(ok);
-                    printClientView(server.getClientView());
+                    view = server.getClientView();
+                    printClientView(view);
                     break;
                 case "south": case "s":
                     ok = server.moveHero(Direction.SOUTH);
                     printMoveResult(ok);
-                    printClientView(server.getClientView());
+                    view = server.getClientView();
+                    printClientView(view);
                     break;
                 case "east": case "e":
                     ok = server.moveHero(Direction.EAST);
                     printMoveResult(ok);
-                    printClientView(server.getClientView());
+                    view = server.getClientView();
+                    printClientView(view);
                     break;
                 case "west": case "w":
                     ok = server.moveHero(Direction.WEST);
                     printMoveResult(ok);
-                    printClientView(server.getClientView());
+                    view = server.getClientView();
+                    printClientView(view);
                     break;
                 case "quit": case "q": case "exit": case "x":
                     System.out.print(localizer.get(MsgToUsr.EXITING));

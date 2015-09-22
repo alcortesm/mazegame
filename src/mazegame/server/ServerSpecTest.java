@@ -37,4 +37,8 @@ public class ServerSpecTest implements ServerSpec {
     public End generateEnd() { return end; }
     public Hero generateHero() { return hero; }
     public int generateTrailCapacity() { return trailCapacity; }
+
+    public String toString() {
+        return "TEST";
+    }
 }

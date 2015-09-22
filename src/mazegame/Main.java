@@ -39,19 +39,29 @@ class Main {
         System.err.println(
                 "\t-l (ENGLISH|SPANISH)" + System.lineSeparator() +
                 "\t\tsets the language for the user interface");
+        System.err.println();
         System.err.println(
                 "\t-s (TEST|EMPTY)" + System.lineSeparator() +
                 "\t\t Map generation style");
+        System.err.println();
         System.err.println(
                 "\t-r number" + System.lineSeparator() +
                 "\t\t number of rows in the map (ignored if using the TEST map)");
+        System.err.println();
         System.err.println(
                 "\t-c number" + System.lineSeparator() +
                 "\t\t number of columns in the map (ignored if using the TEST map)");
+        System.err.println();
         System.err.println(
                 "\t-ui (TUI|GUI)" + System.lineSeparator() +
                 "\t\t choose between a textual client or a graphical one.");
-        System.err.println(System.lineSeparator() +
-                "\tdefaults: -l ENGLISH -s TEST -r 10 -c 20 -t 3 -ui GUI");
+        System.err.println();
+        System.err.println(
+                "\tdefaults: -l " + CLOptions.DEFAULT_LANGUAGE +
+                " -s " + CLOptions.DEFAULT_SERVER_SPEC +
+                " -r " + CLOptions.DEFAULT_ROWS +
+                " -c " + CLOptions.DEFAULT_COLS +
+                " -t " + CLOptions.DEFAULT_TRAIL_CAPACITY +
+                " -ui " + CLOptions.DEFAULT_CLIENT_CHOICE);
     }
 }
