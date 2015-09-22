@@ -10,6 +10,7 @@ import java.awt.BorderLayout;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.WindowEvent;
 
 import mazegame.client.Client;
 import mazegame.server.ServerSpec;
@@ -45,7 +46,9 @@ public class Gui extends JFrame implements Client, ActionListener {
 
     private void createAndShowGui() {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        updateMap(server.getClientView());
+        ClientView view = server.getClientView();
+        updateMap(view.getTopView());
+        triggerGameOver(view.isGameOver());
         pack();
         setVisible(true);
     }
@@ -82,8 +85,7 @@ public class Gui extends JFrame implements Client, ActionListener {
         add(map, BorderLayout.CENTER);
     }
 
-    private void updateMap(ClientView view) {
-        Icon[][] icons = view.getTopView();
+    private void updateMap(Icon[][] icons) {
         int numRows = icons.length;
         int numCols = icons[0].length;
         map.removeAll();
@@ -134,6 +136,17 @@ public class Gui extends JFrame implements Client, ActionListener {
             throw new UnsupportedOperationException(
                     "Unsupported button: " + b.getText());
         }
-        updateMap(server.getClientView());
+        ClientView view = server.getClientView();
+        updateMap(view.getTopView());
+        triggerGameOver(view.isGameOver());
+    }
+
+    private void triggerGameOver(boolean gameOver) {
+        if (! gameOver) {
+            return;
+        }
+        System.out.println("Game Over");
+        dispatchEvent(new WindowEvent(
+                    this, WindowEvent.WINDOW_CLOSING));
     }
 }
