@@ -38,10 +38,10 @@ class CLOptions {
     // the set of default options
     private CLOptions() {
         language = Language.ENGLISH;
-        trailCapacity = 0;
+        trailCapacity = 3;
         rows = 10;
         cols = 20;
-        clientChoice = ClientChoice.TUI;
+        clientChoice = ClientChoice.GUI;
     }
 
     protected CLOptions(String args[]) {

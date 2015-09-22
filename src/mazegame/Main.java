@@ -51,5 +51,7 @@ class Main {
         System.err.println(
                 "\t-ui (TUI|GUI)" + System.lineSeparator() +
                 "\t\t choose between a textual client or a graphical one.");
+        System.err.println(System.lineSeparator() +
+                "\tdefaults: -l ENGLISH -s TEST -r 10 -c 20 -t 3 -ui GUI");
     }
 }
