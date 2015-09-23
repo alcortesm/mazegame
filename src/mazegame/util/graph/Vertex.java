@@ -6,28 +6,35 @@ public class Vertex {
     private int row;
     private int col;
 
-    public Vertex(int r, int c, Spanning2DRectLattice graph) {
+    public Vertex(int row, int col, Spanning2DRectLattice graph) {
         if (graph == null) {
             throw new NullPointerException("graph");
         }
         int rows = graph.getNumRows();
         int cols = graph.getNumCols();
-        if (r < 0) {
+        if (row < 0) {
             throw new IllegalArgumentException("rows < 0");
         }
-        if (r >= rows) {
+        if (row >= rows) {
             throw new IllegalArgumentException(
                     "rows >= number of rows in the graph");
         }
-        if (c < 0) {
+        if (col < 0) {
             throw new IllegalArgumentException("cols < 0");
         }
-        if (c >= cols) {
+        if (col >= cols) {
             throw new IllegalArgumentException(
                     "cols >= number of cols in the graph");
         }
         this.graph = graph;
         this.row = row;
         this.col = col;
+    }
+
+    public int getRow() { return row; }
+    public int getCol() { return col; }
+
+    public String toString() {
+        return "Vertex[ " + row + ", " + col + "]";
     }
 }
