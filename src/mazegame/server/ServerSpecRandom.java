@@ -17,11 +17,11 @@ public class ServerSpecRandom implements ServerSpec {
     private int trailCapacity;
 
     public ServerSpecRandom(int rows, int cols, int trailCapacity) {
-        if (rows <= 0) {
-            throw new IllegalArgumentException("rows was <= 0");
+        if (rows < 1) {
+            throw new IllegalArgumentException("rows < 1");
         }
-        if (cols <= 0) {
-            throw new IllegalArgumentException("columns was <= 0");
+        if (cols < 1) {
+            throw new IllegalArgumentException("columns < 1");
         }
         if (trailCapacity < 0) {
             throw new IllegalArgumentException("trailCapacity < 0");
