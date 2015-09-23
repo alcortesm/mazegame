@@ -47,10 +47,14 @@ public class Place {
         return map.getTile(row, col).isWalkable();
     }
 
-    public boolean equals(Place p) {
+    public boolean equals(Object o) {
+        if (! (o instanceof Place)) {
+            return false;
+        }
+        Place p = (Place) o;
         return (this.getRow() == p.getRow()) &&
             (this.getCol() == p.getCol()) &&
-            (this.map == p.map);
+            (this.map.equals(p.map));
     }
 
     public String toString() {
