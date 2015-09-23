@@ -13,6 +13,8 @@ import java.util.Random;
 
 import mazegame.core.Map;
 import mazegame.util.Direction;
+import mazegame.util.List;
+import mazegame.util.ListArray;
 
 public class Spanning2DRectLattice {
 
@@ -69,6 +71,10 @@ public class Spanning2DRectLattice {
         }
     }
 
+    public Edge getEdge(Step s) {
+        return getEdge(s.getOrigin(), s.getDirection());
+    }
+
     // TODO: repeating this switch from the getEdge method is ugly
     public void setEdge(Vertex v, Direction d, Edge e) {
         if (v == null) {
@@ -95,6 +101,10 @@ public class Spanning2DRectLattice {
         }
     }
 
+    public void openLink(Step s) {
+        setEdge(s.getOrigin(), s.getDirection(), Edge.LINK);
+    }
+
     // the order of a graph is the number of its vertices
     public int order() {
         return rows*cols;
@@ -110,10 +120,6 @@ public class Spanning2DRectLattice {
 
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("Spanning2DRectLattice: (" +
-                rows + ", " + cols + ")" +
-                System.lineSeparator() + System.lineSeparator());
-
         // append vertex, east and south links of all vertex in all
         // rows except the last one
         for (int r=0; r<rows-1; r++) {
@@ -123,7 +129,6 @@ public class Spanning2DRectLattice {
         // append vertex and east links of vertex in the
         // last row
         sb = appendVertexAndEastLinks(sb, rows-1);
-
         return sb.toString();
     }
 
