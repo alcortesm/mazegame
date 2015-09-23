@@ -14,6 +14,10 @@ public class PrimsAlgo extends GraphAlgo {
         int graphRows = MapDimToGraphDim(mapRows);
         int graphCols = MapDimToGraphDim(mapCols);
         graph = new Spanning2DRectLattice(graphRows, graphCols);
+
+        // Randomized Prim's Algorithm
+        Vertex start = graph.getRandomVertex();
+
         // return a FAKE map: just a big L
         // first the downward corridor
         for (int r=0; r<graph.getNumRows()-1; r++) {

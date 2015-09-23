@@ -9,6 +9,8 @@
 
 package mazegame.util.graph;
 
+import java.util.Random;
+
 import mazegame.core.Map;
 import mazegame.util.Direction;
 
@@ -158,5 +160,12 @@ public class Spanning2DRectLattice {
         }
         sb.append(System.lineSeparator());
         return sb;
+    }
+
+    public Vertex getRandomVertex() {
+        Random random = new Random();
+        int randomRow = random.nextInt(rows);
+        int randomCol = random.nextInt(cols);
+        return getVertex(randomRow, randomCol);
     }
 }
