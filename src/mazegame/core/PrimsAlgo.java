@@ -23,7 +23,7 @@ public class PrimsAlgo extends GraphAlgo {
         // now the bottom corridor
         for (int c=0; c<graph.getNumCols()-1; c++) {
             Vertex current =
-                graph.getVertex(graph.getNumRows()-1, 0);
+                graph.getVertex(graph.getNumRows()-1, c);
             graph.setEdge(current, Direction.EAST, Edge.LINK);
         }
     }
