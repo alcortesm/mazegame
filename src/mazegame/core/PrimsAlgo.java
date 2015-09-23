@@ -9,8 +9,8 @@ import mazegame.util.Direction;
 
 public class PrimsAlgo extends GraphAlgo {
 
-    public PrimsAlgo(int rows, int cols) {
-        super(rows, cols);
+    public PrimsAlgo(int mapRows, int mapCols) {
+        super(mapRows, mapCols);
         int graphRows = MapDimToGraphDim(mapRows);
         int graphCols = MapDimToGraphDim(mapCols);
         graph = new Spanning2DRectLattice(graphRows, graphCols);

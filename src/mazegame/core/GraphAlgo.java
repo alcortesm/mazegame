@@ -12,16 +12,16 @@ abstract class GraphAlgo extends MapGeneratorAlgo {
 
     protected Spanning2DRectLattice graph;
 
-    GraphAlgo(int rows, int cols) {
-        super(rows, cols);
+    GraphAlgo(int mapRows, int mapCols) {
+        super(mapRows, mapCols);
     }
 
-    static protected int GraphDimToMapDim(int graphDim) {
-        return (2*graphDim)-1;
+    static protected int MapDimToGraphDim(int m) {
+        return roundUpIntegerDivision(m, 2);
     }
 
-    static protected int GraphIndexToMapIndex(int graphIndex) {
-        return (2*graphIndex);
+    static protected int GraphIndexToMapIndex(int g) {
+        return (2*g);
     }
 
     static private int roundUpIntegerDivision(int num, int div) {
@@ -66,24 +66,24 @@ abstract class GraphAlgo extends MapGeneratorAlgo {
             for (int c=0; c<graphCols-1; c++) {
                 // set south and east tiles
                 current = graph.getVertex(r, c);
-                setTileFromEdge(tiles, current, Direction.SOUTH);
-                setTileFromEdge(tiles, current, Direction.EAST);
+                carveSpaceFromEdge(tiles, current, Direction.SOUTH);
+                carveSpaceFromEdge(tiles, current, Direction.EAST);
             }
             // for the last column set only the south tile
             current = graph.getVertex(r, graphCols-1);
-            setTileFromEdge(tiles, current, Direction.SOUTH);
+            carveSpaceFromEdge(tiles, current, Direction.SOUTH);
         }
 
         // for the last row, set only the east tiles
         for (int c=0; c<graphCols-1; c++) {
             // set south and east tiles
             current = graph.getVertex(graphRows-1, c);
-            setTileFromEdge(tiles, current, Direction.EAST);
+            carveSpaceFromEdge(tiles, current, Direction.EAST);
         }
         return tiles;
     }
 
-    private void setTileFromEdge(
+    private void carveSpaceFromEdge(
             Tile[][] tiles, Vertex vertex, Direction dir) {
         int graphRow = vertex.getRow();
         int graphCol = vertex.getCol();
