@@ -3,7 +3,7 @@
 
 package mazegame.core;
 
-import mazegame.server.Direction;
+import mazegame.util.Direction;
 
 public class Place {
 

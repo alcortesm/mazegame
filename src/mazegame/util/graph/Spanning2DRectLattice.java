@@ -10,6 +10,7 @@
 package mazegame.util.graph;
 
 import mazegame.core.Map;
+import mazegame.util.Direction;
 
 public class Spanning2DRectLattice {
 
@@ -31,11 +32,11 @@ public class Spanning2DRectLattice {
         return new Vertex(r, c, this);
     }
 
-    public Edge getEdge(Vertex a, Vertex b) {
+    public Edge getEdge(Vertex a, Direction d) {
         return Edge.NO_LINK;
     }
 
-    public void setEdge(Vertex a, Vertex b, Edge e) {
+    public void setEdge(Vertex a, Direction d, Edge e) {
     }
 
     // the order of a graph is the number of its vertices

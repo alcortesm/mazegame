@@ -20,7 +20,7 @@ import mazegame.server.ServerSpec;
 import mazegame.server.Server;
 import mazegame.server.ClientView;
 import mazegame.server.Icon;
-import mazegame.server.Direction;
+import mazegame.util.Direction;
 
 public class Gui extends JFrame implements Client, ActionListener {
 

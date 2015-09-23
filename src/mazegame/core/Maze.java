@@ -3,7 +3,7 @@ package mazegame.core;
 import java.util.Random;
 import java.util.ArrayList;
 
-import mazegame.server.Direction;
+import mazegame.util.Direction;
 import mazegame.server.ClientView;
 import mazegame.server.Icon;
 

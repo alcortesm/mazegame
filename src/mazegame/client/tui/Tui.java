@@ -9,7 +9,7 @@ import mazegame.client.MsgToUsr;
 import mazegame.server.Server;
 import mazegame.server.ClientView;
 import mazegame.server.Icon;
-import mazegame.server.Direction;
+import mazegame.util.Direction;
 import mazegame.server.ServerSpec;
 
 public class Tui implements Client {

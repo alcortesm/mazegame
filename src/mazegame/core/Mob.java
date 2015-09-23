@@ -2,7 +2,7 @@
 
 package mazegame.core;
 
-import mazegame.server.Direction;
+import mazegame.util.Direction;
 
 public abstract class Mob extends Entity {
 

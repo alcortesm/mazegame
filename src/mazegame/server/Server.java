@@ -5,6 +5,7 @@ import mazegame.core.Map;
 import mazegame.server.ServerSpec;
 import mazegame.core.End;
 import mazegame.core.Hero;
+import mazegame.util.Direction;
 
 public class Server {
 
