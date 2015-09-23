@@ -12,15 +12,15 @@ public class Vertex {
         }
         int rows = graph.getNumRows();
         int cols = graph.getNumCols();
-        if (r < 1) {
-            throw new IllegalArgumentException("rows < 1");
+        if (r < 0) {
+            throw new IllegalArgumentException("rows < 0");
         }
         if (r >= rows) {
             throw new IllegalArgumentException(
                     "rows >= number of rows in the graph");
         }
-        if (c < 1) {
-            throw new IllegalArgumentException("cols < 1");
+        if (c < 0) {
+            throw new IllegalArgumentException("cols < 0");
         }
         if (c >= cols) {
             throw new IllegalArgumentException(
