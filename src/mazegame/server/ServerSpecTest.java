@@ -1,9 +1,7 @@
 package mazegame.server;
 
 import mazegame.core.Map;
-import mazegame.core.Tile;
-import mazegame.core.Space;
-import mazegame.core.Wall;
+import mazegame.core.TestMap;
 import mazegame.core.End;
 import mazegame.core.Place;
 import mazegame.core.Hero;
@@ -19,15 +17,7 @@ public class ServerSpecTest implements ServerSpec {
         if (trailCapacity < 0) {
             throw new IllegalArgumentException("trailCapacity < 0");
         }
-        Tile w = new Wall();
-        Tile s = new Space();
-        Tile[][] tiles = {
-            {s, w, s, w, s, s, s, w},
-            {s, w, s, s, s, w, s, s},
-            {s, w, s, w, w, w, s, w},
-            {s, s, s, w, s, s, s, s},
-        };
-        this.map = new Map(tiles);
+        this.map = new TestMap().generateMap();
         this.end = new End(new Place(3, 4, map));
         this.hero = new Hero(new Place(0, 0, map));
         this.trailCapacity = trailCapacity;
