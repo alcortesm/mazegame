@@ -1,3 +1,7 @@
 - Remove a lot of methods that are no longer needed.
 
 - The CLOptions code is horrible, rewrite the whole class.
+
+- Think of a better way to fix random maps with even dimensions
+  (maybe using dim as the number of corridors?, not very good
+  for the empty style, though)
