@@ -1,6 +1,7 @@
 package mazegame.server;
 
 import mazegame.core.Map;
+import mazegame.core.PrimsAlgo;
 import mazegame.core.Tile;
 import mazegame.core.Space;
 import mazegame.core.Wall;
@@ -25,8 +26,8 @@ public class ServerSpecRandom implements ServerSpec {
         if (trailCapacity < 0) {
             throw new IllegalArgumentException("trailCapacity < 0");
         }
-        Tile[][] tiles = createTiles(rows, cols);
-        this.map = new Map(tiles);
+        this.map = new PrimsAlgo(rows, cols).generateMap();
+        // TODO find an empty place to start and to end
         this.end = new End(new Place(rows-1, cols-1, map));
         this.hero = new Hero(new Place(0, 0, map));
         this.trailCapacity = trailCapacity;
