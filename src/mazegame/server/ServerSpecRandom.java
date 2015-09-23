@@ -26,6 +26,12 @@ public class ServerSpecRandom implements ServerSpec {
         if (trailCapacity < 0) {
             throw new IllegalArgumentException("trailCapacity < 0");
         }
+        if (rows % 2 == 0) {
+            throw new IllegalArgumentException("Random maps require an odd number of rows");
+        }
+        if (cols % 2 == 0) {
+            throw new IllegalArgumentException("Random maps require an odd number of columns");
+        }
         this.map = new PrimsAlgo(rows, cols).generateMap();
         // TODO find an empty place to start and to end
         this.end = new End(new Place(rows-1, cols-1, map));
