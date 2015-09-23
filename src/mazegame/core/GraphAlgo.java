@@ -34,18 +34,18 @@ abstract class GraphAlgo extends MapGeneratorAlgo {
         if (graph == null) {
             throw new NullPointerException("graph");
         }
-        Tile[][] tiles = createChessBoard();
+        Tile[][] tiles = createCrosses();
         tiles = turnLinksIntoSpaces(tiles);
         return new Map(tiles);
     }
 
-    private Tile[][] createChessBoard() {
+    private Tile[][] createCrosses() {
         Tile[][] tiles = new Tile[mapRows][mapCols];
         Space s = new Space();
         Wall w = new Wall();
         for (int r=0; r<mapRows; r++) {
             for (int c=0; c<mapCols; c++) {
-                if ((r + c) % 2 == 0) {
+                if (r % 2 == 0 && c % 2 == 0) {
                     tiles[r][c] = s;
                 } else {
                     tiles[r][c] = w;
