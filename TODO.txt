@@ -5,3 +5,8 @@
 - Think of a better way to fix random maps with even dimensions
   (maybe using dim as the number of corridors?, not very good
   for the empty style, though)
+
+- For big mazes (~101x101) the game plays too slow. Fix this. This
+  probably is cause by rendering the whole maze every time, which is
+  super nice for making a simple text client, but it is super
+  inneficient for GUI clients.
