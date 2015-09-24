@@ -38,6 +38,12 @@ public class Gui extends JFrame implements Client, ActionListener {
     private static final Color BUTTON_BACKGROUND_COLOR = Color.CYAN;
     private static final Color BUTTON_FOREGROUND_COLOR = Color.BLACK;
 
+    private static final Color WALL_COLOR = Color.BLACK;
+    private static final Color SPACE_COLOR = Color.GRAY;
+    private static final Color HERO_COLOR = Color.BLUE;
+    private static final Color END_COLOR = Color.GREEN;
+    private static final Color FOOTPRINT_COLOR = Color.LIGHT_GRAY;
+
     private Server server;
     private JPanel controls;
     private JPanel map;
@@ -147,19 +153,19 @@ public class Gui extends JFrame implements Client, ActionListener {
         label.setOpaque(true);
         switch (icon) {
             case EMPTY:
-                label.setBackground(Color.GRAY);
+                label.setBackground(SPACE_COLOR);
                 break;
             case WALL:
-                label.setBackground(Color.BLACK);
+                label.setBackground(WALL_COLOR);
                 break;
             case END:
-                label.setBackground(Color.GREEN);
+                label.setBackground(END_COLOR);
                 break;
             case HERO:
-                label.setBackground(Color.WHITE);
+                label.setBackground(HERO_COLOR);
                 break;
             case FOOTPRINT:
-                label.setBackground(Color.LIGHT_GRAY);
+                label.setBackground(FOOTPRINT_COLOR);
                 break;
             default:
                 throw new IllegalArgumentException(icon.toString());
