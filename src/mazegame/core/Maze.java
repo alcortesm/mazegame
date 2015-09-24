@@ -77,9 +77,6 @@ public class Maze {
         boolean isGameOver = hero.getPlace().equals(end.getPlace());
         // isHeroAlive
         boolean isHeroAlive = true;
-        // lastMsgResult
-        String lastMsgResult = lastMoveOk ? "OK" : "Cannot go there!";
-        return new ClientView(icons, isGameOver,
-                isHeroAlive, lastMsgResult);
+        return new ClientView(icons, isGameOver, isHeroAlive);
     }
 }

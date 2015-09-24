@@ -10,12 +10,10 @@ public class ClientView {
     private Icon[][] icons;
     private boolean  isGameOver;
     private boolean  isHeroAlive;
-    private String   lastMsgResult;
 
     public ClientView(Icon[][] icons,
             boolean isGameOver,
-            boolean isHeroAlive,
-            String lastMsgResult) {
+            boolean isHeroAlive) {
         if (icons == null) {
             throw new NullPointerException("icons");
         }
@@ -26,13 +24,9 @@ public class ClientView {
             throw new IllegalArgumentException(
                     "map is not rectangular");
         }
-        if (lastMsgResult == null) {
-            throw new NullPointerException("lastMsgResult");
-        }
         this.icons = icons;
         this.isGameOver = isGameOver;
         this.isHeroAlive = isHeroAlive;
-        this.lastMsgResult = lastMsgResult;
     }
 
     public boolean isGameOver() {
@@ -41,10 +35,6 @@ public class ClientView {
 
     public boolean isHeroAlive() {
         return isHeroAlive;
-    }
-
-    public String lastMsgResult() {
-        return lastMsgResult;
     }
 
     public Icon[][] getTopView() {
