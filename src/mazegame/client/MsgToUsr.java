@@ -1,3 +1,8 @@
+// This is the set of messages used by the client.
+//
+// The Localizer will translate this enums to the correct
+// sentences in the appropiate Language.
+
 package mazegame.client;
 
 public enum MsgToUsr {

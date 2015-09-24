@@ -1,3 +1,6 @@
+// Empty map is a simple algorithm to generate empty maps,
+// this is, maps without walls.
+
 package mazegame.core;
 
 public class EmptyMap extends MapGeneratorAlgo {

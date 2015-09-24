@@ -1,3 +1,5 @@
+// Array implementation of a Trail.
+
 package mazegame.core;
 
 import mazegame.core.Footprint;
@@ -7,8 +9,8 @@ class TrailArray implements Trail {
     private Footprint[] tracks;
     private int capacity;
     private int size; // current number of elements in the collection
-    private int oldest;
-    private int newest;
+    private int oldest; // -1 if empty
+    private int newest; // -1 if empty
 
     TrailArray(int capacity) {
         if (capacity <= 0) {
@@ -17,7 +19,6 @@ class TrailArray implements Trail {
         this.capacity = capacity;
         this.tracks = new Footprint[capacity];
         this.size = 0;
-        // -1 means there is no oldest or newest yet
         this.oldest = -1;
         this.newest = -1;
     }

@@ -1,3 +1,5 @@
+// A simple textual client.
+
 package mazegame.client.tui;
 
 import java.util.Scanner;

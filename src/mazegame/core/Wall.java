@@ -1,3 +1,5 @@
+// A map is composed of spaces and walls.
+
 package mazegame.core;
 
 import mazegame.server.Icon;

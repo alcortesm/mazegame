@@ -1,3 +1,10 @@
+// This is the main class of the game.
+//
+// Its most simple implementation holds a map, an end and a hero and
+// take care of moving the hero around and geenrating the ClientView
+// (the data structure that clients consume to render the maze to the
+// player).
+
 package mazegame.core;
 
 import java.util.Random;

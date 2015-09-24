@@ -1,3 +1,6 @@
+// A map is composed of Walls and Speces, both are subclasses of
+// Tile.
+
 package mazegame.core;
 
 import mazegame.server.Icon;

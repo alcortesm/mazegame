@@ -1,3 +1,5 @@
+// a simple map generator to create a default fixed map.
+
 package mazegame.core;
 
 public class TestMap implements MapGenerator {

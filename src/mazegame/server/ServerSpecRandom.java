@@ -1,3 +1,6 @@
+// The serverspec used by the client to create servers that generate
+// random maps.
+
 package mazegame.server;
 
 import java.util.NoSuchElementException;
@@ -30,10 +33,12 @@ public class ServerSpecRandom implements ServerSpec {
             throw new IllegalArgumentException("trailCapacity < 0");
         }
         if (rows % 2 == 0) {
-            throw new IllegalArgumentException("Random maps require an odd number of rows");
+            throw new IllegalArgumentException(
+                    "Random maps require an odd number of rows");
         }
         if (cols % 2 == 0) {
-            throw new IllegalArgumentException("Random maps require an odd number of columns");
+            throw new IllegalArgumentException(
+                    "Random maps require an odd number of columns");
         }
         map = new PrimsAlgo(rows, cols).generateMap();
         RandomList<Place> walkables = map.getWalkables();

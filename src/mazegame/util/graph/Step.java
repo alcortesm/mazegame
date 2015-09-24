@@ -1,3 +1,6 @@
+// Steps represent a vertex using relative coordinates: origin +
+// direction.
+
 package mazegame.util.graph;
 
 import mazegame.util.Direction;

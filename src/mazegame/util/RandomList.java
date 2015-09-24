@@ -2,6 +2,9 @@
 //
 // Removing will remove a random element.
 //
+// There is not get, so there is not way to predict what element you
+// will remove next.
+//
 // Inserting nulls is not allowed.
 //
 // Implementation should decide if duplicated elements are allowed.

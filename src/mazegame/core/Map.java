@@ -1,3 +1,9 @@
+// A Map is a collection of tiles.
+//
+// The easiest way to store the tiles is an 2D array.
+//
+// A Map is a way to access the 2D internal array in an easiest way.
+
 package mazegame.core;
 
 import mazegame.server.Icon;

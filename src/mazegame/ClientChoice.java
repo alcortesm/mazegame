@@ -1,6 +1,8 @@
+// An enum to hold the possible options for clients.
+
 package mazegame;
 
 enum ClientChoice {
-    TUI,
-    GUI;
+    TUI, // client.tui.Tui
+    GUI; // client.gui.Gui
 }

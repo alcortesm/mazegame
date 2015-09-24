@@ -1,3 +1,15 @@
+// Graphs algorithms are an implementation of map generator algorithm
+// that use a graph (mazegame.util.graph) to generate the map.
+//
+// The protected graph attribute holds the graph and each subclass
+// will configure it according to different algorithms.
+//
+// As Java ctors are not inherited, it is difficult to force
+// subclasses to remember to initialize it.
+//
+// The key point is how to generate the map by inspecting the graph.
+// The "generateMap" should take care of all the work.
+
 package mazegame.core;
 
 import mazegame.util.graph.Spanning2DRectLattice;

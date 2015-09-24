@@ -1,3 +1,6 @@
+// This class is a map generator that uses algorithms that rely on
+// knowing the map rows and columns in advance.
+
 package mazegame.core;
 
 abstract class MapGeneratorAlgo implements MapGenerator {

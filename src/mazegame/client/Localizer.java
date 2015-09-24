@@ -1,3 +1,6 @@
+// This is the client message database, in all supported languages by
+// Language.
+
 package mazegame.client;
 
 import mazegame.util.Array;

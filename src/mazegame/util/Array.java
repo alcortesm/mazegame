@@ -1,3 +1,5 @@
+// Some useful methods to deal with arrays.
+
 package mazegame.util;
 
 public class Array {

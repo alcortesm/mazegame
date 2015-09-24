@@ -1,3 +1,6 @@
+// This is the serverspec used by the client to create a server
+// that uses an Empty map generator.
+
 package mazegame.server;
 
 import mazegame.core.Map;

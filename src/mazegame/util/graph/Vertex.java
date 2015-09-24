@@ -1,3 +1,5 @@
+// a vertex in a graph
+
 package mazegame.util.graph;
 
 import mazegame.util.List;

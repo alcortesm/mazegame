@@ -1,3 +1,8 @@
+// This class holds all the options available from the command line.
+//
+// It gets initialized with the application defaults and the process
+// the command line array of strings to configure each option.
+
 package mazegame;
 
 import mazegame.client.Language;

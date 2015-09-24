@@ -1,3 +1,6 @@
+// This class holds all the information a client needs to renderize
+// the game status to the player.
+
 package mazegame.server;
 
 import mazegame.util.Array;
@@ -47,6 +50,4 @@ public class ClientView {
     public Icon[][] getTopView() {
         return icons;
     }
-
-
 }

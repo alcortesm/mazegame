@@ -1,3 +1,6 @@
+// The serverspec used by the client to create a server that uses the
+// test map.
+
 package mazegame.server;
 
 import mazegame.core.Map;

@@ -1,3 +1,7 @@
+// All mazes have an end entity.
+//
+// When the hero gets to the end, the game is over.
+
 package mazegame.core;
 
 import mazegame.server.Icon;

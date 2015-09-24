@@ -1,3 +1,14 @@
+// A simple GUI client.
+//
+// Students do not know how to use the canvas, so this GUI will only
+// use standard widgets.
+//
+// Student know a pretty limited set of Layouts. For example
+// GridBagLayout will be more interesting than a GridLayout.
+//
+// Keyboard events will be more interesting than using JButtons but
+// keyboard events are covered by the course curriculum.
+
 package mazegame.client.gui;
 
 import javax.swing.JFrame;

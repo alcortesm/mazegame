@@ -1,3 +1,12 @@
+// The maze will be populated with "entities".
+//
+// Entities will have a place in the maze and an Icon so they can
+// be rendered by the clients.
+//
+// Entities are static, this is, their place can not be changed once
+// the object is constructed. The Mob subclass allows for moving
+// entities.
+
 package mazegame.core;
 
 import mazegame.server.Icon;

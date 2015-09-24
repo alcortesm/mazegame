@@ -1,3 +1,5 @@
+// An enum to represent cardinal directions.
+
 package mazegame.util;
 
 public enum Direction {
