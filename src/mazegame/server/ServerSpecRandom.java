@@ -41,14 +41,8 @@ public class ServerSpecRandom implements ServerSpec {
                     "Random maps require an odd number of columns");
         }
         map = new PrimsAlgo(rows, cols).generateMap();
-        OpaqueSack<Place> walkables = map.getWalkables();
-        end = new End(walkables.remove());
-        try {
-            hero = new Hero(walkables.remove());
-        } catch (NoSuchElementException e) {
-            // this happens when the maze is 1x1
-            hero = new Hero(end.getPlace());
-        }
+        hero = new Hero(new Place(0, 0, map));
+        end = new End(new Place(rows-1, cols-1, map));
         this.trailCapacity = trailCapacity;
     }
 
