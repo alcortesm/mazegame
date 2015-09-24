@@ -18,7 +18,6 @@ class CLOptions {
     static final int DEFAULT_ROWS = 31;
     static final int DEFAULT_COLS = 41;
     static final int DEFAULT_TRAIL_CAPACITY = 5;
-    static final ServerSpec DEFAULT_SERVER_SPEC = new ServerSpecRandom(DEFAULT_ROWS, DEFAULT_COLS, DEFAULT_TRAIL_CAPACITY);
     static final ClientChoice DEFAULT_CLIENT_CHOICE = ClientChoice.GUI;
 
     private Language language;
@@ -277,7 +276,7 @@ class CLOptions {
     public Language getLanguage() { return language; }
     public ServerSpec getServerSpec() {
         if (serverSpec == null) {
-            return DEFAULT_SERVER_SPEC;
+            return new ServerSpecRandom(rows, cols, trailCapacity);
         }
         return serverSpec;
     }

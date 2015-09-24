@@ -58,7 +58,7 @@ class Main {
         System.err.println();
         System.err.println(
                 "\tdefaults: -l " + CLOptions.DEFAULT_LANGUAGE +
-                " -s " + CLOptions.DEFAULT_SERVER_SPEC +
+                " -s RANDOM " +
                 " -r " + CLOptions.DEFAULT_ROWS +
                 " -c " + CLOptions.DEFAULT_COLS +
                 " -t " + CLOptions.DEFAULT_TRAIL_CAPACITY +
