@@ -39,8 +39,8 @@ public class Place {
         this.map = map;
     }
 
-    int getRow() { return row; }
-    int getCol() { return col; }
+    public int getRow() { return row; }
+    public int getCol() { return col; }
     Map getMap() { return map; }
 
     boolean isWalkable() {

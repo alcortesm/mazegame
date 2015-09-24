@@ -8,11 +8,13 @@
 package mazegame.core;
 
 import java.util.Random;
-import java.util.ArrayList;
 
 import mazegame.util.Direction;
 import mazegame.server.ClientView;
 import mazegame.server.Icon;
+import mazegame.server.Update;
+import mazegame.util.Queue;
+import mazegame.util.QueueArray;
 
 public class Maze {
 
@@ -21,6 +23,7 @@ public class Maze {
     private Hero hero;
     private boolean lastMoveOk;
     private Trail trail;
+    private Queue<Update> updates;
 
     public Maze(Map map, End end, Hero hero, int trailCapacity) {
         if (map == null) {
@@ -44,6 +47,7 @@ public class Maze {
         } else {
             this.trail = new TrailArray(trailCapacity);
         }
+        updates = new QueueArray<Update>();
     }
 
     public boolean moveHero(Direction dir) {
@@ -51,6 +55,14 @@ public class Maze {
         lastMoveOk = hero.move(dir);
         if (lastMoveOk) {
             trail.add(old);
+            // updates:
+            Tile oldHeroTile =
+                map.getTile(old.getRow(), old.getCol());
+            Update oldHero = new Update(old, oldHeroTile.getIcon());
+            Update newHero =
+                new Update(hero.getPlace(), hero.getIcon());
+            updates.enqueue(oldHero);
+            updates.enqueue(newHero);
         }
         return lastMoveOk;
     }
@@ -74,9 +86,19 @@ public class Maze {
         // add hero
         icons = addEntityToIcons(hero, icons);
         // isGameOver
-        boolean isGameOver = hero.getPlace().equals(end.getPlace());
+        boolean isGameOver = isGameOver();
         // isHeroAlive
         boolean isHeroAlive = true;
         return new ClientView(icons, isGameOver, isHeroAlive);
+    }
+
+    public boolean isGameOver() {
+        return hero.getPlace().equals(end.getPlace());
+    }
+
+    public Queue<Update> getUpdates() {
+        Queue<Update> retval = updates;
+        updates = new QueueArray<Update>();
+        return retval;
     }
 }
