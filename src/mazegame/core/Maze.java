@@ -14,7 +14,7 @@ import mazegame.server.ClientView;
 import mazegame.server.Icon;
 import mazegame.server.Update;
 import mazegame.util.Queue;
-import mazegame.util.QueueArray;
+import mazegame.util.QueueLinked;
 
 public class Maze {
 
@@ -47,12 +47,12 @@ public class Maze {
         } else {
             this.trail = new TrailArray(trailCapacity);
         }
-        updates = new QueueArray<Update>();
+        updates = new QueueLinked<Update>();
     }
 
     public boolean moveHero(Direction dir) {
         // forget old updates
-        updates = new QueueArray<Update>();
+        updates = new QueueLinked<Update>();
 
         Place old = hero.getPlace();
         lastMoveOk = hero.move(dir);
