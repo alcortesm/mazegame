@@ -25,6 +25,7 @@ import java.awt.event.WindowEvent;
 import javax.swing.SwingConstants;
 import java.awt.Dimension;
 import java.awt.Color;
+import java.awt.FlowLayout;
 
 import mazegame.client.Client;
 import mazegame.server.ServerSpec;
@@ -97,6 +98,8 @@ public class Gui extends JFrame implements Client, ActionListener {
         goEast.addActionListener(this);
         goWest.addActionListener(this);
 
+        JPanel controlWrapper = new JPanel(
+                new FlowLayout(FlowLayout.CENTER));
         JPanel controls = new JPanel(new GridLayout(3, 3));
         controls.add(new JLabel());
         controls.add(goNorth);
@@ -107,7 +110,8 @@ public class Gui extends JFrame implements Client, ActionListener {
         controls.add(new JLabel());
         controls.add(goSouth);
         controls.add(new JLabel());
-        add(controls, BorderLayout.SOUTH);
+        controlWrapper.add(controls);
+        add(controlWrapper, BorderLayout.SOUTH);
     }
 
     // adds an initial empty map
