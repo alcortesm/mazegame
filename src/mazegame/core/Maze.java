@@ -57,14 +57,21 @@ public class Maze {
         Place old = hero.getPlace();
         lastMoveOk = hero.move(dir);
         if (lastMoveOk) {
-            trail.add(old);
-            // updates:
+            // update to remove old hero
             Tile oldHeroTile =
                 map.getTile(old.getRow(), old.getCol());
             Update oldHero = new Update(old, oldHeroTile.getIcon());
+            updates.enqueue(oldHero);
+
+            // add old position to trail
+            trail.add(old);
+
+            // update trail changes
+            trail.update(updates);
+
+            // update to add new hero
             Update newHero =
                 new Update(hero.getPlace(), hero.getIcon());
-            updates.enqueue(oldHero);
             updates.enqueue(newHero);
         }
         return lastMoveOk;

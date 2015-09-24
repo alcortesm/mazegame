@@ -3,6 +3,10 @@
 package mazegame.core;
 
 import mazegame.core.Footprint;
+import mazegame.util.Queue;
+import mazegame.util.QueueLinked;
+import mazegame.server.Update;
+import mazegame.server.Icon;
 
 class TrailArray implements Trail {
 
@@ -11,6 +15,7 @@ class TrailArray implements Trail {
     private int size; // current number of elements in the collection
     private int oldest; // -1 if empty
     private int newest; // -1 if empty
+    private QueueLinked<Update> updates;
 
     TrailArray(int capacity) {
         if (capacity <= 0) {
@@ -21,6 +26,7 @@ class TrailArray implements Trail {
         this.size = 0;
         this.oldest = -1;
         this.newest = -1;
+        updates = new QueueLinked<Update>();
     }
 
     public void add(Place p) {
@@ -34,10 +40,39 @@ class TrailArray implements Trail {
                 oldest = 0;
             }
             size++;
+            // updates
+            Update u = new Update(p, Icon.FOOTPRINT);
+            updates.enqueue(u);
         } else {
+            updateRemoveTrail();
             tracks[oldest] = new Footprint(p);
             newest = oldest;
             oldest = (++oldest) % capacity;
+            updateAddTrail();
+        }
+    }
+
+    private void updateRemoveTrail() {
+        Footprint[] tracks = getAll();
+        for (int i=0; i<tracks.length; i++) {
+            Footprint current = tracks[i];
+            Place p = current.getPlace();
+            Map m = p.getMap();
+            int r = p.getRow();
+            int c = p.getCol();
+            Tile t = m.getTile(r, c);
+            Update u = new Update(p, t.getIcon());
+            updates.enqueue(u);
+        }
+    }
+
+    private void updateAddTrail() {
+        Footprint[] tracks = getAll();
+        for (int i=0; i<tracks.length; i++) {
+            Footprint current = tracks[i];
+            Place p = current.getPlace();
+            Update u = new Update(p, Icon.FOOTPRINT);
+            updates.enqueue(u);
         }
     }
 
@@ -71,5 +106,11 @@ class TrailArray implements Trail {
         sb.append(", newest=" + newest);
         sb.append("]");
         return sb.toString();
+    }
+
+    public void update(Queue<Update> dest) {
+        while (! updates.isEmpty()) {
+            dest.enqueue(updates.dequeue());
+        }
     }
 }
