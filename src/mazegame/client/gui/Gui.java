@@ -35,6 +35,9 @@ import mazegame.util.Direction;
 
 public class Gui extends JFrame implements Client, ActionListener {
 
+    private static final Color BUTTON_BACKGROUND_COLOR = Color.CYAN;
+    private static final Color BUTTON_FOREGROUND_COLOR = Color.BLACK;
+
     private Server server;
     private JPanel controls;
     private JPanel map;
@@ -71,9 +74,17 @@ public class Gui extends JFrame implements Client, ActionListener {
 
     private void addControls() {
         goNorth = new JButton("N");
+        goNorth.setBackground(BUTTON_BACKGROUND_COLOR);
+        goNorth.setForeground(BUTTON_FOREGROUND_COLOR);
         goSouth = new JButton("S");
+        goSouth.setBackground(BUTTON_BACKGROUND_COLOR);
+        goSouth.setForeground(BUTTON_FOREGROUND_COLOR);
         goEast = new JButton("E");
+        goEast.setBackground(BUTTON_BACKGROUND_COLOR);
+        goEast.setForeground(BUTTON_FOREGROUND_COLOR);
         goWest = new JButton("W");
+        goWest.setBackground(BUTTON_BACKGROUND_COLOR);
+        goWest.setForeground(BUTTON_FOREGROUND_COLOR);
 
         goNorth.addActionListener(this);
         goSouth.addActionListener(this);
