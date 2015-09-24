@@ -8,11 +8,13 @@
 package mazegame.core;
 
 import java.util.Random;
-import java.util.ArrayList;
 
 import mazegame.util.Direction;
 import mazegame.server.ClientView;
 import mazegame.server.Icon;
+import mazegame.server.Update;
+import mazegame.util.Queue;
+import mazegame.util.QueueLinked;
 
 public class Maze {
 
@@ -20,6 +22,7 @@ public class Maze {
     private End end;
     private Hero hero;
     private Trail trail;
+    private Queue<Update> updates;
 
     public Maze(Map map, End end, Hero hero, int trailCapacity) {
         if (map == null) {
@@ -42,13 +45,32 @@ public class Maze {
         } else {
             this.trail = new TrailArray(trailCapacity);
         }
+        updates = new QueueLinked<Update>();
     }
 
     public boolean moveHero(Direction dir) {
+        // forget old updates
+        updates = new QueueLinked<Update>();
+
         Place old = hero.getPlace();
         boolean lastMoveOk = hero.move(dir);
         if (lastMoveOk) {
+            // update to remove old hero
+            Tile oldHeroTile =
+                map.getTile(old.getRow(), old.getCol());
+            Update oldHero = new Update(old, oldHeroTile.getIcon());
+            updates.enqueue(oldHero);
+
+            // add old position to trail
             trail.add(old);
+
+            // update trail changes
+            trail.update(updates);
+
+            // update to add new hero
+            Update newHero =
+                new Update(hero.getPlace(), hero.getIcon());
+            updates.enqueue(newHero);
         }
         return lastMoveOk;
     }
@@ -72,9 +94,17 @@ public class Maze {
         // add hero
         icons = addEntityToIcons(hero, icons);
         // isGameOver
-        boolean isGameOver = hero.getPlace().equals(end.getPlace());
+        boolean isGameOver = isGameOver();
         // isHeroAlive
         boolean isHeroAlive = true;
         return new ClientView(icons, isGameOver, isHeroAlive);
+    }
+
+    public boolean isGameOver() {
+        return hero.getPlace().equals(end.getPlace());
+    }
+
+    public Queue<Update> getUpdates() {
+        return updates;
     }
 }

@@ -33,6 +33,8 @@ import mazegame.server.Server;
 import mazegame.server.ClientView;
 import mazegame.server.Icon;
 import mazegame.util.Direction;
+import mazegame.util.Queue;
+import mazegame.server.Update;
 
 public class Gui extends JFrame implements Client, ActionListener {
 
@@ -52,6 +54,7 @@ public class Gui extends JFrame implements Client, ActionListener {
     private JButton goSouth;
     private JButton goEast;
     private JButton goWest;
+    private JLabel[][] mapTiles;
 
     private static final Dimension TILE_DIM = new Dimension(10, 10);
 
@@ -127,6 +130,7 @@ public class Gui extends JFrame implements Client, ActionListener {
         int numCols = icons[0].length;
         map.removeAll();
         map.setLayout(new GridLayout(numRows+2, numCols+2));
+        mapTiles = new JLabel[numRows][numCols];
         // north wall
         for (int c=0; c<numCols+2; c++) {
             map.add(newLabel(Icon.WALL));
@@ -136,7 +140,8 @@ public class Gui extends JFrame implements Client, ActionListener {
             map.add(newLabel(Icon.WALL));
             // map contents
             for (int c=0; c<numCols; c++) {
-                map.add(newLabel(icons[r][c]));
+                mapTiles[r][c] = newLabel(icons[r][c]);
+                map.add(mapTiles[r][c]);
             }
             // west wall
             map.add(newLabel(Icon.WALL));
@@ -149,31 +154,30 @@ public class Gui extends JFrame implements Client, ActionListener {
         map.repaint();
     }
 
+    private static Color iconToColor(Icon icon) {
+        switch (icon) {
+            case EMPTY:
+                return SPACE_COLOR;
+            case WALL:
+                return WALL_COLOR;
+            case END:
+                return END_COLOR;
+            case HERO:
+                return HERO_COLOR;
+            case FOOTPRINT:
+                return FOOTPRINT_COLOR;
+            default:
+                throw new IllegalArgumentException(icon.toString());
+        }
+    }
+
     private static JLabel newLabel(Icon icon) {
         JLabel label = new JLabel();
         label.setMinimumSize(TILE_DIM);
         label.setPreferredSize(TILE_DIM);
         label.setMaximumSize(TILE_DIM);
         label.setOpaque(true);
-        switch (icon) {
-            case EMPTY:
-                label.setBackground(SPACE_COLOR);
-                break;
-            case WALL:
-                label.setBackground(WALL_COLOR);
-                break;
-            case END:
-                label.setBackground(END_COLOR);
-                break;
-            case HERO:
-                label.setBackground(HERO_COLOR);
-                break;
-            case FOOTPRINT:
-                label.setBackground(FOOTPRINT_COLOR);
-                break;
-            default:
-                throw new IllegalArgumentException(icon.toString());
-        }
+        label.setBackground(iconToColor(icon));
         label.setHorizontalAlignment(SwingConstants.CENTER);
         label.setVerticalAlignment(SwingConstants.CENTER);
         return label;
@@ -198,9 +202,20 @@ public class Gui extends JFrame implements Client, ActionListener {
             throw new UnsupportedOperationException(
                     "Unsupported button: " + b.getText());
         }
-        ClientView view = server.getClientView();
-        updateMap(view.getTopView());
-        triggerGameOver(view.isGameOver());
+        Queue<Update> updates = server.getUpdates();
+        showUpdates(updates);
+        triggerGameOver(server.isGameOver());
+    }
+
+    private void showUpdates(Queue<Update> updates) {
+        while(! updates.isEmpty()) {
+            Update update = updates.dequeue();
+            int row = update.getRow();
+            int col = update.getCol();
+            Icon icon = update.getIcon();
+            JLabel label = mapTiles[row][col];
+            label.setBackground(iconToColor(icon));
+        }
     }
 
     private void triggerGameOver(boolean gameOver) {

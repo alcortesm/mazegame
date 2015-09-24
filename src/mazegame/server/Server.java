@@ -18,6 +18,7 @@ import mazegame.server.ServerSpec;
 import mazegame.core.End;
 import mazegame.core.Hero;
 import mazegame.util.Direction;
+import mazegame.util.Queue;
 
 public class Server {
 
@@ -37,5 +38,13 @@ public class Server {
 
     public ClientView getClientView() {
         return maze.getClientView();
+    }
+
+    public Queue<Update> getUpdates() {
+        return maze.getUpdates();
+    }
+
+    public boolean isGameOver() {
+        return maze.isGameOver();
     }
 }
