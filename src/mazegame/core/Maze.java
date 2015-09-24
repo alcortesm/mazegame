@@ -19,7 +19,6 @@ public class Maze {
     private Map map;
     private End end;
     private Hero hero;
-    private boolean lastMoveOk;
     private Trail trail;
 
     public Maze(Map map, End end, Hero hero, int trailCapacity) {
@@ -38,7 +37,6 @@ public class Maze {
         this.map = map;
         this.end = end;
         this.hero = hero;
-        lastMoveOk = true;
         if (trailCapacity == 0) {
             this.trail = new TrailFake();
         } else {
@@ -48,7 +46,7 @@ public class Maze {
 
     public boolean moveHero(Direction dir) {
         Place old = hero.getPlace();
-        lastMoveOk = hero.move(dir);
+        boolean lastMoveOk = hero.move(dir);
         if (lastMoveOk) {
             trail.add(old);
         }
