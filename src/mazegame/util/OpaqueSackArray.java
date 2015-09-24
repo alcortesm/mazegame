@@ -1,4 +1,4 @@
-// RandomLists implementation using and array.
+// OpaqueSack implementation using and array.
 //
 // Duplicated elements are allowed.
 
@@ -7,7 +7,7 @@ package mazegame.util;
 import java.util.NoSuchElementException;
 import java.util.Random;
 
-public class RandomListArray<E> implements RandomList<E> {
+public class OpaqueSackArray<E> implements OpaqueSack<E> {
 
     // Same default capacity as java.util.ArrayList
     // not really important
@@ -17,7 +17,7 @@ public class RandomListArray<E> implements RandomList<E> {
     private int size;
     private Random random;
 
-    public RandomListArray() {
+    public OpaqueSackArray() {
         size = 0;
         // We whould like to initialize our array like this:
         //    array = new E[DEFAULT_CAPACITY];

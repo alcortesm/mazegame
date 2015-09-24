@@ -1,4 +1,4 @@
-// Random List: Unordered collection of elements.
+// OpaqueSack: Unordered collection of elements.
 //
 // Removing will remove a random element.
 //
@@ -15,7 +15,7 @@ package mazegame.util;
 
 import java.util.NoSuchElementException;
 
-public interface RandomList<E> {
+public interface OpaqueSack<E> {
     int     size();
     boolean isEmpty();
 

@@ -7,8 +7,8 @@ import mazegame.util.graph.Vertex;
 import mazegame.util.graph.Edge;
 import mazegame.util.graph.Step;
 import mazegame.util.Direction;
-import mazegame.util.RandomList;
-import mazegame.util.RandomListArray;
+import mazegame.util.OpaqueSack;
+import mazegame.util.OpaqueSackArray;
 import mazegame.util.List;
 import mazegame.util.ListArray;
 
@@ -31,7 +31,7 @@ public class PrimsAlgo extends GraphAlgo {
         // - Visited: A list of already visited Vertices
         List<Vertex> visited = new ListArray<Vertex>(graph.order());
         // - Frontier: a random list of bloqued steps
-        RandomList<Step> frontier = new RandomListArray<Step>();
+        OpaqueSack<Step> frontier = new OpaqueSackArray<Step>();
         // - Start: the starting point of the algorithm
         Vertex start;
 

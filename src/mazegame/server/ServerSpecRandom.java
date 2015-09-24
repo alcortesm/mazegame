@@ -13,7 +13,7 @@ import mazegame.core.Wall;
 import mazegame.core.End;
 import mazegame.core.Place;
 import mazegame.core.Hero;
-import mazegame.util.RandomList;
+import mazegame.util.OpaqueSack;
 
 public class ServerSpecRandom implements ServerSpec {
 
@@ -41,7 +41,7 @@ public class ServerSpecRandom implements ServerSpec {
                     "Random maps require an odd number of columns");
         }
         map = new PrimsAlgo(rows, cols).generateMap();
-        RandomList<Place> walkables = map.getWalkables();
+        OpaqueSack<Place> walkables = map.getWalkables();
         end = new End(walkables.remove());
         try {
             hero = new Hero(walkables.remove());

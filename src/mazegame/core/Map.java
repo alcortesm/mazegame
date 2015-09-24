@@ -8,8 +8,8 @@ package mazegame.core;
 
 import mazegame.server.Icon;
 import mazegame.util.Array;
-import mazegame.util.RandomList;
-import mazegame.util.RandomListArray;
+import mazegame.util.OpaqueSack;
+import mazegame.util.OpaqueSackArray;
 
 public class Map {
 
@@ -65,10 +65,10 @@ public class Map {
         return icons;
     }
 
-    public RandomList<Place> getWalkables() {
+    public OpaqueSack<Place> getWalkables() {
         int rows = tiles.length;
         int cols = tiles[0].length;
-        RandomList<Place> list = new RandomListArray<Place>();
+        OpaqueSack<Place> list = new OpaqueSackArray<Place>();
         for (int r=0; r<rows; r++) {
             for (int c=0; c<cols; c++) {
                 if (tiles[r][c].isWalkable()) {
