@@ -51,6 +51,9 @@ public class Maze {
     }
 
     public boolean moveHero(Direction dir) {
+        // forget old updates
+        updates = new QueueArray<Update>();
+
         Place old = hero.getPlace();
         lastMoveOk = hero.move(dir);
         if (lastMoveOk) {
@@ -97,8 +100,6 @@ public class Maze {
     }
 
     public Queue<Update> getUpdates() {
-        Queue<Update> retval = updates;
-        updates = new QueueArray<Update>();
-        return retval;
+        return updates;
     }
 }
