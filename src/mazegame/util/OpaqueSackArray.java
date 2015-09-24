@@ -99,7 +99,7 @@ public class OpaqueSackArray<E> implements OpaqueSack<E> {
         for (int i=pos; i<size-1; i++) {
             array[i] = array[i+1];
         }
-        array[size] = null; // helps the garbage collector
+        array[size-1] = null; // helps the garbage collector
         size--;
         return retval;
     }
