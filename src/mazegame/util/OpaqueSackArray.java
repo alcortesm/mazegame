@@ -10,23 +10,26 @@ import java.util.Random;
 public class OpaqueSackArray<E> implements OpaqueSack<E> {
 
     // Same default capacity as java.util.ArrayList
-    // not really important
     private static final int DEFAULT_CAPACITY = 16;
 
     private E[] array;
     private int size;
     private Random random;
 
-    public OpaqueSackArray() {
+    public OpaqueSackArray(int capacity) {
         size = 0;
         // We whould like to initialize our array like this:
         //    array = new E[DEFAULT_CAPACITY];
         // but Java does not allow creating "generic" arrays.
         // The following 3 lines is a workaround:
         @SuppressWarnings("unchecked")
-        E[] workaround = (E[]) new Object[DEFAULT_CAPACITY];
+        E[] workaround = (E[]) new Object[capacity];
         this.array = workaround;
         this.random = new Random();
+    }
+
+    public OpaqueSackArray() {
+        this(DEFAULT_CAPACITY);
     }
 
     public int size() {
@@ -37,19 +40,28 @@ public class OpaqueSackArray<E> implements OpaqueSack<E> {
         return size == 0;
     }
 
-    // creates a new array with double the capacity of the old one
+    // creates a new array with the desired capacity
     // and copies the data from the old one to the new one
-    private void grow() {
-        int newLength;
-        newLength = array.length * 2;
+    public void ensureCapacity(int capacity) {
+        if (capacity < 0) {
+            throw new IllegalArgumentException();
+        }
+        if (capacity <= capacity()) {
+            return;
+        }
         @SuppressWarnings("unchecked")
-        E[] workaround = (E[]) new Object[newLength];
+        E[] workaround = (E[]) new Object[capacity];
         // there are better ways to copy big arrays, but they are
         // not part of this course
-        for (int i=0; i<array.length; i++) {
+        for (int i=0; i<size; i++) {
             workaround[i] = array[i];
         }
         this.array = workaround;
+    }
+
+    // doubles the array length
+    private void grow() {
+        ensureCapacity(2 * capacity());
     }
 
     public void add(E e) {
@@ -60,15 +72,6 @@ public class OpaqueSackArray<E> implements OpaqueSack<E> {
             grow();
         }
         array[size++] = e;
-    }
-
-    public void ensureCapacity(int capacity) {
-        if (capacity < 0) {
-            throw new IllegalArgumentException();
-        }
-        while (array.length <= capacity) {
-            grow();
-        }
     }
 
     public int capacity() {
