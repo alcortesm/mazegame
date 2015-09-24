@@ -1,5 +1,7 @@
 package mazegame.server;
 
+import java.util.NoSuchElementException;
+
 import mazegame.core.Map;
 import mazegame.core.PrimsAlgo;
 import mazegame.core.Tile;
@@ -8,6 +10,7 @@ import mazegame.core.Wall;
 import mazegame.core.End;
 import mazegame.core.Place;
 import mazegame.core.Hero;
+import mazegame.util.RandomList;
 
 public class ServerSpecRandom implements ServerSpec {
 
@@ -32,10 +35,15 @@ public class ServerSpecRandom implements ServerSpec {
         if (cols % 2 == 0) {
             throw new IllegalArgumentException("Random maps require an odd number of columns");
         }
-        this.map = new PrimsAlgo(rows, cols).generateMap();
-        // TODO find an empty place to start and to end
-        this.end = new End(new Place(rows-1, cols-1, map));
-        this.hero = new Hero(new Place(0, 0, map));
+        map = new PrimsAlgo(rows, cols).generateMap();
+        RandomList<Place> walkables = map.getWalkables();
+        end = new End(walkables.remove());
+        try {
+            hero = new Hero(walkables.remove());
+        } catch (NoSuchElementException e) {
+            // this happens when the maze is 1x1
+            hero = new Hero(end.getPlace());
+        }
         this.trailCapacity = trailCapacity;
     }
 

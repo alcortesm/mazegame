@@ -2,6 +2,8 @@ package mazegame.core;
 
 import mazegame.server.Icon;
 import mazegame.util.Array;
+import mazegame.util.RandomList;
+import mazegame.util.RandomListArray;
 
 public class Map {
 
@@ -55,5 +57,19 @@ public class Map {
             }
         }
         return icons;
+    }
+
+    public RandomList<Place> getWalkables() {
+        int rows = tiles.length;
+        int cols = tiles[0].length;
+        RandomList<Place> list = new RandomListArray<Place>();
+        for (int r=0; r<rows; r++) {
+            for (int c=0; c<cols; c++) {
+                if (tiles[r][c].isWalkable()) {
+                    list.add(new Place(r, c, this));
+                }
+            }
+        }
+        return list;
     }
 }
