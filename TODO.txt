@@ -5,3 +5,5 @@
 - Think of a better way to fix random maps with even dimensions
   (maybe using dim as the number of corridors?, not very good
   for the empty style, though)
+
+- The utils.graph package is ugly and a mess, rewrite it from scrach.
