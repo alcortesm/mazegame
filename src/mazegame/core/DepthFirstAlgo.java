@@ -31,6 +31,12 @@ public class DepthFirstAlgo extends GridAlgo {
     }
 
     // Depth First Algorithm (recursive version)
+    //
+    // You will easily get an StackOverflow by trying to
+    // generate a big make, in my laptop this is at about
+    // 401 x 401.
+    //
+    // This can easily be solved by using a loop and an stack.
     private void algorithm(Vertex current) {
         OpaqueSack<Step> neighbours = new OpaqueSackArray<Step>(4);
         current.setVisited(true);
