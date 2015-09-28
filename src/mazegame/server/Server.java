@@ -12,6 +12,8 @@
 
 package mazegame.server;
 
+import java.util.EmptyStackException;
+
 import mazegame.core.Maze;
 import mazegame.core.Map;
 import mazegame.server.ServerSpec;
@@ -19,10 +21,13 @@ import mazegame.core.End;
 import mazegame.core.Hero;
 import mazegame.util.Direction;
 import mazegame.util.Queue;
+import mazegame.util.Stack;
+import mazegame.util.StackArray;
 
 public class Server {
 
     private Maze maze;
+    private Stack<Direction> undo;
 
     public Server(ServerSpec spec) {
         Map map = spec.generateMap();
@@ -30,10 +35,31 @@ public class Server {
         Hero hero = spec.generateHero();
         int trailCapacity = spec.generateTrailCapacity();
         this.maze = new Maze(map, end, hero, trailCapacity);
+        undo = new StackArray<Direction>();
+    }
+
+    private static Direction reverse(Direction d) {
+        switch (d) {
+            case NORTH:
+                return Direction.SOUTH;
+            case SOUTH:
+                return Direction.NORTH;
+            case WEST:
+                return Direction.EAST;
+            case EAST:
+                return Direction.WEST;
+            default:
+                throw new UnsupportedOperationException(
+                        "Unsupported Direction: " + d);
+        }
     }
 
     public boolean moveHero(Direction dir) {
-        return maze.moveHero(dir);
+        boolean ok =  maze.moveHero(dir);
+        if (ok) {
+            undo.push(reverse(dir));
+        }
+        return ok;
     }
 
     public ClientView getClientView() {
@@ -49,6 +75,13 @@ public class Server {
     }
 
     public boolean undo() {
-        return false;
+        Direction d;
+        try {
+            d = undo.pop();
+        } catch (EmptyStackException ex) {
+            return false;
+        }
+        maze.moveHero(d);
+        return true;
     }
 }
