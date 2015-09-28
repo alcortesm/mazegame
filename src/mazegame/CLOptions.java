@@ -60,6 +60,10 @@ class CLOptions {
     protected CLOptions(String args[]) {
         this();
         if (args.length == 0) {
+            if (serverSpec == null) {
+                serverSpec = new ServerSpecDepthFirst(
+                        rows, cols, trailCapacity);
+            }
             return;
         }
         // going throw all the command line arguments
