@@ -307,9 +307,13 @@ public class Grid {
         Vertex current;
         sb.append("\t");
         for (int c=0; c<cols; c++) {
-            sb.append("*");
+            current = getVertex(row, c);
+            if (current.isVisited()) {
+                sb.append("*");
+            } else {
+                sb.append("O");
+            }
             if (c<cols-1) {
-                current = getVertex(row, c);
                 if (current.isConnected(Direction.EAST)) {
                     sb.append("--");
                 } else {
