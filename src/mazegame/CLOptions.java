@@ -72,6 +72,10 @@ class CLOptions {
         args = extractAndSetNumCols(args);
         args = extractAndSetTrailCapacity(args);
         args = extractAndSetServerSpec(args);
+        if (serverSpec == null) {
+            serverSpec = new ServerSpecDepthFirst(
+                    rows, cols, trailCapacity);
+        }
         // serverSpec detection comes last to use the
         // appropiate rows, columns and trail capacity.
         if (args.length != 0) {
@@ -280,9 +284,6 @@ class CLOptions {
 
     public Language getLanguage() { return language; }
     public ServerSpec getServerSpec() {
-        if (serverSpec == null) {
-            return new ServerSpecPrim(rows, cols, trailCapacity);
-        }
         return serverSpec;
     }
     public int getTrailCapacity() { return trailCapacity; }
