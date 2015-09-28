@@ -1,3 +1,12 @@
+// This class represents spanning subgraphs of 2 dimensional
+// finite rectangular lattice graphs.
+//
+// Rectangular Lattice Graphs are described in:
+//
+// Gerald L. Thompson, Hamiltonian Tours and Paths in Rectangular
+// Lattice Graphs. Mathematics Magazine. Vol. 50, No. 3 (May, 1977),
+// pp. 147-150
+
 package mazegame.util.grid;
 
 import java.util.Random;
