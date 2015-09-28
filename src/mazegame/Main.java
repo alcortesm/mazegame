@@ -41,7 +41,7 @@ class Main {
                 "\t\tsets the language for the user interface");
         System.err.println();
         System.err.println(
-                "\t-s (TEST|EMPTY)" + System.lineSeparator() +
+                "\t-s (TEST|EMPTY|PRIM)" + System.lineSeparator() +
                 "\t\t Map generation style");
         System.err.println();
         System.err.println(
@@ -58,7 +58,7 @@ class Main {
         System.err.println();
         System.err.println(
                 "\tdefaults: -l " + CLOptions.DEFAULT_LANGUAGE +
-                " -s RANDOM " +
+                " -s PRIM " +
                 " -r " + CLOptions.DEFAULT_ROWS +
                 " -c " + CLOptions.DEFAULT_COLS +
                 " -t " + CLOptions.DEFAULT_TRAIL_CAPACITY +

@@ -15,14 +15,14 @@ import mazegame.core.Place;
 import mazegame.core.Hero;
 import mazegame.util.OpaqueSack;
 
-public class ServerSpecRandom implements ServerSpec {
+public class ServerSpecPrim implements ServerSpec {
 
     private Map map;
     private End end;
     private Hero hero;
     private int trailCapacity;
 
-    public ServerSpecRandom(int rows, int cols, int trailCapacity) {
+    public ServerSpecPrim(int rows, int cols, int trailCapacity) {
         if (rows < 1) {
             throw new IllegalArgumentException("rows < 1");
         }
@@ -52,20 +52,6 @@ public class ServerSpecRandom implements ServerSpec {
     public int generateTrailCapacity() { return trailCapacity; }
 
     public String toString() {
-        return "RANDOM";
-    }
-
-    private Tile[][] createTiles(int rows, int cols) {
-        Tile wall = new Wall();
-        Tile space = new Space();
-        Tile[][] tiles = new Tile[rows][cols];
-        for (int r=0; r<rows; r++) {
-            for (int c=0; c<cols; c++) {
-                tiles[r][c] = wall;
-            }
-        }
-        tiles[0][0] = space;
-        tiles[rows-1][cols-1] = space;
-        return tiles;
+        return "PRIM";
     }
 }

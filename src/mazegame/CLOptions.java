@@ -10,7 +10,7 @@ import mazegame.util.Array;
 import mazegame.server.ServerSpec;
 import mazegame.server.ServerSpecTest;
 import mazegame.server.ServerSpecEmpty;
-import mazegame.server.ServerSpecRandom;
+import mazegame.server.ServerSpecPrim;
 
 class CLOptions {
 
@@ -166,9 +166,9 @@ class CLOptions {
                 serverSpec =
                     new ServerSpecEmpty(rows, cols, trailCapacity);
                 break;
-            case "RANDOM":
+            case "PRIM":
                 serverSpec =
-                    new ServerSpecRandom(rows, cols, trailCapacity);
+                    new ServerSpecPrim(rows, cols, trailCapacity);
                 break;
             default:
             throw new IllegalArgumentException(
@@ -276,7 +276,7 @@ class CLOptions {
     public Language getLanguage() { return language; }
     public ServerSpec getServerSpec() {
         if (serverSpec == null) {
-            return new ServerSpecRandom(rows, cols, trailCapacity);
+            return new ServerSpecPrim(rows, cols, trailCapacity);
         }
         return serverSpec;
     }
