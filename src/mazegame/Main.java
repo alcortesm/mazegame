@@ -41,7 +41,7 @@ class Main {
                 "\t\tsets the language for the user interface");
         System.err.println();
         System.err.println(
-                "\t-s (TEST|EMPTY|PRIM)" + System.lineSeparator() +
+                "\t-s (TEST|EMPTY|PRIM|DEPTHFIRST)" + System.lineSeparator() +
                 "\t\t Map generation style");
         System.err.println();
         System.err.println(

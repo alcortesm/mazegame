@@ -11,6 +11,7 @@ import mazegame.server.ServerSpec;
 import mazegame.server.ServerSpecTest;
 import mazegame.server.ServerSpecEmpty;
 import mazegame.server.ServerSpecPrim;
+import mazegame.server.ServerSpecDepthFirst;
 
 class CLOptions {
 
@@ -30,7 +31,7 @@ class CLOptions {
     // enum for parsing the main args
     private enum Opts {
         LANG("-l"), // followed by ENGLISH or SPANISH
-        SPEC("-s"), // followed by TEST or EMPTY
+        SPEC("-s"), // followed by TEST, EMPTY, PRIM, DEPTHFIRST
         ROWS("-r"), // followed by a number
         COLS("-c"), // followed by a number
         TRAIL("-t"), // followed by a number
@@ -169,6 +170,10 @@ class CLOptions {
             case "PRIM":
                 serverSpec =
                     new ServerSpecPrim(rows, cols, trailCapacity);
+                break;
+            case "DEPTHFIRST":
+                serverSpec =
+                    new ServerSpecDepthFirst(rows, cols, trailCapacity);
                 break;
             default:
             throw new IllegalArgumentException(
