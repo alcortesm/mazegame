@@ -58,7 +58,7 @@ class Main {
         System.err.println();
         System.err.println(
                 "\tdefaults: -l " + CLOptions.DEFAULT_LANGUAGE +
-                " -s PRIM " +
+                " -s DEPTHFIRST " +
                 " -r " + CLOptions.DEFAULT_ROWS +
                 " -c " + CLOptions.DEFAULT_COLS +
                 " -t " + CLOptions.DEFAULT_TRAIL_CAPACITY +
