@@ -47,4 +47,8 @@ public class Server {
     public boolean isGameOver() {
         return maze.isGameOver();
     }
+
+    public boolean undo() {
+        return false;
+    }
 }

@@ -78,8 +78,7 @@ public class Tui implements Client {
                     printClientView(view);
                     break;
                 case "backstep": case "b":
-                    // ok = server.undo();
-                    ok = true;
+                    ok = server.undo();
                     printUndoResult(ok);
                     view = server.getClientView();
                     printClientView(view);
