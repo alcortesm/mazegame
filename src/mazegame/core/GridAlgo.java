@@ -1,38 +1,37 @@
-// Graphs algorithms are an implementation of map generator algorithm
-// that use a graph (mazegame.util.graph) to generate the map.
+// Grid algorithms are an implementation of map generator algorithm
+// that use a grid (mazegame.util.grid) to generate the map.
 //
-// The protected graph attribute holds the graph and each subclass
+// The protected grid attribute holds the grid and each subclass
 // will configure it according to different algorithms.
 //
 // As Java ctors are not inherited, it is difficult to force
 // subclasses to remember to initialize it.
 //
-// The key point is how to generate the map by inspecting the graph.
+// The key point is how to generate the map by inspecting the grid.
 // The "generateMap" should take care of all the work.
 
 package mazegame.core;
 
-import mazegame.util.graph.Spanning2DRectLattice;
-import mazegame.util.graph.Vertex;
-import mazegame.util.graph.Edge;
+import mazegame.util.grid.Grid;
+import mazegame.util.grid.Vertex;
 import mazegame.util.Direction;
 import mazegame.core.Space;
 
-abstract class GraphAlgo extends MapGeneratorAlgo {
+abstract class GridAlgo extends MapGeneratorAlgo {
 
     private static final Space space = new Space();
 
-    protected Spanning2DRectLattice graph;
+    protected Grid grid;
 
-    GraphAlgo(int mapRows, int mapCols) {
+    GridAlgo(int mapRows, int mapCols) {
         super(mapRows, mapCols);
     }
 
-    static protected int MapDimToGraphDim(int m) {
+    static protected int mapDimToGridDim(int m) {
         return roundUpIntegerDivision(m, 2);
     }
 
-    static protected int GraphIndexToMapIndex(int g) {
+    static protected int GridIndexToMapIndex(int g) {
         return (2*g);
     }
 
@@ -43,8 +42,8 @@ abstract class GraphAlgo extends MapGeneratorAlgo {
     }
 
     public Map generateMap() {
-        if (graph == null) {
-            throw new NullPointerException("graph");
+        if (grid == null) {
+            throw new NullPointerException("grid");
         }
         Tile[][] tiles = createCrosses();
         tiles = turnLinksIntoSpaces(tiles);
@@ -68,28 +67,28 @@ abstract class GraphAlgo extends MapGeneratorAlgo {
     }
 
     private Tile[][] turnLinksIntoSpaces(Tile[][] tiles) {
-        int graphRows = graph.getNumRows();
-        int graphCols = graph.getNumCols();
+        int gridRows = grid.rows();
+        int gridCols = grid.cols();
         Vertex current;
 
         // for all rows but the last...
-        for (int r=0; r<graphRows-1; r++) {
+        for (int r=0; r<gridRows-1; r++) {
             // for all columns but the last...
-            for (int c=0; c<graphCols-1; c++) {
+            for (int c=0; c<gridCols-1; c++) {
                 // set south and east tiles
-                current = graph.getVertex(r, c);
+                current = grid.getVertex(r, c);
                 carveSpaceFromEdge(tiles, current, Direction.SOUTH);
                 carveSpaceFromEdge(tiles, current, Direction.EAST);
             }
             // for the last column set only the south tile
-            current = graph.getVertex(r, graphCols-1);
+            current = grid.getVertex(r, gridCols-1);
             carveSpaceFromEdge(tiles, current, Direction.SOUTH);
         }
 
         // for the last row, set only the east tiles
-        for (int c=0; c<graphCols-1; c++) {
+        for (int c=0; c<gridCols-1; c++) {
             // set south and east tiles
-            current = graph.getVertex(graphRows-1, c);
+            current = grid.getVertex(gridRows-1, c);
             carveSpaceFromEdge(tiles, current, Direction.EAST);
         }
         return tiles;
@@ -97,11 +96,11 @@ abstract class GraphAlgo extends MapGeneratorAlgo {
 
     private void carveSpaceFromEdge(
             Tile[][] tiles, Vertex vertex, Direction dir) {
-        int graphRow = vertex.getRow();
-        int graphCol = vertex.getCol();
-        int mapRow = GraphIndexToMapIndex(graphRow);
-        int mapCol = GraphIndexToMapIndex(graphCol);
-        if (graph.getEdge(vertex, dir) == Edge.LINK) {
+        int gridRow = vertex.row();
+        int gridCol = vertex.col();
+        int mapRow = GridIndexToMapIndex(gridRow);
+        int mapCol = GridIndexToMapIndex(gridCol);
+        if (vertex.isConnected(dir)) {
             switch (dir) {
                 case NORTH:
                     tiles[mapRow-1][mapCol] = space;
