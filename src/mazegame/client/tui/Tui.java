@@ -77,6 +77,12 @@ public class Tui implements Client {
                     view = server.getClientView();
                     printClientView(view);
                     break;
+                case "backstep": case "b":
+                    ok = server.undo();
+                    printUndoResult(ok);
+                    view = server.getClientView();
+                    printClientView(view);
+                    break;
                 case "quit": case "q": case "exit": case "x":
                     System.out.print(localizer.get(MsgToUsr.EXITING));
                     mustExit = true;
@@ -106,6 +112,17 @@ public class Tui implements Client {
                 return '.';
             default:
                 throw new IllegalArgumentException(icon.toString());
+        }
+    }
+
+    private void printUndoResult(boolean ok) {
+        System.out.println();
+        if (ok) {
+            System.out.println(
+                    localizer.get(MsgToUsr.UNDO_OK));
+        } else {
+            System.out.println(
+                    localizer.get(MsgToUsr.UNDO_KO));
         }
     }
 
