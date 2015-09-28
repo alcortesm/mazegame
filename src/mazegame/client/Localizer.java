@@ -75,6 +75,7 @@ public class Localizer {
         "\ts, south:  go south" + System.lineSeparator() +
         "\te, east:   go east" + System.lineSeparator() +
         "\tw, west:   go west" + System.lineSeparator() +
+        "\tb, back:   backstep" + System.lineSeparator() +
         "\tq, quit:   quit the game" + System.lineSeparator() +
         "\tx, exit:   alias for \"quit\"" + System.lineSeparator() +
         System.lineSeparator();
@@ -96,6 +97,7 @@ public class Localizer {
         "\ts, south:  moverse hacia el sur" + System.lineSeparator() +
         "\te, east:   moverse hacia el este" + System.lineSeparator() +
         "\tw, west:   moverse hacia el oeste" + System.lineSeparator() +
+        "\tb, back:   desacer un movimiento" + System.lineSeparator() +
         "\tq, quit:   Salir del juego" + System.lineSeparator() +
         "\tx, exit:   un álias de \"quit\"" + System.lineSeparator() +
         System.lineSeparator();
@@ -122,6 +124,14 @@ public class Localizer {
 
     private static final String MOVE_KO_SPANISH = "¡No puedo moverme ahí!";
 
+    private static final String UNDO_OK_ENGLISH = "OK";
+
+    private static final String UNDO_OK_SPANISH = "OK";
+
+    private static final String UNDO_KO_ENGLISH = "No moves on the undo queue!";
+
+    private static final String UNDO_KO_SPANISH = "¡No hay movimientos registrados!";
+
     private static final String[][] strings = {
         {
             GREETING_ENGLISH,
@@ -132,7 +142,9 @@ public class Localizer {
             UNKNOWN_COMMAND_ENGLISH,
             UNKNOWN_COMMAND_SUFIX_ENGLISH,
             MOVE_OK_ENGLISH,
-            MOVE_KO_ENGLISH
+            MOVE_KO_ENGLISH,
+            UNDO_OK_ENGLISH,
+            UNDO_KO_ENGLISH
         },
         {
             GREETING_SPANISH,
@@ -143,7 +155,9 @@ public class Localizer {
             UNKNOWN_COMMAND_SPANISH,
             UNKNOWN_COMMAND_SUFIX_SPANISH,
             MOVE_OK_SPANISH,
-            MOVE_KO_SPANISH
+            MOVE_KO_SPANISH,
+            UNDO_OK_SPANISH,
+            UNDO_KO_SPANISH
         }
     };
 

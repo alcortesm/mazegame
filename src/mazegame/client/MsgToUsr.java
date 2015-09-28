@@ -14,5 +14,7 @@ public enum MsgToUsr {
         UNKNOWN_COMMAND,
         UNKNOWN_COMMAND_SUFIX,
         MOVE_OK,
-        MOVE_KO
+        MOVE_KO,
+        UNDO_OK,
+        UNDO_KO
 }
