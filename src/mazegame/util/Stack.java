@@ -9,7 +9,7 @@ package mazegame.util;
 
 import java.util.EmptyStackException;
 
-interface Stack<E> {
+public interface Stack<E> {
     boolean isEmpty();
     void    push(E e) throws NullPointerException;
     E       pop() throws EmptyStackException;

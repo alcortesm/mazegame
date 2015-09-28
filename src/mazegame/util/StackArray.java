@@ -4,7 +4,7 @@ package mazegame.util;
 
 import java.util.EmptyStackException;
 
-class StackArray<E> implements Stack<E> {
+public class StackArray<E> implements Stack<E> {
 
     private static final int DEFAULT_CAPACITY = 16;
 
