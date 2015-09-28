@@ -26,6 +26,7 @@ import javax.swing.SwingConstants;
 import java.awt.Dimension;
 import java.awt.Color;
 import java.awt.FlowLayout;
+import java.awt.Component;
 
 import mazegame.client.Client;
 import mazegame.server.ServerSpec;
@@ -54,6 +55,7 @@ public class Gui extends JFrame implements Client, ActionListener {
     private JButton goSouth;
     private JButton goEast;
     private JButton goWest;
+    private JButton undo;
     private JLabel[][] mapTiles;
 
     private static final Dimension TILE_DIM = new Dimension(10, 10);
@@ -96,13 +98,24 @@ public class Gui extends JFrame implements Client, ActionListener {
         goWest.setBackground(BUTTON_BACKGROUND_COLOR);
         goWest.setForeground(BUTTON_FOREGROUND_COLOR);
 
+        undo = new JButton("Back");
+        undo.setBackground(BUTTON_BACKGROUND_COLOR);
+        undo.setForeground(BUTTON_FOREGROUND_COLOR);
+        undo.setAlignmentY(Component.CENTER_ALIGNMENT);
+        undo.setAlignmentX(Component.CENTER_ALIGNMENT);
+
         goNorth.addActionListener(this);
         goSouth.addActionListener(this);
         goEast.addActionListener(this);
         goWest.addActionListener(this);
+        undo.addActionListener(this);
 
-        JPanel controlWrapper = new JPanel(
-                new FlowLayout(FlowLayout.CENTER));
+        FlowLayout controlWrapperLayout =
+            new FlowLayout(FlowLayout.CENTER);
+        controlWrapperLayout.setHgap(40);
+        JPanel controlWrapper = new JPanel(controlWrapperLayout);
+        controlWrapper.add(undo);
+
         JPanel controls = new JPanel(new GridLayout(3, 3));
         controls.add(new JLabel());
         controls.add(goNorth);
@@ -198,6 +211,8 @@ public class Gui extends JFrame implements Client, ActionListener {
             server.moveHero(Direction.EAST);
         } else if (b == goWest) {
             server.moveHero(Direction.WEST);
+        } else if (b == undo) {
+            server.undo();
         } else {
             throw new UnsupportedOperationException(
                     "Unsupported button: " + b.getText());
