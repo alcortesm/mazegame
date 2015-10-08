@@ -9,6 +9,13 @@ As far as I know, the original idea of using a maze game to teach Java is from
 implementation to check that the game can be coded using only the course
 curriculum and fits well on the course schedule.
 
+This project is not yet finished, but most of the work is done, so you can 
+start using it in your courses.
+
+## Contact Information
+
+You can reach me by email at "Alberto Cortés" <alcortesm@gmail.com>.
+
 ## The Goal of the Game
 
 The goal of the game is to control the movements of a *hero* (visually, the
@@ -18,32 +25,66 @@ The hero will begin the game at a starting position and the game will end
 when the hero gets to the *ending* position or dies.
 
 The maze is a 2D rectangular array of *wall*s and *empty space*. Walls in the
-maze prevents the player from taking a direct, straighforward route to the
+maze prevents the player from taking a direct, straightforward route to the
 ending position. Empty space can hold other objects, like the ending position,
 the hero, monsters, traps...
 
 ### Screenshots
 
+TUI version:
+
 ![Tui screenshot](https://cloud.githubusercontent.com/assets/9169414/10363281/f415d84c-6db3-11e5-8c0a-174439c9840d.PNG)
+
+GUI version:
 
 ![Gui screenshot](https://cloud.githubusercontent.com/assets/9169414/10363390/97d37124-6db4-11e5-8c42-9a0f68d3ff02.PNG)
 
-## Overall desing
+## Overall design
 
-Its desing is strongly influenced by the current curriculum of the course I
-have been teaching in the past 3 years at UC3M. This means you will find:
+The design of the game is strongly influenced by the current curriculum of the
+course. It has elements matching the following course topics:
 
-- Questionable desing decissions.
-- Inefficiencies.
-- Overengineering.
-- Scarce use of the most Java interesting features.
+- Lots of array manipulations (2D matrices mostly).
 
-Some of these are the result of me overlooking something, but must of them are
-motivated by conscious decision to adapt the code to the course curriculum.
+- Non-trivial, but simple inheritance and interfaces.
+
+- A simple TUI client that can be used in the first month of the course, when 
+  the students have not yet learn about SWING.
+
+- A more advanced SWING GUI client is included. As our students do not really
+  learn about canvas painting, the GUI is built from standard SWING widgets,
+  like labels; this is a questionable decision and a bad design, but it suits
+  our needs, you should be able to adapt your GUI version to a more sane 
+  implementation in no time, if you need it.  
+
+- Collections: all collections used in the game are in-house implementations of 
+  the ones taught in the course curriculum.
+
+- A simple queue is used for sending updates to the GUI, but it is not needed
+  in the TUI.
+
+- A more sophisticated queue (`Trail.java`) is used for the worm tail. A fake 
+  trail is provided for trails of length 0, to use at the beginning of the 
+  course. 
+
+- A random set (`OpaqueSack.java`) is used for the random maze generators. It 
+  is implemented as a random list as our students do not learn about sets.
+
+- Lists (`ListArray.java`) are used for the graph generation of the random 
+  mazes algorithms.  
+
+- Stacks (`StackArray.java`) are used for the undo functionality.
+
+- Recursion: one of the algorithms to build random mazes is recursive.
+
+- A simple grid graph is used for generating random mazes.
+
+- Trees are used for the cheat-mode (showing the path to the exit form the hero 
+  position).
 
 It should be simple to start the course using a simplified version of the code
-and built from there. I have also tried to desing the program so it can be easily
-extended.
+and built from there. I have also tried to design the program so it can be easily
+extended and it is composed of interchangeable parts.
 
 The program is divided in two parts:
 
@@ -60,86 +101,11 @@ the game to the client.
 It should be easy to ask your students to code a client (console based or
 graphical) for an already working server or the other way around.
 
-## The Client/Server Interface
+## Extensions
 
-As the course curriculum does not include networking or concurrency, the
-client and the server will run synchronously and in the same device.
+It should be easy to ask your students to modify the program for course 
+projects. Some examples:
 
-In the most simple case, there will be a single client for a single server.
-Each client will create a server instance for its own internal use.
-
-It is easy to extend a simple client to handle several servers (playing
-simultaneously against several internal servers). But the opposite, connecting
-with a client to an already running server, will require the modification of
-the client/server interface as it has no callbacks from the client to the
-server nor it has the concept of "connections" between client and server.
-
-### Client to Server messages
-
-The server initialization requires some data from the client:
-
-- The desired strategy for generating the maze (i.e. choosing one among a set
-  of predefined mazes or asking for a randomly generated maze) and its
-  parameters (i.e.  the name of the pregenerated maze or the dimensions for a
-  randomly generated maze).
-
-This information is stored in objects implementing the `ServerSpec` interface.
-There are implementations of this interface for every kind of server supported.
-
-Once the server has been created, the client can send two types of messages to
-the server:
-
-- `movePlayer(Direction dir)`: to ask the server to move the player one step
-  towards a certain direction.
-
-- `getClientView()`: to ask the server for the current representation of the
-  game state.
-
-`Direction` is an enum with the compass directions (`NORTH`, `SOUTH`, `EAST` and
-`WEST`).
-
-Both messages return an object from the `ClientView` class. This class holds
-all the information the client needs to render an accurate representation of
-the game state to the user after sending the message to the server. The
-information stored in a `ClientView` object is:
-
-- `boolean isGameOver()`: to know if the game has finished.
-
-- `boolean isHeroAlive()`: if the player is alive. At game over the
-  player wins if the hero is alive, otherwise the player loses.
-
-- `String lastMsgResult()`: a textual message to the user to let her know
-  if the last movement was succesfully performed (the hero can not move into
-  walls, for example).
-
-- `Icon[][] getTopView()`: the set of objects in the maze and their
-  positions. To keep things simple, its current implementation is a Java 2D
-  rectangular array of Icons (another enum). This means there can only be one icon
-  for each position in the maze, this is, the hero will obscure the floor under
-  him or the starting and ending position. This makes sense for a textual
-  interface, but will look ugly for a graphical one where transparencies could
-  be used for a much more pleasant visual effect.
-
-### Writing a Client
-
-In summary, to write a client for the game, you will only need to handle the
-following data types:
-
-- The `Server` class: to create a server and send messages to it.
-
-- The `ServerSpec` interface and its implementations: to configure the server:
-  pre-generated map, randomly generated map...
-
-- The `Direction` enum: to tell the server where the hero want to go.
-
-- The `ClientView` class: all the information for an accurate rendering of the
-  game state.
-
-- The `Icon` enum: walls, hero, starting position, ending position or an empty
-  floor; to render the maze to the user.
-
-All these data types can be found in the `server` package.
-
-The `Tui` class is a very simple implementation for a console based client. The
-`Gui` class is simple SWING based implementation of a graphical client.
-
+- Turn this into a single player tron-like game: using empty mazes, adding some 
+  coins (that will make the hero's trail to grow) and making the hero's trail 
+  lethal to the hero. 
