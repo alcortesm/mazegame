@@ -5,7 +5,7 @@
 MazeGame is a tiny roguelike game for teaching Java at UC3M.
 
 As far as I know, the original idea of using a maze game to teach Java is from
-"Maria Carmen Fernandez Panadero" <mcfp@gmail.com>. I just wrote a reference
+"Maria Carmen Fernandez Panadero" <mcfp@it.uc3m.es>. I just wrote a reference
 implementation to check that the game can be coded using only the course
 curriculum and fits well on the course schedule.
 
