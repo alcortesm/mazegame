@@ -5,3 +5,10 @@
 - Think of a better way to fix random maps with even dimensions
   (maybe using dim as the number of corridors?, not very good
   for the empty style, though)
+
+- The ServerSpec family is to complicated to use at the beginning of
+  the course, think about how to simlify that.
+
+- Write a cheat mode that draws the path from the current hero
+  position to the exit. (WARNING think about how to do that for
+  not-perfect mazes (empty and test).

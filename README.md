@@ -10,7 +10,7 @@ implementation to check that the game can be coded using only the course
 curriculum and fits well on the course schedule.
 
 This project is not yet finished, but most of the work is done, so you can 
-start using it in your courses.
+start using it in your courses. Please check the `TODO.txt` file.
 
 ## Contact Information
 
@@ -104,8 +104,8 @@ graphical) for an already working server or the other way around.
 ## Extensions
 
 It should be easy to ask your students to modify the program for course 
-projects. Some examples:
+projects or exams. For example:
 
-- Turn this into a single player tron-like game: using empty mazes, adding some 
-  coins (that will make the hero's trail to grow) and making the hero's trail 
+- Turn the game into a single player tron-like game: using empty mazes, adding 
+  some coins (that will make the hero's trail grow) and making the hero's trail 
   lethal to the hero. 
