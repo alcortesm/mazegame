@@ -2,7 +2,33 @@
 
 ## Introduction
 
-MazeGame is a tiny roguelike game for teaching Java.
+MazeGame is a tiny roguelike game for teaching Java at UC3M.
+
+As far as I know, the original idea of using a maze game to teach Java is from
+"Maria Carmen Fernandez Panadero" <mcfp@gmail.com>. I just wrote a reference
+implementation to check that the game can be coded using only the course
+curriculum and fits well on the course schedule.
+
+## The Goal of the Game
+
+The goal of the game is to control the movements of a *hero* (visually, the
+hero is more like a worm, really) inside a closed 2D randomly generated maze.
+
+The hero will begin the game at a starting position and the game will end
+when the hero gets to the *ending* position or dies.
+
+The maze is a 2D rectangular array of *wall*s and *empty space*. Walls in the
+maze prevents the player from taking a direct, straighforward route to the
+ending position. Empty space can hold other objects, like the ending position,
+the hero, monsters, traps...
+
+### Screenshots
+
+![Tui screenshot](https://cloud.githubusercontent.com/assets/9169414/10363281/f415d84c-6db3-11e5-8c0a-174439c9840d.PNG)
+
+![Gui screenshot](https://cloud.githubusercontent.com/assets/9169414/10363390/97d37124-6db4-11e5-8c42-9a0f68d3ff02.PNG)
+
+## Overall desing
 
 Its desing is strongly influenced by the current curriculum of the course I
 have been teaching in the past 3 years at UC3M. This means you will find:
@@ -18,27 +44,6 @@ motivated by conscious decision to adapt the code to the course curriculum.
 It should be simple to start the course using a simplified version of the code
 and built from there. I have also tried to desing the program so it can be easily
 extended.
-
-## Screenshots
-
-![Tui screenshot](https://cloud.githubusercontent.com/assets/9169414/10363281/f415d84c-6db3-11e5-8c0a-174439c9840d.PNG)
-
-![Gui screenshot](https://cloud.githubusercontent.com/assets/9169414/10363390/97d37124-6db4-11e5-8c42-9a0f68d3ff02.PNG)
-
-## The Goal of the Game
-
-The goal of the game is to control the movements of a *hero* inside a closed 2D
-maze.
-
-The hero will begin the game at a starting position and the game will end
-when the hero gets to the *ending* position or dies.
-
-The maze is a 2D rectangular array of *wall*s and *empty space*. Walls in the
-maze prevents the player from taking a direct, straighforward route to the
-ending position. Empty space can hold other objects, like the ending position,
-the hero, monsters, traps...
-
-## Overall desing
 
 The program is divided in two parts:
 
