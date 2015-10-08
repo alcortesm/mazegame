@@ -19,6 +19,12 @@ It should be simple to start the course using a simplified version of the code
 and built from there. I have also tried to desing the program so it can be easily
 extended.
 
+## Screenshots
+
+![Tui screenshot](https://cloud.githubusercontent.com/assets/9169414/10363281/f415d84c-6db3-11e5-8c0a-174439c9840d.PNG)
+
+![Gui screenshot](https://cloud.githubusercontent.com/assets/9169414/10363390/97d37124-6db4-11e5-8c42-9a0f68d3ff02.PNG)
+
 ## The Goal of the Game
 
 The goal of the game is to control the movements of a *hero* inside a closed 2D
